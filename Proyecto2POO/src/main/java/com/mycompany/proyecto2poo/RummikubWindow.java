@@ -6,6 +6,7 @@ package com.mycompany.proyecto2poo;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.nio.file.Path;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -14,15 +15,30 @@ import javax.swing.JPanel;
  *
  * @author Pablo
  */
-public class JuegoRummikub extends javax.swing.JFrame {
+public class RummikubWindow extends javax.swing.JFrame {
+    
+    Player player;
     
     private final Path currentPath = java.nio.file.Paths.get("").toAbsolutePath();
     
     /**
      * Creates new form JuegoRummikub
      */
-    public JuegoRummikub() {
-        initComponents();
+    public RummikubWindow() {
+        
+        try {
+            // Parte de la ventana
+            initComponents();
+            setLocationRelativeTo(null);
+            
+            // Crea una cliente que es su coenxion al server
+            
+            player = new Player(this);
+            player.getConnected();
+            
+        } catch (IOException ex) {
+           
+        }
     }
 
     /**
@@ -151,28 +167,26 @@ public class JuegoRummikub extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JuegoRummikub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RummikubWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JuegoRummikub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RummikubWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JuegoRummikub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RummikubWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JuegoRummikub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RummikubWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JuegoRummikub().setVisible(true);
+                new RummikubWindow().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblAvatarPlayer1;
     private javax.swing.JLabel lblAvatarPlayer2;
     private javax.swing.JLabel lblAvatarPlayer3;

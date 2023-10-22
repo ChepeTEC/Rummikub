@@ -193,7 +193,7 @@ public class MainWindow extends javax.swing.JFrame {
         private Image image;
 
         public ImagePanel() {
-            this.image = new ImageIcon("ImagenPantallaInicio.jpg").getImage();
+            this.image = new ImageIcon("ImagenPantallaInicio1.jpg").getImage();
         }
 
         @Override

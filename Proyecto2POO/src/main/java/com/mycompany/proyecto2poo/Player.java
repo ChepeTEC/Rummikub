@@ -6,7 +6,9 @@ package com.mycompany.proyecto2poo;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,16 +18,16 @@ public class Player {
     
     // Atributos 
     
-    private JuegoRummikub refVentana; // Referencia a la ventana de juego 
+    private RummikubWindow refVentana; // Referencia a la ventana de juego 
     public static String IP_SERVER = "localhost"; //IP del Servidor
-    private DataInputStream in = null; //leer comunicacion
-    private DataOutputStream out = null; //escribir comunicacion
+    private DataInputStream read = null; //leer comunicacion
+    private DataOutputStream write = null; //escribir comunicacion
     private Socket player = null; //para la comunicacion
     private String username;
     
     // Constructor
     
-    public Player(JuegoRummikub refVentana){
+    public Player(RummikubWindow refVentana){
         
         this.refVentana = refVentana;
         
@@ -33,15 +35,38 @@ public class Player {
     
     // METODOS
     
-    
+    public void getConnected() throws IOException{
+        
+        try{
+            
+            // Initialize Socket
+            player = new Socket(getIP_SERVER(), 8081);
+            
+            // Initiliaze read and write  
+            read = new DataInputStream(player.getInputStream());
+            write = new DataOutputStream(player.getOutputStream());
+            
+            // Request for username
+            setUsername(JOptionPane.showInputDialog("Introduzca su nombre de usuario:"));
+        
+            // Send username to server
+            write.writeUTF(username);
+        }
+        catch(IOException e){
+            
+            System.out.println("\tEl servidor no esta levantado");
+            System.out.println("\t=============================");
+        }
+        
+    }
     
     // Getters and setters
 
-    public JuegoRummikub getRefVentana() {
+    public RummikubWindow getRefVentana() {
         return refVentana;
     }
 
-    public void setRefVentana(JuegoRummikub refVentana) {
+    public void setRefVentana(RummikubWindow refVentana) {
         this.refVentana = refVentana;
     }
 
@@ -53,20 +78,20 @@ public class Player {
         Player.IP_SERVER = IP_SERVER;
     }
 
-    public DataInputStream getIn() {
-        return in;
+    public DataInputStream getRead() {
+        return read;
     }
 
-    public void setIn(DataInputStream in) {
-        this.in = in;
+    public void setRead(DataInputStream in) {
+        this.read = in;
     }
 
-    public DataOutputStream getOut() {
-        return out;
+    public DataOutputStream getWrite() {
+        return write;
     }
 
-    public void setOut(DataOutputStream out) {
-        this.out = out;
+    public void setWrite(DataOutputStream out) {
+        this.write = out;
     }
 
     public Socket getPlayer() {
