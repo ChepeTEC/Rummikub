@@ -1,4 +1,4 @@
-package main.java.servidor;
+package servidor;
 
 public class JFrameServidor extends javax.swing.JFrame {
  
@@ -6,7 +6,7 @@ public class JFrameServidor extends javax.swing.JFrame {
      /** Creates new form JFrameServidor */
      public JFrameServidor() {
          initComponents();
-         servidor = new ServidorRummikub(this);
+         //servidor = new ServidorRummikub(this);
      }
  
      @SuppressWarnings("unchecked")

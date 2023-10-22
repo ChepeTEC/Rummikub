@@ -2,22 +2,22 @@ package com.mycompany.proyecto2poo;
 
 public class Token {
     // Atributos
-    private String color;
+    private TokensTypes color;
     private int value;
 
     // Constructor
-    public Token(String color, int value) {
+    public Token(TokensTypes color, int value) {
         this.color = color;
         this.value = value;
     }
 
     // Getters y Setters
 
-    public String getColor() {
+    public TokensTypes getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(TokensTypes color) {
         this.color = color;
     }
 
