@@ -15,12 +15,12 @@ import javax.swing.border.LineBorder;
  *
  * @author Pablo
  */
-public class VentanaInicio extends javax.swing.JFrame {
+public class MainWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio() {
+    public MainWindow() {
         initComponents();
         setLocationRelativeTo(null);
         
@@ -36,27 +36,27 @@ public class VentanaInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new ImagePanel();
-        btnCrearPartida = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
         BtnUnirseAPartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCrearPartida.setBackground(new java.awt.Color(0, 0, 102));
-        btnCrearPartida.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        btnCrearPartida.setForeground(new java.awt.Color(204, 0, 0));
-        btnCrearPartida.setText("CREAR PARTIDA");
-        btnCrearPartida.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCrearPartida.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCreate.setBackground(new java.awt.Color(0, 0, 102));
+        btnCreate.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnCreate.setForeground(new java.awt.Color(204, 0, 0));
+        btnCreate.setText("CREAR PARTIDA");
+        btnCreate.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCreate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCrearPartidaMouseEntered(evt);
+                btnCreateMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCrearPartidaMouseExited(evt);
+                btnCreateMouseExited(evt);
             }
         });
-        btnCrearPartida.addActionListener(new java.awt.event.ActionListener() {
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearPartidaActionPerformed(evt);
+                btnCreateActionPerformed(evt);
             }
         });
 
@@ -85,7 +85,7 @@ public class VentanaInicio extends javax.swing.JFrame {
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addContainerGap(144, Short.MAX_VALUE)
-                .addComponent(btnCrearPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnUnirseAPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(141, 141, 141))
@@ -96,7 +96,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addContainerGap(281, Short.MAX_VALUE)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnUnirseAPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCrearPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54))
         );
 
@@ -119,28 +119,28 @@ public class VentanaInicio extends javax.swing.JFrame {
     private void configuracionesBotones(){
         
         BtnUnirseAPartida.setBorder(new LineBorder(Color.RED));
-        btnCrearPartida.setBorder(new LineBorder(Color.RED));
+        btnCreate.setBorder(new LineBorder(Color.RED));
     }
     
     private void BtnUnirseAPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseAPartidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnUnirseAPartidaActionPerformed
 
-    private void btnCrearPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearPartidaActionPerformed
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCrearPartidaActionPerformed
+    }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void btnCrearPartidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearPartidaMouseEntered
-        btnCrearPartida.setBackground(new Color(0,0,255));
-    }//GEN-LAST:event_btnCrearPartidaMouseEntered
+    private void btnCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseEntered
+        btnCreate.setBackground(new Color(0,0,255));
+    }//GEN-LAST:event_btnCreateMouseEntered
 
     private void BtnUnirseAPartidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUnirseAPartidaMouseEntered
         BtnUnirseAPartida.setBackground(new Color(0,0,255));
     }//GEN-LAST:event_BtnUnirseAPartidaMouseEntered
 
-    private void btnCrearPartidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearPartidaMouseExited
-        btnCrearPartida.setBackground(new Color(0,0,102));
-    }//GEN-LAST:event_btnCrearPartidaMouseExited
+    private void btnCreateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseExited
+        btnCreate.setBackground(new Color(0,0,102));
+    }//GEN-LAST:event_btnCreateMouseExited
 
     private void BtnUnirseAPartidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUnirseAPartidaMouseExited
         BtnUnirseAPartida.setBackground(new Color(0,0,102));
@@ -163,27 +163,28 @@ public class VentanaInicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaInicio().setVisible(true);
+                new MainWindow().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnUnirseAPartida;
-    private javax.swing.JButton btnCrearPartida;
+    private javax.swing.JButton btnCreate;
     private javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
     
@@ -192,8 +193,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         private Image image;
 
         public ImagePanel() {
-            this.image = new ImageIcon("ImagenPantallaInicio1.jpg").getImage();
-            
+            this.image = new ImageIcon("ImagenPantallaInicio.jpg").getImage();
         }
 
         @Override

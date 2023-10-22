@@ -12,15 +12,22 @@ import java.net.Socket;
  *
  * @author Pablo
  */
-public class Jugador {
+public class Player {
+    
+    // Atributos 
     
     // JuegoRummikum refVentana; 
-    DataInputStream entrada = null;//leer comunicacion
-    DataOutputStream salida = null;//escribir comunicacion
-    Socket cliente = null;//para la comunicacion
-    String nombreDeCliente;
+    DataInputStream in = null; //leer comunicacion
+    DataOutputStream out = null; //escribir comunicacion
+    Socket player = null; //para la comunicacion
+    String username;
     
-    public Jugador(){
+    // Constructor
+    
+    // HOLA DANI
+    // GOAAAAAAAAL 
+    
+    public Player(){
         
         
     }

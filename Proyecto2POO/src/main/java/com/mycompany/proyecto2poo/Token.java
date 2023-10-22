@@ -1,17 +1,17 @@
 package com.mycompany.proyecto2poo;
 
-public class Ficha {
-    //Atributos
+public class Token {
+    // Atributos
     private String color;
-    private int valor;
+    private int value;
 
-    //Constructor
-    public Ficha(String color, int valor) {
+    // Constructor
+    public Token(String color, int value) {
         this.color = color;
-        this.valor = valor;
+        this.value = value;
     }
 
-    //Getters y Setters
+    // Getters y Setters
 
     public String getColor() {
         return color;
@@ -21,17 +21,17 @@ public class Ficha {
         this.color = color;
     }
 
-    public int getValor() {
-        return valor;
+    public int getValue() {
+        return value;
     }
 
-    public void setValor(int valor) {
-        this.valor = valor;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     @Override
     public String toString() {
-        return "Ficha:" + " de color: " + color + " con valor de " + valor;
+        return "Token:" + " color -> " + color + " value -> " + value;
     }
     
     

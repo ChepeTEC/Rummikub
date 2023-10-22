@@ -46,7 +46,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace pref="144" max="32767" attributes="0"/>
-                  <Component id="btnCrearPartida" min="-2" pref="203" max="-2" attributes="0"/>
+                  <Component id="btnCreate" min="-2" pref="203" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BtnUnirseAPartida" min="-2" pref="203" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
@@ -59,7 +59,7 @@
                   <EmptySpace pref="281" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnUnirseAPartida" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="btnCrearPartida" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="btnCreate" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               </Group>
@@ -67,7 +67,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnCrearPartida">
+        <Component class="javax.swing.JButton" name="btnCreate">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="0" type="rgb"/>
@@ -86,9 +86,9 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearPartidaMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCrearPartidaMouseExited"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearPartidaActionPerformed"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCreateMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCreateMouseExited"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCreateActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnUnirseAPartida">
