@@ -59,7 +59,7 @@ public class Player {
             System.out.println("\t=============================");
         }
         
-        new ThreadPlayer1(read,refVentana).start();
+        new ThreadPlayer(read,refVentana).start();
     }
     
     // Getters and setters

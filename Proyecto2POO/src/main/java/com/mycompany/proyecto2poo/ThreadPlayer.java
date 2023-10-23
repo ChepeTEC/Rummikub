@@ -11,13 +11,13 @@ import java.io.IOException;
  *
  * @author Pablo
  */
-public class ThreadPlayer1 extends Thread{
+public class ThreadPlayer extends Thread{
     
     private DataInputStream read; // Para hacer lectura de lo que comunica el server
     private RummikubWindow playerWindow; // Referencia a la ventana y al jugador de esa ventana
     private boolean isRunning;
     
-    public ThreadPlayer1(DataInputStream read, RummikubWindow playerWindow){
+    public ThreadPlayer(DataInputStream read, RummikubWindow playerWindow){
         
         this.read = read;
         this.playerWindow = playerWindow;

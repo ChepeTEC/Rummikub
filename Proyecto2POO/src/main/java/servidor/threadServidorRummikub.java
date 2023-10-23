@@ -21,7 +21,7 @@ public class threadServidorRummikub extends Thread {
     String namePlayer;
     ServerRummikub server; //Referencia al server
     threadServidorRummikub enemigo = null;
-    
+    //boolean enLobby = true;
     int numPlayer;
     
     //Constructor
@@ -81,7 +81,8 @@ public class threadServidorRummikub extends Thread {
                 switch (opcion){
                     //TODO: Faltan hacer los cases para las diferentes funcionalidades
                     case 1:
-                        break;
+                        server.frame.mostrar("HA ENTRADO AL CASE 1");
+                        
                     case 2:
                         break;
                     case 3:

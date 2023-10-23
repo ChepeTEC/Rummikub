@@ -11,6 +11,8 @@ public class ServerRummikub{
     //Atributos:
     JFrameServer frame;
     ArrayList <Socket> players;
+    //ArrayList<Partida> partidas;
+    //ArrayList<threadServidorRummikub> jugadoresEnLobby;
     boolean accepting;
     Socket player1;
     Socket player2;
@@ -19,7 +21,8 @@ public class ServerRummikub{
     public ServerRummikub (JFrameServer ventanaPadre){
         this.frame = ventanaPadre;
         players = new ArrayList <Socket> ();
-        accepting = true;        
+        accepting = true; 
+        //jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
     }
 
     public void runServer (){
@@ -43,7 +46,9 @@ public class ServerRummikub{
             
             user1.enemigo = user2;
             user2.enemigo = user1;
+            /*
             
+            */
             while (true)
             {
             
