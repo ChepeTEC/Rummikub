@@ -4,6 +4,8 @@
  */
 package servidor;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author Jose
@@ -89,7 +91,14 @@ public class JFrameServer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameServer().setVisible(true);
+                
+                JFrameServer serv = new JFrameServer();
+                serv.setVisible(true);
+                Thread serverThread = new Thread(() -> {
+                    serv.servidor.runServer();
+                });
+                serverThread.start();
+                    
             }
         });
     }
@@ -97,6 +106,16 @@ public class JFrameServer extends javax.swing.JFrame {
     public void mostrar (String texto){
         txtAreaMensajes.append (texto+"\n");
     }
+
+    public JTextArea getTxtAreaMensajes() {
+        return txtAreaMensajes;
+    }
+
+    public void setTxtAreaMensajes(JTextArea txtAreaMensajes) {
+        this.txtAreaMensajes = txtAreaMensajes;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

@@ -48,8 +48,9 @@ public class Player {
             
             // Request for username
             setUsername(JOptionPane.showInputDialog("Introduzca su nombre de usuario:"));
-        
+            
             // Send username to server
+            
             write.writeUTF(username);
         }
         catch(IOException e){
@@ -58,6 +59,7 @@ public class Player {
             System.out.println("\t=============================");
         }
         
+        new ThreadPlayer1(read,refVentana).start();
     }
     
     // Getters and setters

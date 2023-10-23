@@ -12,6 +12,8 @@ public class ServerRummikub{
     JFrameServer frame;
     ArrayList <Socket> players;
     boolean accepting;
+    Socket player1;
+    Socket player2;
 
     //Constructores:
     public ServerRummikub (JFrameServer ventanaPadre){
@@ -22,17 +24,30 @@ public class ServerRummikub{
 
     public void runServer (){
         try{
+            
             ServerSocket server = new ServerSocket (8081);
             frame.mostrar (".:: Servidor Activo ::.");
             frame.mostrar (".:: Esperando jugadores ::.");
-            while (accepting){
-              Socket player = server.accept();
-              players.add(player);
-              frame.mostrar("Ingreso un jugador");
-              if (players.size() == 4){
-                  accepting = false;
-              }
-            }  
+
+            player1 = server.accept();
+            frame.mostrar(".::Primer Cliente Aceptado");
+            threadServidorRummikub user1 = new threadServidorRummikub(player1, this, 1);
+            user1.start();
+            
+
+            player2 = server.accept();
+            frame.mostrar(".::Segundo Cliente Aceptado");
+            threadServidorRummikub user2 = new threadServidorRummikub(player2, this, 2);
+            user2.start();
+            
+            
+            user1.enemigo = user2;
+            user2.enemigo = user1;
+            
+            while (true)
+            {
+            
+            }
             
         }catch (IOException e){
             e.printStackTrace();

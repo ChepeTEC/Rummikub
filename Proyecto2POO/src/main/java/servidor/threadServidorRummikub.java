@@ -20,6 +20,7 @@ public class threadServidorRummikub extends Thread {
     DataOutputStream output = null; //Enviar
     String namePlayer;
     ServerRummikub server; //Referencia al server
+    threadServidorRummikub enemigo = null;
     
     int numPlayer;
     
@@ -60,6 +61,7 @@ public class threadServidorRummikub extends Thread {
     
     @Override
     public void run (){
+        
         try{
             //Inicializamos para lectura y escritura con el player
             input = new DataInputStream (player.getInputStream());
@@ -78,6 +80,31 @@ public class threadServidorRummikub extends Thread {
                 opcion = input.readInt();
                 switch (opcion){
                     //TODO: Faltan hacer los cases para las diferentes funcionalidades
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        
+                        server.frame.mostrar("HA ENTRADO AL CASE 4");
+                        String mensaje = input.readUTF();
+                        server.frame.mostrar(mensaje);
+                        
+                        // envia un 4 al thradCliente enemigo
+                        enemigo.output.writeInt(4);
+                        
+                        server.frame.mostrar("DESPUES DEL PRIMER INPUT");
+                        
+                        // envia el emnsaje al thread cliente enemigo
+                        enemigo.output.writeUTF(mensaje);
+                        
+                        server.frame.mostrar("DESPUES DEL SEGUNDO INPUT");
+                        
+                        System.out.println("Op4: envia 4 y mensaje: "+ mensaje);
+                        
+                        break;
                 }
             }catch (IOException e){
                 System.out.println("El cliente termino la conexion"); break;}
