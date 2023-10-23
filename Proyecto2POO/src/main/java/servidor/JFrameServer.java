@@ -105,6 +105,7 @@ public class JFrameServer extends javax.swing.JFrame {
     
     public void mostrar (String texto){
         txtAreaMensajes.append (texto+"\n");
+        this.repaint();
     }
 
     public JTextArea getTxtAreaMensajes() {

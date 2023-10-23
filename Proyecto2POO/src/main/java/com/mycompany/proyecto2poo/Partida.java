@@ -13,10 +13,9 @@ import java.util.ArrayList;
 public class Partida {
     Player admin;
     ArrayList <Player> players;
+    //
     boolean inProgres;
     int amountPlayer;
-    
-    
-    
+  
     //Más cosillas
 }

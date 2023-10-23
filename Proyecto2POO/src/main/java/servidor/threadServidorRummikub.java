@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,8 +21,9 @@ public class threadServidorRummikub extends Thread {
     DataOutputStream output = null; //Enviar
     String namePlayer;
     ServerRummikub server; //Referencia al server
-    threadServidorRummikub enemigo = null;
+    //threadServidorRummikub enemigo = null;
     //boolean enLobby = true;
+    ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
     int numPlayer;
     
     //Constructor
@@ -29,6 +31,7 @@ public class threadServidorRummikub extends Thread {
         this.player = player;
         this.server = server;
         this.numPlayer = num;
+        //enemies = new ArrayList <threadServidorRummikub> ();
         namePlayer = ""; //Se desconoce hasta la primera corrida del thread
     }
 
@@ -94,7 +97,16 @@ public class threadServidorRummikub extends Thread {
                         server.frame.mostrar(mensaje);
                         
                         // envia un 4 al thradCliente enemigo
-                        enemigo.output.writeInt(4);
+                        for (threadServidorRummikub enemy : enemies){
+                            try {
+                                enemy.output.writeInt(4);
+                                enemy.output.writeUTF(mensaje);
+                                server.frame.mostrar("Mensaje enviado a " + enemy.getNamePlayer());       
+                            }catch (IOException e){
+                                server.frame.mostrar("Error al enviar mensaje a " + enemy.getNamePlayer());
+                            }
+                        }
+                        /*enemigo.output.writeInt(4);
                         
                         server.frame.mostrar("DESPUES DEL PRIMER INPUT");
                         
@@ -103,7 +115,7 @@ public class threadServidorRummikub extends Thread {
                         
                         server.frame.mostrar("DESPUES DEL SEGUNDO INPUT");
                         
-                        System.out.println("Op4: envia 4 y mensaje: "+ mensaje);
+                        System.out.println("Op4: envia 4 y mensaje: "+ mensaje);*/
                         
                         break;
                 }
