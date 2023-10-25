@@ -1,5 +1,6 @@
 package servidor;
 
+import com.mycompany.proyecto2poo.LobbyWindow;
 import com.mycompany.proyecto2poo.Partida;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -11,22 +12,27 @@ import java.util.logging.Logger;
 public class ServerRummikub{
     //Atributos:
     JFrameServer frame;
+    LobbyWindow frameLobby;
     ArrayList <Socket> players;
     ArrayList<Partida> partidas;
     ArrayList<threadServidorRummikub> jugadoresEnLobby;
+    ArrayList<threadServidorRummikub> jugadoresPrePartida;
     boolean accepting;
     Socket player1;
     Socket player2;
 
     //Constructores:
-    public ServerRummikub (JFrameServer ventanaPadre){
+    public ServerRummikub (JFrameServer ventanaPadre, LobbyWindow ventanaMadre){
         this.frame = ventanaPadre;
-        players = new ArrayList <Socket> ();
+        this.frameLobby = ventanaMadre;
+            players = new ArrayList <Socket> ();
         accepting = true; 
         jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
+        partidas = new ArrayList <Partida> ();
+        jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
     }
 
-    
+    //Metodos
     public void runServer (){
         try{
             
@@ -69,22 +75,29 @@ public class ServerRummikub{
 
                 threadServidorRummikub playerThread = new threadServidorRummikub(player, this, ++counter);
                 System.out.println(counter);
-                playerThread.start();
+                playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor
 
                 // Agregar al jugador al lobby
                 jugadoresEnLobby.add(playerThread);
+                jugadoresPrePartida.add (playerThread);
                 
-                for (threadServidorRummikub otherPlayer : jugadoresEnLobby) {
+                for (threadServidorRummikub otherPlayer : jugadoresPrePartida) { //Ponerlos enemigos entre ellos (comunicación entre ellos
                     if (otherPlayer != playerThread) {
                         playerThread.enemies.add(otherPlayer);
                         otherPlayer.enemies.add (playerThread);
                     }
                 }
                 
-                if (jugadoresEnLobby.size() == 4){
+                if (jugadoresPrePartida.size() == 4){
                     accepting = false;
-                    frame.mostrar("Ya no se estan aceptando más jugadores.");
-                    break;
+                    frame.mostrar("Ya no se estan aceptando más jugadores estos jugadores serán ingresados una partida");
+                    Partida partida = new Partida (jugadoresPrePartida, true, 4); //Se crea el objeto de partida
+                    partidas.add (partida); //Se agrega al arraylist que consultará el threadLobby
+                    String mostrar = "<html>Admin: " + partida.getAdmin() + "\t" + "\t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4 " + "\t" + "\t" + "Estado Partida: " + "Activa";
+                    frameLobby.insertarPartida (mostrar);
+                    accepting = true;
+                    jugadoresPrePartida = new ArrayList <threadServidorRummikub> (); //Limpiamos el arrayList para la partida
+                    continue;
                 }
             } 
             
@@ -92,6 +105,40 @@ public class ServerRummikub{
             e.printStackTrace();
         }
     }
+
+    public JFrameServer getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrameServer frame) {
+        this.frame = frame;
+    }
+
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public void setPartidas(ArrayList<Partida> partidas) {
+        this.partidas = partidas;
+    }
+
+    public ArrayList<threadServidorRummikub> getJugadoresEnLobby() {
+        return jugadoresEnLobby;
+    }
+
+    public void setJugadoresEnLobby(ArrayList<threadServidorRummikub> jugadoresEnLobby) {
+        this.jugadoresEnLobby = jugadoresEnLobby;
+    }
+
+    public boolean isAccepting() {
+        return accepting;
+    }
+
+    public void setAccepting(boolean accepting) {
+        this.accepting = accepting;
+    }
+    
+    
 
 
 }

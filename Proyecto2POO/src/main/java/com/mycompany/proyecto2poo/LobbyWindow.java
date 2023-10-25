@@ -4,7 +4,9 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -122,7 +124,7 @@ public class LobbyWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        insertarPartida();
+        //insertarPartida();
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -131,7 +133,7 @@ public class LobbyWindow extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
     
-    public void insertarPartida(){
+    public void insertarPartida(String text){
         
         JPanel panel = new JPanel();
         pnlLobbys.add(panel);
@@ -145,8 +147,12 @@ public class LobbyWindow extends javax.swing.JFrame {
         panel.setBorder(bevelBorder);
         
         panel.setVisible(true);
+        JLabel menssage = new JLabel ();
+        menssage.setText(text);
+        menssage.setFont (new Font ("Segoe UI Historic", 0, 18));
+        panel.add (menssage);
         setCordY(getCordY()+100);
-        
+        pnlLobbys.repaint();
     }
     
     public void agregarBoton(){
@@ -180,6 +186,7 @@ public class LobbyWindow extends javax.swing.JFrame {
     public void setCordY(int cordY) {
         this.cordY = cordY;
     }
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -4,6 +4,7 @@
  */
 package servidor;
 
+import com.mycompany.proyecto2poo.LobbyWindow;
 import javax.swing.JTextArea;
 
 /**
@@ -11,14 +12,16 @@ import javax.swing.JTextArea;
  * @author Jose
  */
 public class JFrameServer extends javax.swing.JFrame {
-    ServerRummikub servidor;
+    private ServerRummikub servidor;
 
     /**
      * Creates new form JFrameServidor1
      */
     public JFrameServer() {
         initComponents();
-        servidor = new ServerRummikub(this);   
+        LobbyWindow lobby = new LobbyWindow();
+        lobby.setVisible (true);
+        servidor = new ServerRummikub(this, lobby);
     }
 
     
@@ -117,6 +120,10 @@ public class JFrameServer extends javax.swing.JFrame {
 
     public void setTxtAreaMensajes(JTextArea txtAreaMensajes) {
         this.txtAreaMensajes = txtAreaMensajes;
+    }
+    
+    public ServerRummikub getServer (){
+        return servidor;
     }
     
     
