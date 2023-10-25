@@ -123,7 +123,11 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     private void BtnUnirseAPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnirseAPartidaActionPerformed
-        // TODO add your handling code here:
+        
+        LobbyWindow Ventana = new LobbyWindow();
+        Ventana.setVisible(true);
+        dispose();
+        
     }//GEN-LAST:event_BtnUnirseAPartidaActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed

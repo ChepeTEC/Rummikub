@@ -26,13 +26,18 @@ public class ServerRummikub{
         jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
     }
 
+    
     public void runServer (){
         try{
             
             ServerSocket server = new ServerSocket (8081);
             frame.mostrar (".:: Servidor Activo ::.");
             frame.mostrar (".:: Esperando jugadores ::.");
+
             /*
+            
+            CODIGO COMENTADO: ACEPTA A SOLAMENTE DOS JUGADORES
+            
             player1 = server.accept();
             frame.mostrar(".::Primer Cliente Aceptado");
             threadServidorRummikub user1 = new threadServidorRummikub(player1, this, 1);
@@ -49,8 +54,16 @@ public class ServerRummikub{
             user2.enemigo = user1;
 
             */
+            
+                        
+            //while (true)
+            //{
+            
+            //}
+            
             int counter = 0;
             while (accepting) {
+                
                 Socket player = server.accept();
                 frame.mostrar(".:: Cliente Aceptado");
 
@@ -73,15 +86,7 @@ public class ServerRummikub{
                     frame.mostrar("Ya no se estan aceptando más jugadores.");
                     break;
                 }
-                
-
             } 
-            
-            
-            //while (true)
-            //{
-            
-            //}
             
         }catch (IOException e){
             e.printStackTrace();

@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author Jose
  */
 public class Partida {
+    
     Player admin;
     ArrayList <Player> players;
-    //
     boolean inProgres;
     int amountPlayer;
   

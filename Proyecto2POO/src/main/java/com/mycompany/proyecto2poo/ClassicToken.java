@@ -14,4 +14,5 @@ public class ClassicToken extends Token {
         super(color, value);
     }
     
+    // Hola
 }

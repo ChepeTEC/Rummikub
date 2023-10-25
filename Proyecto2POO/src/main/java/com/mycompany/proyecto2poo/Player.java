@@ -110,7 +110,6 @@ public class Player {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-    
+    }    
     
 }
