@@ -7,7 +7,9 @@ package com.mycompany.proyecto2poo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -16,13 +18,22 @@ import javax.swing.border.LineBorder;
  * @author Pablo
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    Player player;
     /**
      * Creates new form VentanaInicio
      */
     public MainWindow() {
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        try{          
+            // Crea una cliente que es su coenxion al server
+            
+            player = new Player(); //No se le pasa la referencia a la ventana aun
+            player.getConnected();         
+            
+        }catch (IOException ex) {
+           
+        }
     }
 
     /**
@@ -130,7 +141,17 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnUnirseAPartidaActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
+        String cantidad = JOptionPane.showInputDialog("Introduzca la cantidad de jugadores que desea para la partida: ");
+        try{
+            int cantidadInt = Integer.parseInt (cantidad);
+            if (cantidadInt >= 4)
+            
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(rootPane, "La cantidad dada no es un número", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        player.getServer().getServer().getPartidas().add(new Partida (player.getUsername(), players, false, ))
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseEntered

@@ -26,6 +26,7 @@ public class Player {
     private Socket player = null; // para la comunicacion
     private String username; //
     private boolean isHost; //
+    private LobbyWindow refLobby;
     
     // Atributo de prueba; 
     
@@ -36,6 +37,10 @@ public class Player {
     public Player(RummikubWindow refVentana){
         
         this.refVentana = refVentana;
+        
+    }
+    
+    public Player (){
         
     }
     
@@ -117,5 +122,14 @@ public class Player {
     public void setUsername(String username) {
         this.username = username;
     }    
+
+    public LobbyWindow getRefLobby() {
+        return refLobby;
+    }
+
+    public void setRefLobby(LobbyWindow refLobby) {
+        this.refLobby = refLobby;
+    }
+    
     
 }

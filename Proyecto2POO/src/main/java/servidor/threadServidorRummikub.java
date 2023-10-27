@@ -4,6 +4,7 @@
  */
 package servidor;
 
+import com.mycompany.proyecto2poo.Partida;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -24,16 +25,20 @@ public class threadServidorRummikub extends Thread {
     //threadServidorRummikub enemigo = null;
     //boolean enLobby = true;
     ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
+    ArrayList <Partida> gamesToShow = new ArrayList<> ();
     int numPlayer;
     
     //Constructor
-    public threadServidorRummikub (Socket player, ServerRummikub server, int num){
+    public threadServidorRummikub (Socket player, ServerRummikub server, int num, ArrayList <Partida> gamesToShow){
         this.player = player;
         this.server = server;
         this.numPlayer = num;
         //enemies = new ArrayList <threadServidorRummikub> ();
         namePlayer = ""; //Se desconoce hasta la primera corrida del thread
+        this.gamesToShow = gamesToShow;
     }
+    
+    
 
     //Getter y setters
     public Socket getPlayer() {
@@ -59,6 +64,16 @@ public class threadServidorRummikub extends Thread {
     public void setServer(ServerRummikub server) {
         this.server = server;
     }
+
+    public ArrayList<Partida> getGamesToShow() {
+        return gamesToShow;
+    }
+
+    public void setGamesToShow(ArrayList<Partida> gamesToShow) {
+        this.gamesToShow = gamesToShow;
+    }
+    
+    
     
     //Methods
     

@@ -34,22 +34,22 @@ public class RummikubWindow extends javax.swing.JFrame {
         this.cordMazoX = 10;
         this.cordMazoY = 2;
         
-        try {
+        //try {
             // Parte de la ventana
             initComponents();
             setLocationRelativeTo(null);
             
             // Crea una cliente que es su coenxion al server
             
-            player = new Player(this);
-            player.getConnected();
+            //player = new Player(this);
+            //player.getConnected();
             
             setSize(820, 380);
             
             
-        } catch (IOException ex) {
+        //} catch (IOException ex) {
            
-        }
+        //}
     }
     
     public void mostrar(String mensaje){

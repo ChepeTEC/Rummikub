@@ -5,19 +5,21 @@
 package com.mycompany.proyecto2poo;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
+import servidor.threadServidorRummikub;
 
 /**
  *
  * @author todom
  */
 public class LobbyWindow extends javax.swing.JFrame {
-    
+    private threadServidorRummikub playerThreadServidor;
     private int cordX;
     private int cordY;
     
@@ -45,9 +47,10 @@ public class LobbyWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlBackGround.setBackground(new java.awt.Color(0, 51, 255));
+        pnlBackGround.setBackground(new java.awt.Color(76, 112, 255));
 
-        btnPrueba.setText("Prueba");
+        btnPrueba.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnPrueba.setText("Refrescar partidas");
         btnPrueba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPruebaActionPerformed(evt);
@@ -76,7 +79,8 @@ public class LobbyWindow extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(pnlLobbys);
 
-        btnVolver.setText("VOLVER");
+        btnVolver.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -124,7 +128,13 @@ public class LobbyWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        //insertarPartida();
+        ArrayList <Partida> currentGames = playerThreadServidor.getGamesToShow();
+        
+        for (int i = 0; i < currentGames.size(); i++) {
+            Partida gameRecibido = currentGames.get(i);
+            agregarBoton();
+            
+        }
     }//GEN-LAST:event_btnPruebaActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
