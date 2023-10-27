@@ -6,6 +6,7 @@ public class Token {
     private int value;
 
     // Constructor
+    
     public Token(TokensTypes color, int value) {
         this.color = color;
         this.value = value;

@@ -166,9 +166,6 @@ public class LobbyWindow extends javax.swing.JFrame {
         
     }
     
-    
-    
-    
     // GETTERS AND SETTERS
     
     public int getCordX() {
@@ -187,7 +184,6 @@ public class LobbyWindow extends javax.swing.JFrame {
         this.cordY = cordY;
     }
     
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

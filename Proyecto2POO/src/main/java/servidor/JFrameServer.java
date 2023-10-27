@@ -5,6 +5,7 @@
 package servidor;
 
 import com.mycompany.proyecto2poo.LobbyWindow;
+import com.mycompany.proyecto2poo.ThreadLeerPartidasActivas;
 import javax.swing.JTextArea;
 
 /**
@@ -12,16 +13,28 @@ import javax.swing.JTextArea;
  * @author Jose
  */
 public class JFrameServer extends javax.swing.JFrame {
+    
     private ServerRummikub servidor;
+    private ThreadLeerPartidasActivas threadLeerPartidas;
+    private LobbyWindow lobby;
 
     /**
      * Creates new form JFrameServidor1
      */
     public JFrameServer() {
+        
         initComponents();
-        LobbyWindow lobby = new LobbyWindow();
-        lobby.setVisible (true);
-        servidor = new ServerRummikub(this, lobby);
+        
+        // CREACION DE LOS ATRIBUTOS 
+        
+        this.lobby = new LobbyWindow();
+        this.servidor = new ServerRummikub(this, lobby);
+        this.threadLeerPartidas = new ThreadLeerPartidasActivas(this, this.lobby);
+        
+        // PONER A CORRER AL THREAD
+        
+        this.threadLeerPartidas.start();
+
     }
 
     
@@ -46,20 +59,16 @@ public class JFrameServer extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public void correrServer(){
-    
-    
-    }
+
     
     /**
      * @param args the command line arguments
@@ -86,6 +95,7 @@ public class JFrameServer extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFrameServer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -107,8 +117,6 @@ public class JFrameServer extends javax.swing.JFrame {
         });
     }
     
-    
-    
     public void mostrar (String texto){
         txtAreaMensajes.append (texto+"\n");
         this.repaint();
@@ -126,8 +134,6 @@ public class JFrameServer extends javax.swing.JFrame {
         return servidor;
     }
     
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaMensajes;

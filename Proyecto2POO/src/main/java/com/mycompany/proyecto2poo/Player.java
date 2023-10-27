@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import javax.swing.JOptionPane;
+import servidor.JFrameServer;
 
 /**
  *
@@ -19,11 +20,16 @@ public class Player {
     // Atributos 
     
     private RummikubWindow refVentana; // Referencia a la ventana de juego 
-    public static String IP_SERVER = "localhost"; //IP del Servidor
-    private DataInputStream read = null; //leer comunicacion
-    private DataOutputStream write = null; //escribir comunicacion
-    private Socket player = null; //para la comunicacion
-    private String username;
+    public static String IP_SERVER = "localhost"; // IP del Servidor
+    private DataInputStream read = null; // leer comunicacion
+    private DataOutputStream write = null; // escribir comunicacion
+    private Socket player = null; // para la comunicacion
+    private String username; //
+    private boolean isHost; //
+    
+    // Atributo de prueba; 
+    
+    private JFrameServer server;
     
     // Constructor
     

@@ -22,6 +22,7 @@ public class ThreadPlayer extends Thread{
         this.read = read;
         this.playerWindow = playerWindow;
         this.isRunning = true;
+        
     }
 
     public void run(){
@@ -34,7 +35,6 @@ public class ThreadPlayer extends Thread{
            
             try{
                 
-                System.out.println("ENTRA AL TRY");
                 String mensaje = "";
                 opcion = read.readInt();
                 
@@ -55,13 +55,9 @@ public class ThreadPlayer extends Thread{
                         
                     case 4:
                         
-                        System.out.println("ENTRA AL CASE xD");
-                        
                         mensaje = read.readUTF();
                         
                         playerWindow.mostrar(mensaje);
-                        
-                        System.out.println("VA SALIENDO");
                         
                         break;
                 }

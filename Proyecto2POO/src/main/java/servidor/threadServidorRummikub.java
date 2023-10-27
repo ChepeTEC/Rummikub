@@ -84,7 +84,6 @@ public class threadServidorRummikub extends Thread {
                 switch (opcion){
                     //TODO: Faltan hacer los cases para las diferentes funcionalidades
                     case 1:
-                        server.frame.mostrar("HA ENTRADO AL CASE 1");
                         
                     case 2:
                         break;
@@ -92,7 +91,6 @@ public class threadServidorRummikub extends Thread {
                         break;
                     case 4:
                         
-                        server.frame.mostrar("HA ENTRADO AL CASE 4");
                         String mensaje = input.readUTF();
                         server.frame.mostrar(mensaje);
                         

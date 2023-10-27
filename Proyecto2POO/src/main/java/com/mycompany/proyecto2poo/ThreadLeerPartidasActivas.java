@@ -11,11 +11,11 @@ import servidor.JFrameServer;
  * @author todom
  */
 public class ThreadLeerPartidasActivas extends Thread{
+    
     private JFrameServer frame;
+    private LobbyWindow frameLobby;
     private boolean finish;
     private boolean paused;
-    private LobbyWindow frameLobby;
-    //
     
     /*
     
@@ -39,11 +39,23 @@ public class ThreadLeerPartidasActivas extends Thread{
     Ahora si quieres comunicar el Lobby con el Server, creo yo que lo mejor seria utilizar el JFrameServer ya que podriamos utilizarlo de una vez para mandar mensajes y asi
     
     */
-    @Override
-    @SuppressWarnings("SleepWhileInLoop")
+    
+    public ThreadLeerPartidasActivas(JFrameServer frame, LobbyWindow frameLobby){
+        
+        this.frame = frame;
+        this.frameLobby = frameLobby;
+        this.finish = true;
+        this.paused = false;
+    }
+    
+    @Override   
+    
     public void run(){
+        
         while (finish){
+            
             while (paused){
+                
                 try {
                     Thread.sleep(1000); // Pausa de 1 segundo
                 } catch (InterruptedException e) {
@@ -53,13 +65,25 @@ public class ThreadLeerPartidasActivas extends Thread{
             }
             
             if (!frame.getServer().getPartidas().isEmpty()){ //Si hay partidas en el server
+                
                 Partida partida = frame.getServer().getPartidas().get(0);
+                
+                // Para partidas que estan en progreso
+                
                 if (partida.isInProgres()){
+                    
                     String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Activa";
                     frameLobby.insertarPartida(mostrar);
-                }else{
+                    
+                }
+                
+                // Para partidas que no han empezado
+                
+                else{
+        
                     String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Inactiva";
                     frameLobby.insertarPartida(mostrar);
+                    
                 }
                 
             }   

@@ -13,27 +13,34 @@ public class ServerRummikub{
     //Atributos:
     JFrameServer frame;
     LobbyWindow frameLobby;
+    
     ArrayList <Socket> players;
     ArrayList<Partida> partidas;
+    
     ArrayList<threadServidorRummikub> jugadoresEnLobby;
     ArrayList<threadServidorRummikub> jugadoresPrePartida;
+    
     boolean accepting;
-    Socket player1;
-    Socket player2;
+    
+//    Socket player1;
+//    Socket player2;
 
     //Constructores:
     public ServerRummikub (JFrameServer ventanaPadre, LobbyWindow ventanaMadre){
+        
         this.frame = ventanaPadre;
         this.frameLobby = ventanaMadre;
-            players = new ArrayList <Socket> ();
+        players = new ArrayList <Socket> ();
         accepting = true; 
         jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
         partidas = new ArrayList <Partida> ();
         jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
+        
     }
 
     //Metodos
     public void runServer (){
+        
         try{
             
             ServerSocket server = new ServerSocket (8081);
@@ -68,13 +75,14 @@ public class ServerRummikub{
             //}
             
             int counter = 0;
+            
             while (accepting) {
                 
                 Socket player = server.accept();
                 frame.mostrar(".:: Cliente Aceptado");
 
                 threadServidorRummikub playerThread = new threadServidorRummikub(player, this, ++counter);
-                System.out.println(counter);
+                
                 playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor
 
                 // Agregar al jugador al lobby
@@ -82,6 +90,7 @@ public class ServerRummikub{
                 jugadoresPrePartida.add (playerThread);
                 
                 for (threadServidorRummikub otherPlayer : jugadoresPrePartida) { //Ponerlos enemigos entre ellos (comunicación entre ellos
+                    
                     if (otherPlayer != playerThread) {
                         playerThread.enemies.add(otherPlayer);
                         otherPlayer.enemies.add (playerThread);
@@ -89,6 +98,7 @@ public class ServerRummikub{
                 }
                 
                 if (jugadoresPrePartida.size() == 4){
+                    
                     accepting = false;
                     frame.mostrar("Ya no se estan aceptando más jugadores estos jugadores serán ingresados una partida");
                     Partida partida = new Partida (jugadoresPrePartida, true, 4); //Se crea el objeto de partida
@@ -98,14 +108,19 @@ public class ServerRummikub{
                     accepting = true;
                     jugadoresPrePartida = new ArrayList <threadServidorRummikub> (); //Limpiamos el arrayList para la partida
                     continue;
+                    
                 }
             } 
+        
             
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-
+    
+    
+    // GETTERS AND SETTERS 
+    
     public JFrameServer getFrame() {
         return frame;
     }
