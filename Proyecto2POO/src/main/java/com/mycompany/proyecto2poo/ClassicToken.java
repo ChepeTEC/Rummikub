@@ -10,7 +10,7 @@ package com.mycompany.proyecto2poo;
  */
 public class ClassicToken extends Token {
     
-    public ClassicToken(TokensTypes color, int value) {
+    public ClassicToken(TokensTypes.Token color, int value) {
         super(color, value);
     }
     

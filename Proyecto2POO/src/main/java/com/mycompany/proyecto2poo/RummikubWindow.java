@@ -4,11 +4,13 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import java.nio.file.Path;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -17,13 +19,20 @@ import javax.swing.JPanel;
  */
 public class RummikubWindow extends javax.swing.JFrame {
     
-    Player player;
+    private Player player;
+    private int cordMazoX;
+    private int cordMazoY;
+    
     private final Path currentPath = java.nio.file.Paths.get("").toAbsolutePath();
     
     /**
      * Creates new form JuegoRummikub
      */
+    
     public RummikubWindow() {
+        
+        this.cordMazoX = 10;
+        this.cordMazoY = 2;
         
         try {
             // Parte de la ventana
@@ -48,6 +57,41 @@ public class RummikubWindow extends javax.swing.JFrame {
         
     }
     
+    public void generarFicha(Token token){
+
+        int value = token.getValue();
+        TokensTypes.Token color = token.getColor();
+
+        JLabel tokenLabel = new JLabel();
+        pnlPlayerTokens.add(tokenLabel);
+        
+        tokenLabel.setSize(50, 50);
+        tokenLabel.setText(String.valueOf(value));
+        tokenLabel.setBackground(Color.BLACK); // Establece el fondo en negro
+
+        switch (color) {
+            case BLACK:
+                tokenLabel.setForeground(Color.BLACK);
+                break;
+            case BLUE:
+                tokenLabel.setForeground(Color.BLUE);
+                break;
+            case RED:
+                tokenLabel.setForeground(Color.RED);
+                break;
+            case YELLOW:
+                tokenLabel.setForeground(Color.YELLOW);
+                break;
+            default:
+                throw new AssertionError();
+        }
+
+        
+        tokenLabel.setLocation(cordMazoX, cordMazoY);
+        pnlPlayerTokens.repaint();
+    }
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -58,7 +102,7 @@ public class RummikubWindow extends javax.swing.JFrame {
         lblAvatarPlayer2 = new javax.swing.JLabel();
         lblAvatarPlayer3 = new javax.swing.JLabel();
         lblAvatarPlayer4 = new javax.swing.JLabel();
-        lblPlayerTokens = new javax.swing.JPanel();
+        pnlPlayerTokens = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txaChat = new javax.swing.JTextArea();
         txfPrueba = new javax.swing.JTextField();
@@ -95,15 +139,15 @@ public class RummikubWindow extends javax.swing.JFrame {
         lblAvatarPlayer4.setBackground(new java.awt.Color(153, 153, 153));
         lblAvatarPlayer4.setOpaque(true);
 
-        javax.swing.GroupLayout lblPlayerTokensLayout = new javax.swing.GroupLayout(lblPlayerTokens);
-        lblPlayerTokens.setLayout(lblPlayerTokensLayout);
-        lblPlayerTokensLayout.setHorizontalGroup(
-            lblPlayerTokensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlPlayerTokensLayout = new javax.swing.GroupLayout(pnlPlayerTokens);
+        pnlPlayerTokens.setLayout(pnlPlayerTokensLayout);
+        pnlPlayerTokensLayout.setHorizontalGroup(
+            pnlPlayerTokensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 368, Short.MAX_VALUE)
         );
-        lblPlayerTokensLayout.setVerticalGroup(
-            lblPlayerTokensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        pnlPlayerTokensLayout.setVerticalGroup(
+            pnlPlayerTokensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         txaChat.setEditable(false);
@@ -142,7 +186,7 @@ public class RummikubWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnlBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblPlayerTokens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,18 +202,19 @@ public class RummikubWindow extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPlayerTokens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18))
+                        .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))))
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,23 +233,25 @@ public class RummikubWindow extends javax.swing.JFrame {
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         
-        try {
-            // se toma lo escrito
-            String Mensaje = String.valueOf(txfPrueba.getText());
-            // se muestra en el text area
-            txaChat.append(player.getUsername()+"> "+ Mensaje + "\n");
-            // se limpia el textfield
-            txfPrueba.setText("");
-
-            // envia al server la opcion 4 para que le pase al enemigo
-            // lo escrito
-            player.getWrite().writeInt(4);
-            // le envia el mensaje
-            player.getWrite().writeUTF(player.getUsername()+ "> " + Mensaje);
-            
-        } catch (IOException ex) {
-            System.out.println("");
-        }
+        generarFicha(new Token(TokensTypes.Token.RED, 8));
+        
+//        try {
+//            // se toma lo escrito
+//            String Mensaje = String.valueOf(txfPrueba.getText());
+//            // se muestra en el text area
+//            txaChat.append(player.getUsername()+"> "+ Mensaje + "\n");
+//            // se limpia el textfield
+//            txfPrueba.setText("");
+//
+//            // envia al server la opcion 4 para que le pase al enemigo
+//            // lo escrito
+//            player.getWrite().writeInt(4);
+//            // le envia el mensaje
+//            player.getWrite().writeUTF(player.getUsername()+ "> " + Mensaje);
+//            
+//        } catch (IOException ex) {
+//            System.out.println("");
+//        }
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -255,9 +302,9 @@ public class RummikubWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblAvatarPlayer2;
     private javax.swing.JLabel lblAvatarPlayer3;
     private javax.swing.JLabel lblAvatarPlayer4;
-    private javax.swing.JPanel lblPlayerTokens;
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlBoard;
+    private javax.swing.JPanel pnlPlayerTokens;
     private javax.swing.JTextArea txaChat;
     private javax.swing.JTextField txfPrueba;
     // End of variables declaration//GEN-END:variables

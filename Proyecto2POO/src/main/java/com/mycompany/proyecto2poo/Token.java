@@ -2,23 +2,24 @@ package com.mycompany.proyecto2poo;
 
 public class Token {
     // Atributos
-    private TokensTypes color;
+    
+    private TokensTypes.Token color;
     private int value;
 
     // Constructor
     
-    public Token(TokensTypes color, int value) {
+    public Token(TokensTypes.Token color, int value) {
         this.color = color;
         this.value = value;
     }
 
     // Getters y Setters
 
-    public TokensTypes getColor() {
+    public TokensTypes.Token getColor() {
         return color;
     }
 
-    public void setColor(TokensTypes color) {
+    public void setColor(TokensTypes.Token color) {
         this.color = color;
     }
 

@@ -10,7 +10,7 @@ package com.mycompany.proyecto2poo;
  */
 public class WildCard extends Token{
     
-    public WildCard(TokensTypes color, int value) {
+    public WildCard(TokensTypes.Token color, int value) {
         super(color, value);
     }
     

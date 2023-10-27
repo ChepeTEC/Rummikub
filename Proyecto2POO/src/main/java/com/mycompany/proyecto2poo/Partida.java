@@ -12,7 +12,9 @@ import servidor.threadServidorRummikub;
  * @author Jose
  */
 public class Partida {
+    
     //Atributos
+    
     private Player admin;
     private ArrayList <threadServidorRummikub> players;
     private boolean inProgres;
