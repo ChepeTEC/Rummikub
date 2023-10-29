@@ -2,30 +2,34 @@ package servidor;
 
 import com.mycompany.proyecto2poo.LobbyWindow;
 import com.mycompany.proyecto2poo.Partida;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ServerRummikub{
-    //Atributos:
-    JFrameServer frame;
-    LobbyWindow frameLobby;
+public class ServerRummikub implements Serializable{
+    //Atributos
     
-    ArrayList <Socket> players;
-    ArrayList<Partida> partidas;
+    private JFrameServer frame;
+    private LobbyWindow frameLobby;
     
-    ArrayList<threadServidorRummikub> jugadoresEnLobby;
-    ArrayList<threadServidorRummikub> jugadoresPrePartida;
+    private ArrayList <Socket> players;
+    private ArrayList<Partida> partidas;
     
-    boolean accepting;
+    private ArrayList<threadServidorRummikub> jugadoresEnLobby;
+    private ArrayList<threadServidorRummikub> jugadoresPrePartida;
     
-//    Socket player1;
-//    Socket player2;
+    private boolean accepting;
+    private DataOutputStream output = null;
 
     //Constructores:
+    
     public ServerRummikub (JFrameServer ventanaPadre, LobbyWindow ventanaMadre){
         
         this.frame = ventanaPadre;
@@ -44,77 +48,32 @@ public class ServerRummikub{
         try{
             
             ServerSocket server = new ServerSocket (8081);
+            
             frame.mostrar (".:: Servidor Activo ::.");
             frame.mostrar (".:: Esperando jugadores ::.");
-
-            /*
-            
-            CODIGO COMENTADO: ACEPTA A SOLAMENTE DOS JUGADORES
-            
-            player1 = server.accept();
-            frame.mostrar(".::Primer Cliente Aceptado");
-            threadServidorRummikub user1 = new threadServidorRummikub(player1, this, 1);
-            user1.start();
-            
-
-            player2 = server.accept();
-            frame.mostrar(".::Segundo Cliente Aceptado");
-            threadServidorRummikub user2 = new threadServidorRummikub(player2, this, 2);
-            user2.start();
-            
-            
-            user1.enemigo = user2;
-            user2.enemigo = user1;
-
-            */
-            
-                        
-            //while (true)
-            //{
-            
-            //}
             
             int counter = 0;
             
             while (accepting) {
                 
                 Socket player = server.accept();
+                
                 frame.mostrar(".:: Cliente #" + ++counter + " Aceptado ::.");
 
                 threadServidorRummikub playerThread = new threadServidorRummikub(player, this, counter, partidas);
                 
-                playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor
-
-                // Agregar al jugador al lobby
-                /*jugadoresEnLobby.add(playerThread);
-                jugadoresPrePartida.add (playerThread);
+                playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor                               
                 
-                for (threadServidorRummikub otherPlayer : jugadoresPrePartida) { //Ponerlos enemigos entre ellos (comunicación entre ellos
-                    
-                    if (otherPlayer != playerThread) {
-                        playerThread.enemies.add(otherPlayer);
-                        otherPlayer.enemies.add (playerThread);
-                    }
-                }*/
+                // Intento de pasarle el objeto
                 
-                /*if (jugadoresPrePartida.size() == 4){
-                    
-                    accepting = false;
-                    frame.mostrar("Ya no se estan aceptando más jugadores estos jugadores serán ingresados una partida");
-                    Partida partida = new Partida (jugadoresPrePartida, true, 4); //Se crea el objeto de partida
-                    partidas.add (partida); //Se agrega al arraylist que consultará el threadLobby
-                    String mostrar = "<html>Admin: " + partida.getAdmin() + "\t" + "\t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4 " + "\t" + "\t" + "Estado Partida: " + "Activa";
-                    frameLobby.insertarPartida (mostrar);
-                    accepting = true;
-                    jugadoresPrePartida = new ArrayList <threadServidorRummikub> (); //Limpiamos el arrayList para la partida
-                    continue;
-                    
-                }*/
+                System.out.println("Intentando");
                 
+//                ObjectOutputStream out = new ObjectOutputStream(player.getOutputStream()); // Crea un socket para enviar un objeto
+//                out.writeObject(this.partidas); // Envia el objeto para que el cliente lo reciba
                 
+                System.out.println("Se pudo");
             } 
-        
-            
+         
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -154,8 +113,5 @@ public class ServerRummikub{
     public void setAccepting(boolean accepting) {
         this.accepting = accepting;
     }
-    
-    
-
 
 }

@@ -12,7 +12,5 @@ public class ClassicToken extends Token {
     
     public ClassicToken(TokensTypes.Token color, int value) {
         super(color, value);
-    }
-    
-    // Hola
+    }    
 }

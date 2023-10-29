@@ -5,6 +5,7 @@
 package com.mycompany.proyecto2poo;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.nio.file.Path;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -22,19 +24,14 @@ public class RummikubWindow extends javax.swing.JFrame {
     private Player player;
     private int cordMazoX;
     private int cordMazoY;
-    
-    private final Path currentPath = java.nio.file.Paths.get("").toAbsolutePath();
-    
-    /**
-     * Creates new form JuegoRummikub
-     */
-    
+
     public RummikubWindow() {
         
         this.cordMazoX = 10;
-        this.cordMazoY = 2;
+        this.cordMazoY = 10;
         
         //try {
+        
             // Parte de la ventana
             initComponents();
             setLocationRelativeTo(null);
@@ -65,9 +62,13 @@ public class RummikubWindow extends javax.swing.JFrame {
         JLabel tokenLabel = new JLabel();
         pnlPlayerTokens.add(tokenLabel);
         
-        tokenLabel.setSize(50, 50);
+        tokenLabel.setSize(20,30);
         tokenLabel.setText(String.valueOf(value));
-        tokenLabel.setBackground(Color.BLACK); // Establece el fondo en negro
+        tokenLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        tokenLabel.setBackground(Color.gray); // Establece el fondo en negro
+        tokenLabel.setOpaque(true);
+        Font font = new Font("Lucida Sans", Font.BOLD, 16);
+        tokenLabel.setFont(font);
 
         switch (color) {
             case BLACK:
@@ -88,9 +89,11 @@ public class RummikubWindow extends javax.swing.JFrame {
 
         
         tokenLabel.setLocation(cordMazoX, cordMazoY);
+        setCordMazoX(getCordMazoX()+30);
         pnlPlayerTokens.repaint();
+        
+        
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -230,38 +233,54 @@ public class RummikubWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    public int getCordMazoX() {
+        return cordMazoX;
+    }
 
+    public void setCordMazoX(int cordMazoX) {
+        this.cordMazoX = cordMazoX;
+    }
+
+    public int getCordMazoY() {
+        return cordMazoY;
+    }
+
+    public void setCordMazoY(int cordMazoY) {
+        this.cordMazoY = cordMazoY;
+    }
+    
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         
-        generarFicha(new Token(TokensTypes.Token.RED, 8));
+//        generarFicha(new Token(TokensTypes.Token.RED, 8));
         
-//        try {
-//            // se toma lo escrito
-//            String Mensaje = String.valueOf(txfPrueba.getText());
-//            // se muestra en el text area
-//            txaChat.append(player.getUsername()+"> "+ Mensaje + "\n");
-//            // se limpia el textfield
-//            txfPrueba.setText("");
-//
-//            // envia al server la opcion 4 para que le pase al enemigo
-//            // lo escrito
-//            player.getWrite().writeInt(4);
-//            // le envia el mensaje
-//            player.getWrite().writeUTF(player.getUsername()+ "> " + Mensaje);
-//            
-//        } catch (IOException ex) {
-//            System.out.println("");
-//        }
+        try {
+            
+            // se toma lo escrito
+            String Mensaje = String.valueOf(txfPrueba.getText());
+            
+            // se muestra en el text area
+            txaChat.append(player.getUsername()+"> "+ Mensaje + "\n");
+            
+            // se limpia el textfield
+            txfPrueba.setText("");
+
+            // envia al server la opcion 4 para que le pase al enemigo lo escrito
+            player.getWrite().writeInt(4);
+            
+            // le envia el mensaje
+            player.getWrite().writeUTF(player.getUsername()+ "> " + Mensaje);
+            
+        } catch (IOException ex) {
+            System.out.println("");
+        }
         
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     private void txfPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPruebaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfPruebaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    }//GEN-LAST:event_txfPruebaActionPerformed
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

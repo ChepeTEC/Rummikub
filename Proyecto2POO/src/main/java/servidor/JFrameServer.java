@@ -18,25 +18,23 @@ public class JFrameServer extends javax.swing.JFrame {
     private ThreadLeerPartidasActivas threadLeerPartidas;
     private LobbyWindow lobby;
 
-    /**
-     * Creates new form JFrameServidor1
-     */
     public JFrameServer() {
         
         initComponents();
+        setLocationRelativeTo(null);
         
         // CREACION DE LOS ATRIBUTOS 
         
         this.lobby = new LobbyWindow();
         this.servidor = new ServerRummikub(this, lobby);
+        
+        // Este puede quedar inutilizado
         this.threadLeerPartidas = new ThreadLeerPartidasActivas(this, this.lobby);
         
         // PONER A CORRER AL THREAD
-        
         this.threadLeerPartidas.start();
 
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,10 +67,6 @@ public class JFrameServer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

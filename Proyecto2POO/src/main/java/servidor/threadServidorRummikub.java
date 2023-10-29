@@ -8,6 +8,7 @@ import com.mycompany.proyecto2poo.Partida;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -16,20 +17,26 @@ import java.util.ArrayList;
  * @author Jose
  */
 public class threadServidorRummikub extends Thread {
-    //Atributes
-    Socket player = null; //Referencia del socket (cliente)
-    DataInputStream input = null; //Leer
-    DataOutputStream output = null; //Enviar
-    String namePlayer;
-    ServerRummikub server; //Referencia al server
-    //threadServidorRummikub enemigo = null;
-    //boolean enLobby = true;
-    ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
-    ArrayList <Partida> gamesToShow = new ArrayList<> ();
-    int numPlayer;
     
-    //Constructor
+    //Atributes
+    
+    private Socket player = null; //Referencia del socket (cliente)
+    
+    private DataInputStream input = null; //Leer
+    private DataOutputStream output = null; //Enviar
+    
+    private int numPlayer;
+    private String namePlayer;
+    
+    private ServerRummikub server; //Referencia al server
+    
+    private ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
+    private ArrayList <Partida> gamesToShow = new ArrayList<> ();
+    
+    // BUILDER
+    
     public threadServidorRummikub (Socket player, ServerRummikub server, int num, ArrayList <Partida> gamesToShow){
+        
         this.player = player;
         this.server = server;
         this.numPlayer = num;
@@ -38,9 +45,82 @@ public class threadServidorRummikub extends Thread {
         this.gamesToShow = gamesToShow;
     }
     
+    // METHODS
     
-
-    //Getter y setters
+    @Override
+    public void run (){
+        
+        try{
+            
+            //Inicializamos para lectura y escritura con el player
+            input = new DataInputStream (player.getInputStream());
+            output = new DataOutputStream (player.getOutputStream());
+            
+            this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
+            
+        }catch (IOException e){
+            
+            System.out.println("ERROR");
+            e.printStackTrace();
+        }
+        
+        int opcion = 0; 
+        
+        while (true){
+            
+            try{
+                
+                opcion = input.readInt();
+                switch (opcion){
+                    //TODO: Faltan hacer los cases para las diferentes funcionalidades
+                    case 1:
+                        
+                        // Mostrar las partidas activas en ese momeneto
+                        
+                        // Actualiza los juegos disponibles en ese momento
+                        setGamesToShow(server.getPartidas());
+                        
+                        // Le pasa la opcion que se desea que se haga en la ventana del jugador
+                        player.getOutputStream().write(1);
+                        
+                        ObjectOutputStream out = new ObjectOutputStream(player.getOutputStream()); // Crea un socket para enviar un objeto
+                        out.writeObject(gamesToShow); // Envia el objeto para que el cliente lo reciba
+                        
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        
+                        // Enviar un mensaje por el chat
+                        
+                        String mensaje = input.readUTF();
+                        server.getFrame().mostrar(mensaje);
+                        
+                        // envia un 4 al thradCliente enemigo
+                        for (threadServidorRummikub enemy : enemies){
+                            try {
+                                enemy.output.writeInt(4);
+                                enemy.output.writeUTF(mensaje);
+                                server.getFrame().mostrar("Mensaje enviado a " + enemy.getNamePlayer());       
+                            }catch (IOException e){
+                                server.getFrame().mostrar("Error al enviar mensaje a " + enemy.getNamePlayer());
+                            }
+                        }
+                        break;
+                }
+                
+            }catch (IOException e){
+                System.out.println("El cliente termino la conexion"); 
+                break;
+            }
+        }
+        server.getFrame().mostrar("Se removio este usuario: " + namePlayer);        
+    }
+    
+    //GETTERS & SETTERS
+    
     public Socket getPlayer() {
         return player;
     }
@@ -72,74 +152,23 @@ public class threadServidorRummikub extends Thread {
     public void setGamesToShow(ArrayList<Partida> gamesToShow) {
         this.gamesToShow = gamesToShow;
     }
-    
-    
-    
-    //Methods
-    
-    @Override
-    public void run (){
-        
-        try{
-            //Inicializamos para lectura y escritura con el player
-            input = new DataInputStream (player.getInputStream());
-            output = new DataOutputStream (player.getOutputStream());
-            
-            this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
-            
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        
-        int opcion = 0; 
-        
-        while (true){
-            try{
-                opcion = input.readInt();
-                switch (opcion){
-                    //TODO: Faltan hacer los cases para las diferentes funcionalidades
-                    case 1:
-                        
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        
-                        String mensaje = input.readUTF();
-                        server.frame.mostrar(mensaje);
-                        
-                        // envia un 4 al thradCliente enemigo
-                        for (threadServidorRummikub enemy : enemies){
-                            try {
-                                enemy.output.writeInt(4);
-                                enemy.output.writeUTF(mensaje);
-                                server.frame.mostrar("Mensaje enviado a " + enemy.getNamePlayer());       
-                            }catch (IOException e){
-                                server.frame.mostrar("Error al enviar mensaje a " + enemy.getNamePlayer());
-                            }
-                        }
-                        /*enemigo.output.writeInt(4);
-                        
-                        server.frame.mostrar("DESPUES DEL PRIMER INPUT");
-                        
-                        // envia el emnsaje al thread cliente enemigo
-                        enemigo.output.writeUTF(mensaje);
-                        
-                        server.frame.mostrar("DESPUES DEL SEGUNDO INPUT");
-                        
-                        System.out.println("Op4: envia 4 y mensaje: "+ mensaje);*/
-                        
-                        break;
-                }
-            }catch (IOException e){
-                System.out.println("El cliente termino la conexion"); break;}
-        }
-        server.frame.mostrar("Se removio este usuario: " + namePlayer);
-             
+
+    public DataInputStream getInput() {
+        return input;
+    }
+
+    public void setInput(DataInputStream input) {
+        this.input = input;
+    }
+
+    public DataOutputStream getOutput() {
+        return output;
+    }
+
+    public void setOutput(DataOutputStream output) {
+        this.output = output;
     }
     
     
-
-
+    
 }   

@@ -4,45 +4,29 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import servidor.threadServidorRummikub;
 
-/**
- *
- * @author Jose
- */
-public class Partida {
+public class Partida implements Serializable{
     
     //Atributos
     
-    private Player admin;
     private ArrayList <threadServidorRummikub> players;
     private boolean inProgres;
     private int amountPlayer;
   
     //Constructores
 
-    public Partida(Player admin, ArrayList<threadServidorRummikub> players, boolean inProgres, int amountPlayer) {
-        this.admin = admin;
+    public Partida(ArrayList<threadServidorRummikub> players, boolean inProgres) {
+        
         this.players = players;
         this.inProgres = inProgres;
-        this.amountPlayer = amountPlayer;
+
     }
 
-    public Partida(ArrayList<threadServidorRummikub> players, boolean inProgres, int amountPlayer) {
-        this.players = players;
-        this.inProgres = inProgres;
-        this.amountPlayer = amountPlayer;
-    }
-
-    public Player getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Player admin) {
-        this.admin = admin;
-    }
-
+    // GETTERS AND SETTERS
+    
     public ArrayList<threadServidorRummikub> getPlayers() {
         return players;
     }
@@ -66,12 +50,5 @@ public class Partida {
     public void setAmountPlayer(int amountPlayer) {
         this.amountPlayer = amountPlayer;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+     
 }

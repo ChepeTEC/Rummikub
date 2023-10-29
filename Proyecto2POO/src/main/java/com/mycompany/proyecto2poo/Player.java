@@ -7,70 +7,77 @@ package com.mycompany.proyecto2poo;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import servidor.JFrameServer;
+import servidor.ServerRummikub;
 
-/**
- *
- * @author Pablo
- */
-public class Player {
+public class Player implements Serializable{
     
     // Atributos 
     
     private RummikubWindow refVentana; // Referencia a la ventana de juego 
+    private LobbyWindow refLobby;
+    private MainWindow refMainWindow;
+    
     public static String IP_SERVER = "localhost"; // IP del Servidor
+    
+    private Socket player = null; // para la comunicacion
+    
     private DataInputStream read = null; // leer comunicacion
     private DataOutputStream write = null; // escribir comunicacion
-    private Socket player = null; // para la comunicacion
-    private String username; //
-    private boolean isHost; //
-    private LobbyWindow refLobby;
+    
+    private String username; // Username del jugador
+    private boolean isHost; // True --> Es el host : False --> No es el host
     
     // Atributo de prueba; 
     
-    private JFrameServer server;
+    private ArrayList<Partida> partidas;
     
     // Constructor
     
-    public Player(RummikubWindow refVentana){
+    public Player(RummikubWindow refVentana) throws ClassNotFoundException{
         
         this.refVentana = refVentana;
-        
+        this.refLobby = new LobbyWindow();
+        this.refMainWindow = new MainWindow();
+        this.isHost = false;
     }
     
-    public Player (){
+    public Player () throws ClassNotFoundException{
         
+        this.refLobby = new LobbyWindow();
+        this.refMainWindow = new MainWindow();
+        this.isHost = false;
     }
     
     // METODOS
     
-    public void getConnected() throws IOException{
-        
-        try{
-            
-            // Initialize Socket
+    public void getConnected() {
+        try {
+            // Inicializa el socket
             player = new Socket(getIP_SERVER(), 8081);
-            
-            // Initiliaze read and write  
+
+            // Inicializa las corrientes de entrada y salida
             read = new DataInputStream(player.getInputStream());
             write = new DataOutputStream(player.getOutputStream());
-            
-            // Request for username
+
+            // Solicita el nombre de usuario
             setUsername(JOptionPane.showInputDialog("Introduzca su nombre de usuario:"));
-            
-            // Send username to server
-            
+
+            // Envia el nombre de usuario al servidor
             write.writeUTF(username);
-        }
-        catch(IOException e){
             
-            System.out.println("\tEl servidor no esta levantado");
-            System.out.println("\t=============================");
+            // Inicia un hilo para manejar la comunicación con el servidor
+            new ThreadPlayer(read, this).start();
+            
+        } catch (IOException e) {
+            System.out.println("Error de E/S: " + e.getMessage());
+            System.out.println("El servidor no está levantado o hay un problema de conexión.");
         }
-        
-        new ThreadPlayer(read,refVentana).start();
     }
     
     // Getters and setters
@@ -130,6 +137,23 @@ public class Player {
     public void setRefLobby(LobbyWindow refLobby) {
         this.refLobby = refLobby;
     }
+
+    public boolean isIsHost() {
+        return isHost;
+    }
+
+    public void setIsHost(boolean isHost) {
+        this.isHost = isHost;
+    }
+
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public void setPartidas(ArrayList<Partida> partidas) {
+        this.partidas = partidas;
+    }
+
     
-    
+
 }

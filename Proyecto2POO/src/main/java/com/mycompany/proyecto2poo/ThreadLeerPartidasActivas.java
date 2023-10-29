@@ -12,6 +12,13 @@ import servidor.JFrameServer;
  */
 public class ThreadLeerPartidasActivas extends Thread{
     
+    /*
+    COMENTARIO:
+    
+    Me parece que este Thread va a quedar inutilizado
+    
+    */
+    
     private JFrameServer frame;
     private LobbyWindow frameLobby;
     private boolean finish;
@@ -46,6 +53,7 @@ public class ThreadLeerPartidasActivas extends Thread{
         this.frameLobby = frameLobby;
         this.finish = true;
         this.paused = false;
+        
     }
     
     @Override   
@@ -72,8 +80,8 @@ public class ThreadLeerPartidasActivas extends Thread{
                 
                 if (partida.isInProgres()){
                     
-                    String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Activa";
-                    frameLobby.insertarPartida(mostrar);
+//                    String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Activa";
+//                    frameLobby.insertarPartida(mostrar);
                     
                 }
                 
@@ -81,8 +89,8 @@ public class ThreadLeerPartidasActivas extends Thread{
                 
                 else{
         
-                    String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Inactiva";
-                    frameLobby.insertarPartida(mostrar);
+//                    String mostrar = "Admin: " + partida.getAdmin() + "/t" + "Num. Jugadores: " + partida.getPlayers().size() + "/4" + "/t" + "Estado Partida: " + "Inactiva";
+//                    frameLobby.insertarPartida(mostrar);
                     
                 }
                 

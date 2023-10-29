@@ -6,6 +6,8 @@ package com.mycompany.proyecto2poo;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,20 +21,16 @@ import servidor.threadServidorRummikub;
  * @author todom
  */
 public class LobbyWindow extends javax.swing.JFrame {
+    
     private threadServidorRummikub playerThreadServidor;
     private int cordX;
     private int cordY;
     
-    /**
-     * Creates new form LobbyWindow
-     */
     public LobbyWindow() {
         initComponents();
         setLocationRelativeTo(null);
         this.cordX = 10;
-        this.cordY = 10;
-        
-        
+        this.cordY = 10; 
     }
     
     @SuppressWarnings("unchecked")
@@ -104,9 +102,9 @@ public class LobbyWindow extends javax.swing.JFrame {
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,28 +125,55 @@ public class LobbyWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
-        ArrayList <Partida> currentGames = playerThreadServidor.getGamesToShow();
+    public void agregarPartidasDisponibles(ArrayList<Partida> partidas){
         
-        for (int i = 0; i < currentGames.size(); i++) {
-            Partida gameRecibido = currentGames.get(i);
-            agregarBoton();
+        int cantidadDePlayers = 0;
+        boolean inProgress = false;
+        
+        for (Partida partida: partidas){
+            
+            cantidadDePlayers = partida.getAmountPlayer();
+            inProgress = partida.isInProgres();
+            insertarPartida(cantidadDePlayers, inProgress);
             
         }
-    }//GEN-LAST:event_btnPruebaActionPerformed
+        
+    }
+    
+    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+        
+//        ArrayList <Partida> currentGames = playerThreadServidor.getGamesToShow();
+//        
+//        for (int i = 0; i < currentGames.size(); i++) {
+//            
+//            Partida gameRecibido = currentGames.get(i);
+//            agregarBoton(); // Aqui me parece que el método a llamar es insertarPartida()
+//            
+//        }
 
+          insertarPartida(2, true);
+    }//GEN-LAST:event_btnPruebaActionPerformed
+    
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        MainWindow ventana = new MainWindow();
+        
+        MainWindow ventana = null;
+        try {
+            ventana = new MainWindow();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LobbyWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ventana.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
     
-    public void insertarPartida(String text){
+    public void insertarPartida(int cantidadDePlayers, boolean inPogress){
         
         JPanel panel = new JPanel();
         pnlLobbys.add(panel);
         panel.setLocation(cordX, cordY);
         panel.setSize(617, 50);
+        
+        // Falta crear el boton para unirse a la partida
         
         // Crear e instanciar un BevelBorder
         BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED); // Puedes usar LOWERED para un bisel hacia adentro
@@ -156,13 +181,23 @@ public class LobbyWindow extends javax.swing.JFrame {
         // Establecer el borde en el JPanel
         panel.setBorder(bevelBorder);
         
+        String gameInfo = String.valueOf(cantidadDePlayers) + "/4\t\t\t\t";
+        
+        if(inPogress == false)
+            gameInfo += "No iniciado";
+        
+        else gameInfo += "Iniciado";
+        
+        JLabel message = new JLabel ();
+        message.setText(gameInfo);
+        message.setFont (new Font ("Segoe UI Historic", 0, 20));
+        
+        panel.add (message);
+        
         panel.setVisible(true);
-        JLabel menssage = new JLabel ();
-        menssage.setText(text);
-        menssage.setFont (new Font ("Segoe UI Historic", 0, 18));
-        panel.add (menssage);
-        setCordY(getCordY()+100);
         pnlLobbys.repaint();
+        
+        setCordY(getCordY()+60);
     }
     
     public void agregarBoton(){

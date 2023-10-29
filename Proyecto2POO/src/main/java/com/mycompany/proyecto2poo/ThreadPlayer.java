@@ -6,6 +6,10 @@ package com.mycompany.proyecto2poo;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,13 +18,13 @@ import java.io.IOException;
 public class ThreadPlayer extends Thread{
     
     private DataInputStream read; // Para hacer lectura de lo que comunica el server
-    private RummikubWindow playerWindow; // Referencia a la ventana y al jugador de esa ventana
     private boolean isRunning;
+    private Player player;
     
-    public ThreadPlayer(DataInputStream read, RummikubWindow playerWindow){
+    public ThreadPlayer(DataInputStream read, Player player){
         
         this.read = read;
-        this.playerWindow = playerWindow;
+        this.player = player;
         this.isRunning = true;
         
     }
@@ -36,12 +40,16 @@ public class ThreadPlayer extends Thread{
             try{
                 
                 String mensaje = "";
+                ArrayList <Partida> gamesToShow = new ArrayList <Partida> ();
                 opcion = read.readInt();
                 
                 switch(opcion){
                     case 1: // Funcionalidad 1
                         
-                        // ENVIAR MENSAJE
+                        ObjectInputStream in = new ObjectInputStream(read);
+                        gamesToShow = ((ArrayList<Partida>) in.readObject());
+                        
+                        player.getRefLobby();
                         
                         break;
                         
@@ -57,16 +65,23 @@ public class ThreadPlayer extends Thread{
                         
                         mensaje = read.readUTF();
                         
-                        playerWindow.mostrar(mensaje);
+                        player.getRefVentana().mostrar(mensaje);
                         
                         break;
                 }
             }
-            catch(IOException e){
-                  
-                
+            catch (ClassNotFoundException ex) {
+                Logger.getLogger(ThreadPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("ERROR 1");
             }
+            catch(IOException e){
+                  System.out.println("ERROR 2");   
+            } 
             
         }
-    }    
+    }
+    
+    // GETTER & SETTERS
+    
+    
 }
