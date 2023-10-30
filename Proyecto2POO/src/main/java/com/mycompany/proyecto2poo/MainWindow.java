@@ -138,6 +138,7 @@ public class MainWindow extends javax.swing.JFrame {
             }else{ //Union de la partida
                 try{
                     player.getWrite().writeInt(2);
+                    player.getWrite().writeInt (numero);
                 } catch (Exception e){
                     System.out.println("ERROR AL CREAR LA PARTIDA");
                 }
