@@ -25,8 +25,10 @@ public class MainWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         // Crea una cliente que es su conexión al server
-        
-        player = new Player(); //No se le pasa la referencia a la ventana aun
+        LobbyWindow refLobby = new LobbyWindow();
+        //MainWindow refMainWindow = new MainWindow(); Si le pasas este al player pasa lo de ayer
+        //Si le pasas el this. no se peta
+        player = new Player(refLobby, this); //No se le pasa la referencia a la ventana aun
         player.getConnected();
         
     }
@@ -194,7 +196,8 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new MainWindow().setVisible(true);
+                    MainWindow ventana = new MainWindow();
+                    ventana.setVisible(true);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                 }

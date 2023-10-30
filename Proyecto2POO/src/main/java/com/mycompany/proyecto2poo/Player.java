@@ -50,10 +50,10 @@ public class Player implements Serializable{
         this.isHost = false;
     }
     
-    public Player () throws ClassNotFoundException{
+    public Player (LobbyWindow refLobby, MainWindow refMainWindow) throws ClassNotFoundException{
         
-        this.refLobby = new LobbyWindow();
-        this.refMainWindow = new MainWindow();
+        this.refLobby = refLobby;
+        this.refMainWindow = refMainWindow;
         this.isHost = false;
     }
     
