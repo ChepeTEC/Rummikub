@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import servidor.JFrameServer;
 import servidor.ServerRummikub;
+import servidor.threadServidorRummikub;
 
 public class Player implements Serializable{
     
@@ -32,6 +33,8 @@ public class Player implements Serializable{
     
     private String username; // Username del jugador
     private boolean isHost; // True --> Es el host : False --> No es el host
+    private threadServidorRummikub threadServidor;
+    
     
     // Atributo de prueba; 
     

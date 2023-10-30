@@ -14,7 +14,8 @@ public class Partida implements Serializable{
     
     private ArrayList <threadServidorRummikub> players;
     private boolean inProgres;
-    private int amountPlayer;
+    private int amountPlayerWanted;
+    private String usernameHost;
   
     //Constructores
 
@@ -23,6 +24,13 @@ public class Partida implements Serializable{
         this.players = players;
         this.inProgres = inProgres;
 
+    }
+    
+    public Partida (boolean inProgress, String usernameHost, int amountWanted){
+        this.usernameHost = usernameHost;
+        this.inProgres = inProgress;
+        this.players = new ArrayList <>();
+        this.amountPlayerWanted = amountWanted;
     }
 
     // GETTERS AND SETTERS
@@ -44,11 +52,11 @@ public class Partida implements Serializable{
     }
 
     public int getAmountPlayer() {
-        return amountPlayer;
+        return amountPlayerWanted;
     }
 
     public void setAmountPlayer(int amountPlayer) {
-        this.amountPlayer = amountPlayer;
+        this.amountPlayerWanted = amountPlayer;
     }
      
 }

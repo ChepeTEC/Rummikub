@@ -41,6 +41,8 @@ public class ThreadPlayer extends Thread{
                 
                 String mensaje = "";
                 ArrayList <Partida> gamesToShow = new ArrayList <Partida> ();
+                
+                
                 opcion = read.readInt();
                 
                 switch(opcion){
@@ -54,6 +56,11 @@ public class ThreadPlayer extends Thread{
                         break;
                         
                     case 2: // Funcionalidad 2
+                        int wantedPlayers = read.readInt();
+                        
+                        Partida gameToCreate = new Partida(isRunning, player.getUsername(), wantedPlayers);
+                        
+                        ObjectInputStream in1 = new ObjectInputStream (read);
                         
                         break;
                     

@@ -88,6 +88,14 @@ public class threadServidorRummikub extends Thread {
                         
                         break;
                     case 2:
+                        
+                        //Crear las partidas
+                        player.getOutputStream().write (2);
+                        
+                        ObjectOutputStream outCreate = new ObjectOutputStream (player.getOutputStream());
+                        
+
+                        
                         break;
                     case 3:
                         break;

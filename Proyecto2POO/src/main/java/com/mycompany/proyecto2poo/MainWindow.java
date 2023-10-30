@@ -128,7 +128,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnUnirseAPartidaActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        String respuesta = JOptionPane.showInputDialog ("Por favor, introduce un número");
         
+        try{
+            int numero = Integer.parseInt(respuesta);
+            if (numero > 4 || numero < 2){ //Validacion de datos
+                JOptionPane.showConfirmDialog(rootPane, "Los datos ingresados no son válidos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                this.dispose();
+            }else{ //Union de la partida
+                try{
+                    player.getWrite().writeInt(2);
+                } catch (Exception e){
+                    System.out.println("ERROR AL CREAR LA PARTIDA");
+                }
+            }
+        }catch (NumberFormatException e){ //Validacion de tipos de datos
+            JOptionPane.showConfirmDialog(rootPane, "Se ingreso un valor no númerico.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnCreateMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCreateMouseEntered
