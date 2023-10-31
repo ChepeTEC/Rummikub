@@ -81,20 +81,23 @@ public class threadServidorRummikub extends Thread {
                         setGamesToShow(server.getPartidas());
                         
                         // Le pasa la opcion que se desea que se haga en la ventana del jugador
-                        player.getOutputStream().write(1);
+                        output.writeInt(1);
                         
                         ObjectOutputStream out = new ObjectOutputStream(player.getOutputStream()); // Crea un socket para enviar un objeto
                         out.writeObject(gamesToShow); // Envia el objeto para que el cliente lo reciba
                         
+                        System.out.println("Despues de recibir el mensaje");
+                        
                         break;
+                        
                     case 2:
                         
                         //Crear las partidas
-                        player.getOutputStream().write (2);
                         
-                        ObjectOutputStream outCreate = new ObjectOutputStream (player.getOutputStream());
+                        int wantedPlayers = input.readInt();
                         
-
+                        Partida gameToCreate = new Partida(false, namePlayer, wantedPlayers);
+                        server.getPartidas().add(gameToCreate);
                         
                         break;
                     case 3:

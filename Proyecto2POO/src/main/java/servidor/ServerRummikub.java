@@ -17,7 +17,6 @@ public class ServerRummikub implements Serializable{
     //Atributos
     
     private JFrameServer frame;
-    private LobbyWindow frameLobby;
     
     private ArrayList <Socket> players;
     private ArrayList<Partida> partidas;
@@ -30,10 +29,9 @@ public class ServerRummikub implements Serializable{
 
     //Constructores:
     
-    public ServerRummikub (JFrameServer ventanaPadre, LobbyWindow ventanaMadre){
+    public ServerRummikub (JFrameServer ventanaPadre){
         
         this.frame = ventanaPadre;
-        this.frameLobby = ventanaMadre;
         players = new ArrayList <Socket> ();
         accepting = true; 
         jugadoresEnLobby = new ArrayList <threadServidorRummikub>();

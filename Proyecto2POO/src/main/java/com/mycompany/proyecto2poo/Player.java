@@ -45,16 +45,20 @@ public class Player implements Serializable{
     public Player(RummikubWindow refVentana) throws ClassNotFoundException{
         
         this.refVentana = refVentana;
-        this.refLobby = new LobbyWindow();
-        this.refMainWindow = new MainWindow();
+        this.refLobby = new LobbyWindow(this);
+        this.refMainWindow = new MainWindow(true);
         this.isHost = false;
     }
     
-    public Player (LobbyWindow refLobby, MainWindow refMainWindow) throws ClassNotFoundException{
+    public Player (MainWindow refMainWindow) throws ClassNotFoundException{
         
-        this.refLobby = refLobby;
+        this.refLobby = new LobbyWindow(this);
         this.refMainWindow = refMainWindow;
         this.isHost = false;
+    }
+    
+    public Player(){
+        
     }
     
     // METODOS
@@ -155,6 +159,14 @@ public class Player implements Serializable{
 
     public void setPartidas(ArrayList<Partida> partidas) {
         this.partidas = partidas;
+    }
+
+    public MainWindow getRefMainWindow() {
+        return refMainWindow;
+    }
+
+    public void setRefMainWindow(MainWindow refMainWindow) {
+        this.refMainWindow = refMainWindow;
     }
 
     

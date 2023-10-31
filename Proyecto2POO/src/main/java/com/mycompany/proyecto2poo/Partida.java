@@ -58,5 +58,13 @@ public class Partida implements Serializable{
     public void setAmountPlayer(int amountPlayer) {
         this.amountPlayerWanted = amountPlayer;
     }
-     
+
+    public String getUsernameHost() {
+        return usernameHost;
+    }
+
+    public void setUsernameHost(String usernameHost) {
+        this.usernameHost = usernameHost;
+    }
+    
 }

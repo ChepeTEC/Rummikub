@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto2poo;
 
+import com.sun.tools.javac.Main;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -13,24 +14,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import servidor.threadServidorRummikub;
 
-/**
- *
- * @author todom
- */
+
 public class LobbyWindow extends javax.swing.JFrame {
     
     private threadServidorRummikub playerThreadServidor;
     private int cordX;
     private int cordY;
     
-    public LobbyWindow() {
+    private Player player;
+    public LobbyWindow(Player player) {
+        
         initComponents();
         setLocationRelativeTo(null);
+        
         this.cordX = 10;
-        this.cordY = 10; 
+        this.cordY = 10;
+        
+        this.player = player;
     }
     
     @SuppressWarnings("unchecked")
@@ -38,7 +42,7 @@ public class LobbyWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackGround = new javax.swing.JPanel();
-        btnPrueba = new javax.swing.JButton();
+        btnRefreshGames = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         pnlLobbys = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
@@ -47,11 +51,11 @@ public class LobbyWindow extends javax.swing.JFrame {
 
         pnlBackGround.setBackground(new java.awt.Color(76, 112, 255));
 
-        btnPrueba.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
-        btnPrueba.setText("Refrescar partidas");
-        btnPrueba.addActionListener(new java.awt.event.ActionListener() {
+        btnRefreshGames.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        btnRefreshGames.setText("Refrescar partidas");
+        btnRefreshGames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPruebaActionPerformed(evt);
+                btnRefreshGamesActionPerformed(evt);
             }
         });
 
@@ -96,7 +100,7 @@ public class LobbyWindow extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 359, Short.MAX_VALUE)
-                        .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRefreshGames, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlBackGroundLayout.setVerticalGroup(
@@ -106,7 +110,7 @@ public class LobbyWindow extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefreshGames, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -130,48 +134,61 @@ public class LobbyWindow extends javax.swing.JFrame {
         int cantidadDePlayers = 0;
         boolean inProgress = false;
         
+        System.out.println("->>" + partidas.size());
+        
         for (Partida partida: partidas){
             
             cantidadDePlayers = partida.getAmountPlayer();
             inProgress = partida.isInProgres();
-            insertarPartida(cantidadDePlayers, inProgress);
+            insertarPartida(cantidadDePlayers, inProgress, partida);
             
         }
         
     }
     
-    private void btnPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPruebaActionPerformed
+    private void btnRefreshGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshGamesActionPerformed
+            
+        pnlLobbys.removeAll();
+        pnlLobbys.revalidate();
+        pnlLobbys.repaint();
+        setCordX(10);
+        setCordY(10);
         
-//        ArrayList <Partida> currentGames = playerThreadServidor.getGamesToShow();
-//        
-//        for (int i = 0; i < currentGames.size(); i++) {
-//            
-//            Partida gameRecibido = currentGames.get(i);
-//            agregarBoton(); // Aqui me parece que el método a llamar es insertarPartida()
-//            
-//        }
-
-          insertarPartida(2, true);
-    }//GEN-LAST:event_btnPruebaActionPerformed
+        try {
+        
+            player.getWrite().writeInt(1);
+            
+        } catch (Exception e) {
+            
+            System.out.println("ERROR AL UNIRSE A PARTIDA");
+        
+        }
+        
+    }//GEN-LAST:event_btnRefreshGamesActionPerformed
     
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         
-        MainWindow ventana = null;
-        try {
-            ventana = new MainWindow();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LobbyWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ventana.setVisible(true);
+        player.getRefMainWindow().setVisible(true);
+        pnlLobbys.removeAll();
+        pnlLobbys.revalidate();
+        pnlLobbys.repaint();
+        setCordX(10);
+        setCordY(10);
         dispose();
+        
     }//GEN-LAST:event_btnVolverActionPerformed
     
-    public void insertarPartida(int cantidadDePlayers, boolean inPogress){
+    public void insertarPartida(int cantidadDePlayers, boolean inPogress, Partida partida){
         
         JPanel panel = new JPanel();
         pnlLobbys.add(panel);
         panel.setLocation(cordX, cordY);
         panel.setSize(617, 50);
+        
+        JButton btnUnirse = new JButton();
+        btnUnirse.setText("UNIRSE");
+        btnUnirse.setFont(new Font ("Century Gothic", 0, 18));
+        btnUnirse.setSize(20, 20);
         
         // Falta crear el boton para unirse a la partida
         
@@ -181,18 +198,20 @@ public class LobbyWindow extends javax.swing.JFrame {
         // Establecer el borde en el JPanel
         panel.setBorder(bevelBorder);
         
-        String gameInfo = String.valueOf(cantidadDePlayers) + "/4\t\t\t\t";
+        String gameInfo = "HOST: " + partida.getUsernameHost() + "      ";
+        gameInfo += partida.getPlayers().size() + "/" + String.valueOf(cantidadDePlayers) + " JUGADORES";
         
         if(inPogress == false)
-            gameInfo += "No iniciado";
+            gameInfo += "      NO INCIADO      ";
         
-        else gameInfo += "Iniciado";
+        else gameInfo += "      INICIADO      ";
         
         JLabel message = new JLabel ();
         message.setText(gameInfo);
-        message.setFont (new Font ("Segoe UI Historic", 0, 20));
+        message.setFont (new Font ("Century Gothic", 0, 18));
         
         panel.add (message);
+        panel.add (btnUnirse);
         
         panel.setVisible(true);
         pnlLobbys.repaint();
@@ -256,13 +275,13 @@ public class LobbyWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LobbyWindow().setVisible(true);
+                new LobbyWindow(new Player()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPrueba;
+    private javax.swing.JButton btnRefreshGames;
     private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnlBackGround;

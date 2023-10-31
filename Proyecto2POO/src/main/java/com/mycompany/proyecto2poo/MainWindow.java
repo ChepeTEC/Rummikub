@@ -17,19 +17,20 @@ import javax.swing.border.LineBorder;
 
 public class MainWindow extends javax.swing.JFrame {
     
-    Player player;
+    private Player player;
 
-    public MainWindow() throws ClassNotFoundException {
+    public MainWindow(boolean flag) throws ClassNotFoundException {
         
         initComponents();
         setLocationRelativeTo(null);
         
-        // Crea una cliente que es su conexión al server
-        LobbyWindow refLobby = new LobbyWindow();
         //MainWindow refMainWindow = new MainWindow(); Si le pasas este al player pasa lo de ayer
         //Si le pasas el this. no se peta
-        player = new Player(refLobby, this); //No se le pasa la referencia a la ventana aun
-        player.getConnected();
+        
+        if(flag == true){
+            player = new Player(this); //No se le pasa la referencia a la ventana aun
+            player.getConnected();
+        }
         
     }
 
@@ -125,18 +126,20 @@ public class MainWindow extends javax.swing.JFrame {
             player.getWrite().writeInt(1);
             
         } catch (Exception e) {
+            
             System.out.println("ERROR AL UNIRSE A PARTIDA");
+        
         }
     }//GEN-LAST:event_BtnUnirseAPartidaActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+       
         String respuesta = JOptionPane.showInputDialog ("Por favor, introduce un número");
         
         try{
             int numero = Integer.parseInt(respuesta);
             if (numero > 4 || numero < 2){ //Validacion de datos
-                JOptionPane.showConfirmDialog(rootPane, "Los datos ingresados no son válidos", "ERROR", JOptionPane.ERROR_MESSAGE);
-                this.dispose();
+                JOptionPane.showMessageDialog(rootPane, "Los datos ingresados no son válidos", "ERROR", JOptionPane.ERROR_MESSAGE);
             }else{ //Union de la partida
                 try{
                     player.getWrite().writeInt(2);
@@ -146,8 +149,7 @@ public class MainWindow extends javax.swing.JFrame {
                 }
             }
         }catch (NumberFormatException e){ //Validacion de tipos de datos
-            JOptionPane.showConfirmDialog(rootPane, "Se ingreso un valor no númerico.", "ERROR", JOptionPane.ERROR_MESSAGE);
-            this.dispose();
+            JOptionPane.showMessageDialog(rootPane, "Se ingreso un valor no númerico.", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnCreateActionPerformed
 
@@ -196,7 +198,7 @@ public class MainWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MainWindow ventana = new MainWindow();
+                    MainWindow ventana = new MainWindow(true);
                     ventana.setVisible(true);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);

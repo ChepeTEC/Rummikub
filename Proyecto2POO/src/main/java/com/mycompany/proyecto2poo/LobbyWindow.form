@@ -50,7 +50,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnVolver" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace pref="359" max="32767" attributes="0"/>
-                          <Component id="btnPrueba" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="btnRefreshGames" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -64,7 +64,7 @@
                   <Component id="jScrollPane2" min="-2" pref="386" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnPrueba" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="btnRefreshGames" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="btnVolver" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -73,7 +73,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnPrueba">
+        <Component class="javax.swing.JButton" name="btnRefreshGames">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI Historic" size="14" style="0"/>
@@ -81,7 +81,7 @@
             <Property name="text" type="java.lang.String" value="Refrescar partidas"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPruebaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefreshGamesActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">

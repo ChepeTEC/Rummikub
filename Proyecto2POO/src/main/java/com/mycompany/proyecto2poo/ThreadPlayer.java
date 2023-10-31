@@ -33,6 +33,8 @@ public class ThreadPlayer extends Thread{
         
         // Hacer algo antes del while true
         
+        System.out.println("START");
+        
         int opcion = 0;
         
         while(isRunning){
@@ -42,23 +44,29 @@ public class ThreadPlayer extends Thread{
                 String mensaje = "";
                 ArrayList <Partida> gamesToShow = new ArrayList <Partida> ();
                 
+                System.out.println("ANTES DE LEER OPCION");
                 
                 opcion = read.readInt();
                 
+                System.out.println("LEE OPCION");
+                
                 switch(opcion){
-                    case 1: // Funcionalidad 1
+                    case 1: // Funcionalidad 1: Mostrar partidas disponibles
                         
                         ObjectInputStream in = new ObjectInputStream(read);
                         gamesToShow = ((ArrayList<Partida>) in.readObject());
                         
-                        player.getRefLobby();
+                        player.getRefLobby().agregarPartidasDisponibles(gamesToShow);
+                        player.getRefLobby().setVisible(true);
+                        player.getRefMainWindow().setVisible(false);
                         
                         break;
                         
-                    case 2: // Funcionalidad 2
-                        int wantedPlayers = read.readInt();
+                    case 2: // Funcionalidad 2: Crear partida
                         
-                        Partida gameToCreate = new Partida(isRunning, player.getUsername(), wantedPlayers);
+                        
+                        
+                       
                         
                         ObjectInputStream in1 = new ObjectInputStream (read);
                         
@@ -68,7 +76,7 @@ public class ThreadPlayer extends Thread{
                         
                         break;
                         
-                    case 4:
+                    case 4: // Funcionalidad 3: Interaccion del chat
                         
                         mensaje = read.readUTF();
                         
