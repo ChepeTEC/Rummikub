@@ -6,6 +6,10 @@ package com.mycompany.proyecto2poo;
 
 import com.sun.tools.javac.Main;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +30,8 @@ public class LobbyWindow extends javax.swing.JFrame {
     private int cordY;
     
     private Player player;
+    
+    
     public LobbyWindow(Player player) {
         
         initComponents();
@@ -190,7 +196,23 @@ public class LobbyWindow extends javax.swing.JFrame {
         btnUnirse.setFont(new Font ("Century Gothic", 0, 18));
         btnUnirse.setSize(20, 20);
         
-        // Falta crear el boton para unirse a la partida
+        //Funcionalidad del boton "UNIRSE"
+        btnUnirse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    player.getWrite().writeInt(3); //Primero mandamos la opcion que queremos
+                    
+                    ObjectOutputStream output = new ObjectOutputStream (player.getPlayer().getOutputStream());
+                    output.writeObject(partida); //Mandamos la info de la partida
+                    
+                    player.getWrite().writeUTF(player.getUsername()); //Mandamos el nombre del player que hace la accion
+                    
+                }catch (IOException a){
+                    System.out.println("Ocurrió un error al intentar unirse a la partida deseada.");
+                }
+            }
+        });
         
         // Crear e instanciar un BevelBorder
         BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED); // Puedes usar LOWERED para un bisel hacia adentro

@@ -5,12 +5,17 @@
 package servidor;
 
 import com.mycompany.proyecto2poo.Partida;
+import com.mycompany.proyecto2poo.Player;
+import com.mycompany.proyecto2poo.RummikubWindow;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +26,7 @@ public class threadServidorRummikub extends Thread {
     //Atributes
     
     private Socket player = null; //Referencia del socket (cliente)
+    private Player playerObject;
     
     private DataInputStream input = null; //Leer
     private DataOutputStream output = null; //Enviar
@@ -33,6 +39,7 @@ public class threadServidorRummikub extends Thread {
     private ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
     private ArrayList <Partida> gamesToShow = new ArrayList<> ();
     
+    
     // BUILDER
     
     public threadServidorRummikub (Socket player, ServerRummikub server, int num, ArrayList <Partida> gamesToShow){
@@ -43,6 +50,10 @@ public class threadServidorRummikub extends Thread {
         //enemies = new ArrayList <threadServidorRummikub> ();
         namePlayer = ""; //Se desconoce hasta la primera corrida del thread
         this.gamesToShow = gamesToShow;
+    }
+    
+    public threadServidorRummikub (){
+
     }
     
     // METHODS
@@ -101,7 +112,42 @@ public class threadServidorRummikub extends Thread {
                         
                         break;
                     case 3:
+                        //Unirse a una partida
+                        
+                        String namePlayer = input.readUTF(); //Leemos el nombre del jugador para asignarle el threadServidorRummikub
+                        
+                        ObjectInputStream in3 = new ObjectInputStream (player.getInputStream());
+                        
+                    {
+                        try {
+                            Partida gameRecieved = ((Partida) in3.readObject()); //Recibimos la partida que se quiere
+                            
+                            ArrayList <threadServidorRummikub> playersActiveThread = server.getJugadoresEnLobby(); //Obtenemos todas los jugadores conectados
+                        
+                        for (int i = 0; i < playersActiveThread.size(); i++) { //Recorremos hasta buscar el que concuerde con el nombre
+                            threadServidorRummikub get = playersActiveThread.get(i);
+                            if (get.getNamePlayer() == namePlayer){
+                                ObjectOutputStream out3 = new ObjectOutputStream (player.getOutputStream());
+                                out3.writeObject(get);
+                                gameRecieved.getPlayers().add(get); //A la partida le agregamos el jugador que solicito la entrada
+                                
+                                for (threadServidorRummikub otherPlayer : playersActiveThread) { //Se relacionen siendo enemigos con los que estan en la partida
+                                    if (otherPlayer != get) {
+                                        get.enemies.add(otherPlayer);
+                                        otherPlayer.enemies.add (get);
+                                    }
+                                }
+                            
+                            }
+                        }
+                        
+                        } catch (ClassNotFoundException ex) {
+                            Logger.getLogger(threadServidorRummikub.class.getName()).log(Level.SEVERE, null, ex);
+                            System.out.println("Ocurrio un error durante el recibir del la partida deseada");
+                        }
+                    }   
                         break;
+
                     case 4:
                         
                         // Enviar un mensaje por el chat

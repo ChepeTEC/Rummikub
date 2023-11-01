@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import servidor.threadServidorRummikub;
 
 /**
  *
@@ -44,6 +45,8 @@ public class ThreadPlayer extends Thread{
                 String mensaje = "";
                 ArrayList <Partida> gamesToShow = new ArrayList <Partida> ();
                 
+                threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
+                
                 System.out.println("ANTES DE LEER OPCION");
                 
                 opcion = read.readInt();
@@ -64,17 +67,12 @@ public class ThreadPlayer extends Thread{
                         
                     case 2: // Funcionalidad 2: Crear partida
                         
-                        
-                        
-                       
-                        
-                        ObjectInputStream in1 = new ObjectInputStream (read);
-                        
                         break;
                     
                     case 3: // Funcionalidad 3
-                        
-                        break;
+                        ObjectInputStream in3 = new ObjectInputStream (read);
+                        playerThreadServidor = ((threadServidorRummikub) in3.readObject());
+                        player.setThreadServidorPlayer(playerThreadServidor);            
                         
                     case 4: // Funcionalidad 3: Interaccion del chat
                         

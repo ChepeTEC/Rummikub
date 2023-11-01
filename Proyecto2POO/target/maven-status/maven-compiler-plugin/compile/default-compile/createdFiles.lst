@@ -16,6 +16,7 @@ servidor\JFrameServer$1.class
 com\mycompany\proyecto2poo\Proyecto2POO.class
 com\mycompany\proyecto2poo\Token.class
 com\mycompany\proyecto2poo\ThreadLeerPartidasActivas.class
+com\mycompany\proyecto2poo\LobbyWindow$4.class
 com\mycompany\proyecto2poo\Partida.class
 com\mycompany\proyecto2poo\RummikubWindow$2.class
 com\mycompany\proyecto2poo\NewGameWindow.class

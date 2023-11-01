@@ -33,7 +33,7 @@ public class Player implements Serializable{
     
     private String username; // Username del jugador
     private boolean isHost; // True --> Es el host : False --> No es el host
-    private threadServidorRummikub threadServidor;
+    private threadServidorRummikub threadServidorPlayer;
     
     
     // Atributo de prueba; 
@@ -48,6 +48,7 @@ public class Player implements Serializable{
         this.refLobby = new LobbyWindow(this);
         this.refMainWindow = new MainWindow(true);
         this.isHost = false;
+        this.threadServidorPlayer = null;
     }
     
     public Player (MainWindow refMainWindow) throws ClassNotFoundException{
@@ -55,6 +56,7 @@ public class Player implements Serializable{
         this.refLobby = new LobbyWindow(this);
         this.refMainWindow = refMainWindow;
         this.isHost = false;
+        this.threadServidorPlayer = null;
     }
     
     public Player(){
@@ -168,6 +170,16 @@ public class Player implements Serializable{
     public void setRefMainWindow(MainWindow refMainWindow) {
         this.refMainWindow = refMainWindow;
     }
+
+    public threadServidorRummikub getThreadServidorPlayer() {
+        return threadServidorPlayer;
+    }
+
+    public void setThreadServidorPlayer(threadServidorRummikub threadServidorPlayer) {
+        this.threadServidorPlayer = threadServidorPlayer;
+    }
+    
+    
 
     
 

@@ -67,4 +67,6 @@ public class Partida implements Serializable{
         this.usernameHost = usernameHost;
     }
     
+    
+    
 }
