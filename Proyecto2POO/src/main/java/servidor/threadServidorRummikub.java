@@ -5,6 +5,7 @@
 package servidor;
 
 import com.mycompany.proyecto2poo.Partida;
+import com.mycompany.proyecto2poo.PartidaSerializable;
 import com.mycompany.proyecto2poo.Player;
 import com.mycompany.proyecto2poo.RummikubWindow;
 import java.io.DataInputStream;
@@ -35,19 +36,18 @@ public class threadServidorRummikub extends Thread implements Serializable {
     private ServerRummikub server; //Referencia al server
     
     private ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
-    private ArrayList <Partida> gamesToShow = new ArrayList<> ();
+    private ArrayList <PartidaSerializable> gamesToShow = new ArrayList<> ();
     
     
     // BUILDER
     
-    public threadServidorRummikub (Socket player, ServerRummikub server, int num, ArrayList <Partida> gamesToShow){
+    public threadServidorRummikub (Socket player, ServerRummikub server, int num){
         
         this.player = player;
         this.server = server;
         this.numPlayer = num;
         //enemies = new ArrayList <threadServidorRummikub> ();
         namePlayer = ""; //Se desconoce hasta la primera corrida del thread
-        this.gamesToShow = gamesToShow;
     }
     
     public threadServidorRummikub (){
@@ -87,7 +87,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         // Mostrar las partidas activas en ese momeneto
                         
                         // Actualiza los juegos disponibles en ese momento
-                        setGamesToShow(server.getPartidas());
+                        setGamesToShow(server.getCopiaPartidas());
                         
                         // Le pasa la opcion que se desea que se haga en la ventana del jugador
                         output.writeInt(1);
@@ -101,11 +101,18 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         
                         //Crear las partidas
                         
+                        System.out.println("ENTRA A CREAR PARTIDA");
+                        
                         int wantedPlayers = input.readInt();
                         
-                        Partida gameToCreate = new Partida(false, namePlayer, wantedPlayers, server.getMatchID());
-                        server.setMatchID(server.getMatchID() + 1);
+                        Partida gameToCreate = new Partida(false, namePlayer, wantedPlayers);
+                       
+                        PartidaSerializable copyOfGameToCreate = new PartidaSerializable(false, namePlayer, wantedPlayers);
+                       
                         server.getPartidas().add(gameToCreate);
+                        server.getCopiaPartidas().add(copyOfGameToCreate);
+                        
+                        System.out.println("CREA LA PARTIDA");
                         
                         break;
                         
@@ -195,11 +202,11 @@ public class threadServidorRummikub extends Thread implements Serializable {
         this.server = server;
     }
 
-    public ArrayList<Partida> getGamesToShow() {
+    public ArrayList<PartidaSerializable> getGamesToShow() {
         return gamesToShow;
     }
 
-    public void setGamesToShow(ArrayList<Partida> gamesToShow) {
+    public void setGamesToShow(ArrayList<PartidaSerializable> gamesToShow) {
         this.gamesToShow = gamesToShow;
     }
 

@@ -37,7 +37,7 @@ public class ThreadPlayer extends Thread{
             try{
                 
                 String mensaje = "";
-                ArrayList <Partida> gamesToShow = new ArrayList <Partida> ();
+                ArrayList <PartidaSerializable> gamesToShow = new ArrayList <PartidaSerializable> ();
                 
                 threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
                 
@@ -47,7 +47,7 @@ public class ThreadPlayer extends Thread{
                     case 1: // Funcionalidad 1: Mostrar partidas disponibles
                         
                         ObjectInputStream in = new ObjectInputStream(read);
-                        gamesToShow = ((ArrayList<Partida>) in.readObject());
+                        gamesToShow = ((ArrayList<PartidaSerializable>) in.readObject());
                         
                         player.getRefLobby().agregarPartidasDisponibles(gamesToShow);
                         player.getRefLobby().setVisible(true);

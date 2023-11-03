@@ -13,11 +13,11 @@ public class Partida implements Serializable{
     //Atributos
     
     private ArrayList <threadServidorRummikub> players;
+    
     private boolean inProgres;
     private int amountPlayerWanted;
     private int currentPlayers;
     private String usernameHost;
-    private int matchID;
   
     //Constructores
 
@@ -29,13 +29,12 @@ public class Partida implements Serializable{
 
     }
     
-    public Partida (boolean inProgress, String usernameHost, int amountWanted, int matchID){
+    public Partida (boolean inProgress, String usernameHost, int amountWanted){
         
         this.usernameHost = usernameHost;
         this.inProgres = inProgress;
         this.players = new ArrayList <>();
         this.amountPlayerWanted = amountWanted;
-        this.matchID = matchID;
         this.currentPlayers = 0;
         
     }

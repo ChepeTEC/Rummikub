@@ -2,6 +2,7 @@ package servidor;
 
 import com.mycompany.proyecto2poo.LobbyWindow;
 import com.mycompany.proyecto2poo.Partida;
+import com.mycompany.proyecto2poo.PartidaSerializable;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class ServerRummikub implements Serializable{
     
     private ArrayList <Socket> players;
     private ArrayList<Partida> partidas;
+    private ArrayList<PartidaSerializable> copiaPartidas;
     
     private ArrayList<threadServidorRummikub> jugadoresEnLobby;
     private ArrayList<threadServidorRummikub> jugadoresPrePartida;
@@ -38,6 +40,7 @@ public class ServerRummikub implements Serializable{
         this.accepting = true; 
         this.jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
         this.partidas = new ArrayList <Partida> ();
+        this.copiaPartidas = new ArrayList <PartidaSerializable> ();
         this.jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
         this.matchID = 0;
         
@@ -61,7 +64,7 @@ public class ServerRummikub implements Serializable{
                 
                 frame.mostrar(".:: Cliente #" + ++counter + " Aceptado ::.");
 
-                threadServidorRummikub playerThread = new threadServidorRummikub(player, this, counter, partidas);
+                threadServidorRummikub playerThread = new threadServidorRummikub(player, this, counter);
                 
                 playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor                               
                 
@@ -121,6 +124,14 @@ public class ServerRummikub implements Serializable{
 
     public void setMatchID(int matchID) {
         this.matchID = matchID;
+    }
+
+    public ArrayList<PartidaSerializable> getCopiaPartidas() {
+        return copiaPartidas;
+    }
+
+    public void setCopiaPartidas(ArrayList<PartidaSerializable> copiaPartidas) {
+        this.copiaPartidas = copiaPartidas;
     }
 
     

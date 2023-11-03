@@ -136,16 +136,16 @@ public class LobbyWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void agregarPartidasDisponibles(ArrayList<Partida> partidas){
+    public void agregarPartidasDisponibles(ArrayList<PartidaSerializable> partidas){
         
         int cantidadDePlayers = 0;
         boolean inProgress = false;
         
         System.out.println("->>" + partidas.size());
         
-        for (Partida partida: partidas){
+        for (PartidaSerializable partida: partidas){
             
-            cantidadDePlayers = partida.getAmountPlayer();
+            cantidadDePlayers = partida.getAmountPlayerWanted();
             inProgress = partida.isInProgres();
             insertarPartida(cantidadDePlayers, inProgress, partida, partidas.indexOf(partida));
             
@@ -185,7 +185,7 @@ public class LobbyWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnVolverActionPerformed
     
-    public void insertarPartida(int cantidadDePlayers, boolean inPogress, Partida partida, int index){
+    public void insertarPartida(int cantidadDePlayers, boolean inPogress, PartidaSerializable partida, int index){
         
         JPanel panel = new JPanel();
         pnlLobbys.add(panel);
@@ -230,7 +230,7 @@ public class LobbyWindow extends javax.swing.JFrame {
         panel.setBorder(bevelBorder);
         
         String gameInfo = "HOST: " + partida.getUsernameHost() + "      ";
-        gameInfo += partida.getPlayers().size() + "/" + String.valueOf(cantidadDePlayers) + " JUGADORES";
+        gameInfo += partida.getCurrentPlayers() + "/" + String.valueOf(cantidadDePlayers) + " JUGADORES";
         
         if(inPogress == false)
             gameInfo += "      NO INCIADO      ";
