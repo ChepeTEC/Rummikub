@@ -12,10 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import servidor.threadServidorRummikub;
 
-/**
- *
- * @author Pablo
- */
 public class ThreadPlayer extends Thread{
     
     private DataInputStream read; // Para hacer lectura de lo que comunica el server
@@ -34,8 +30,6 @@ public class ThreadPlayer extends Thread{
         
         // Hacer algo antes del while true
         
-        System.out.println("START");
-        
         int opcion = 0;
         
         while(isRunning){
@@ -47,11 +41,7 @@ public class ThreadPlayer extends Thread{
                 
                 threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
                 
-                System.out.println("ANTES DE LEER OPCION");
-                
                 opcion = read.readInt();
-                
-                System.out.println("LEE OPCION");
                 
                 switch(opcion){
                     case 1: // Funcionalidad 1: Mostrar partidas disponibles
@@ -70,6 +60,9 @@ public class ThreadPlayer extends Thread{
                         break;
                     
                     case 3: // Funcionalidad 3
+                        
+                        // Para que sirve esta funcionalidad??
+                        
                         ObjectInputStream in3 = new ObjectInputStream (read);
                         playerThreadServidor = ((threadServidorRummikub) in3.readObject());
                         player.setThreadServidorPlayer(playerThreadServidor);            
@@ -81,6 +74,14 @@ public class ThreadPlayer extends Thread{
                         player.getRefVentana().mostrar(mensaje);
                         
                         break;
+                        
+                    case 5:
+                        
+                        player.setRefVentana(new RummikubWindow(player));
+                        player.getRefVentana().setVisible(true);
+                        player.getRefLobby().dispose();
+                        
+                        break;
                 }
             }
             catch (ClassNotFoundException ex) {
@@ -88,6 +89,7 @@ public class ThreadPlayer extends Thread{
                 System.out.println("ERROR 1");
             }
             catch(IOException e){
+                  Logger.getLogger(ThreadPlayer.class.getName()).log(Level.SEVERE, null, e);
                   System.out.println("ERROR 2");   
             } 
             

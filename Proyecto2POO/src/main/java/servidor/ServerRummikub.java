@@ -26,17 +26,20 @@ public class ServerRummikub implements Serializable{
     
     private boolean accepting;
     private DataOutputStream output = null;
+    
+    private int matchID;
 
     //Constructores:
     
     public ServerRummikub (JFrameServer ventanaPadre){
         
         this.frame = ventanaPadre;
-        players = new ArrayList <Socket> ();
-        accepting = true; 
-        jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
-        partidas = new ArrayList <Partida> ();
-        jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
+        this.players = new ArrayList <Socket> ();
+        this.accepting = true; 
+        this.jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
+        this.partidas = new ArrayList <Partida> ();
+        this.jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
+        this.matchID = 0;
         
     }
 
@@ -112,4 +115,13 @@ public class ServerRummikub implements Serializable{
         this.accepting = accepting;
     }
 
+    public int getMatchID() {
+        return matchID;
+    }
+
+    public void setMatchID(int matchID) {
+        this.matchID = matchID;
+    }
+
+    
 }

@@ -31,6 +31,7 @@ public class LobbyWindow extends javax.swing.JFrame {
     
     private Player player;
     
+    private ArrayList<JButton> Buttons = new ArrayList<JButton>();
     
     public LobbyWindow(Player player) {
         
@@ -146,7 +147,7 @@ public class LobbyWindow extends javax.swing.JFrame {
             
             cantidadDePlayers = partida.getAmountPlayer();
             inProgress = partida.isInProgres();
-            insertarPartida(cantidadDePlayers, inProgress, partida);
+            insertarPartida(cantidadDePlayers, inProgress, partida, partidas.indexOf(partida));
             
         }
         
@@ -184,7 +185,7 @@ public class LobbyWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnVolverActionPerformed
     
-    public void insertarPartida(int cantidadDePlayers, boolean inPogress, Partida partida){
+    public void insertarPartida(int cantidadDePlayers, boolean inPogress, Partida partida, int index){
         
         JPanel panel = new JPanel();
         pnlLobbys.add(panel);
@@ -192,25 +193,33 @@ public class LobbyWindow extends javax.swing.JFrame {
         panel.setSize(617, 50);
         
         JButton btnUnirse = new JButton();
-        btnUnirse.setText("UNIRSE");
+        btnUnirse.setText("UNIRSE " + String.valueOf(index));
         btnUnirse.setFont(new Font ("Century Gothic", 0, 18));
         btnUnirse.setSize(20, 20);
+        Buttons.add(btnUnirse);
         
         //Funcionalidad del boton "UNIRSE"
+        
         btnUnirse.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                final JButton buttonPressed = (JButton) e.getSource();
+                
                 try {
+                    
+                    int buttonIndex = findJButtonIndex(buttonPressed);
+                    
                     player.getWrite().writeInt(3); //Primero mandamos la opcion que queremos
                     
-                    ObjectOutputStream output = new ObjectOutputStream (player.getPlayer().getOutputStream());
-                    output.writeObject(partida); //Mandamos la info de la partida
+                    player.getWrite().writeInt(buttonIndex);
                     
                     player.getWrite().writeUTF(player.getUsername()); //Mandamos el nombre del player que hace la accion
                     
                 }catch (IOException a){
                     System.out.println("Ocurrió un error al intentar unirse a la partida deseada.");
                 }
+                
             }
         });
         
@@ -239,6 +248,18 @@ public class LobbyWindow extends javax.swing.JFrame {
         pnlLobbys.repaint();
         
         setCordY(getCordY()+60);
+    }
+    
+    public int findJButtonIndex(JButton button){
+        
+        for (int i = 0; i < Buttons.size(); i++){
+            
+            if (Buttons.get(i) == button)
+                return i;
+            
+        }
+        
+        return -1;
     }
     
     public void agregarBoton(){

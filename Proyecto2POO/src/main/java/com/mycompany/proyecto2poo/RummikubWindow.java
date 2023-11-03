@@ -25,10 +25,13 @@ public class RummikubWindow extends javax.swing.JFrame {
     private int cordMazoX;
     private int cordMazoY;
 
-    public RummikubWindow() {
+    public RummikubWindow(Player player) {
         
         this.cordMazoX = 10;
         this.cordMazoY = 10;
+        
+        this.player = player;
+        
         
         //try {
         
@@ -309,7 +312,7 @@ public class RummikubWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RummikubWindow().setVisible(true);
+                new RummikubWindow(new Player()).setVisible(true);
             }
         });
     }
