@@ -14,10 +14,12 @@ public class Partida implements Serializable{
     
     private ArrayList <threadServidorRummikub> players;
     
+    
     private boolean inProgres;
     private int amountPlayerWanted;
     private int currentPlayers;
     private String usernameHost;
+    private ArrayList <Token> tokens;
   
     //Constructores
 
@@ -26,6 +28,7 @@ public class Partida implements Serializable{
         this.players = players;
         this.inProgres = inProgres;
         this.currentPlayers = 0;
+        this.tokens = new ArrayList <> ();
 
     }
     
@@ -36,6 +39,7 @@ public class Partida implements Serializable{
         this.players = new ArrayList <>();
         this.amountPlayerWanted = amountWanted;
         this.currentPlayers = 0;
+        this.tokens = new ArrayList <> ();
         
     }
 

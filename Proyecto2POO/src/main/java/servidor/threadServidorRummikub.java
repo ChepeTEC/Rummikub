@@ -8,6 +8,7 @@ import com.mycompany.proyecto2poo.Partida;
 import com.mycompany.proyecto2poo.PartidaSerializable;
 import com.mycompany.proyecto2poo.Player;
 import com.mycompany.proyecto2poo.RummikubWindow;
+import com.mycompany.proyecto2poo.Token;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 public class threadServidorRummikub extends Thread implements Serializable {
@@ -37,6 +39,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
     
     private ArrayList <threadServidorRummikub> enemies = new ArrayList <>();
     private ArrayList <PartidaSerializable> gamesToShow = new ArrayList<> ();
+    private ArrayList <Token> tokens;
     
     
     // BUILDER
@@ -48,6 +51,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
         this.numPlayer = num;
         //enemies = new ArrayList <threadServidorRummikub> ();
         namePlayer = ""; //Se desconoce hasta la primera corrida del thread
+        this.tokens = new ArrayList <>();
     }
     
     public threadServidorRummikub (){
@@ -65,7 +69,19 @@ public class threadServidorRummikub extends Thread implements Serializable {
             input = new DataInputStream (player.getInputStream());
             output = new DataOutputStream (player.getOutputStream());
             
-            this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
+            //String posibleNombreDeJugador = input.readUTF(); No se porque no esta funcionando se queda pegado al unirse partida (boton)
+            
+            
+            //for (int i = 0 ; i <= server.getJugadoresEnLobby().size() ; i++){
+                //if (server.getJugadoresEnLobby().get(i).getNamePlayer().equals(posibleNombreDeJugador)){ //Si se repite el nombre de jugador
+                    //server.getJugadoresEnLobby().get(i).getPlayer().close(); //Se cierra el socket
+                    //server.getFrame().mostrar("Se cerró el socket con el jugador con el nombre repetido.");
+                //}else{
+                    this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
+                    
+                //}
+            //}
+
             
         }catch (IOException e){
             
@@ -125,23 +141,28 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         String namePlayer = input.readUTF(); //Leemos el nombre del jugador para asignarle el threadServidorRummikub
                             
                         Partida gameRecieved = server.getPartidas().get(indexOfGame); // Se reconoce cual es el game al que se quiere unir
+                        
+                        if (gameRecieved.getCurrentPlayers() + 1 > gameRecieved.getAmountPlayer()){ //Si se pasa del limite de jugadores
+                            JOptionPane.showMessageDialog(server.getFrame(), "No se puede unir a la partida porque supera el limite de jugadores");
+                            break;
+                        }
                             
                         gameRecieved.setCurrentPlayers(gameRecieved.getCurrentPlayers() + 1); // Se unio un jugador, se le suma
-                        
+                        server.getCopiaPartidas().get(indexOfGame).setCurrentPlayers(server.getCopiaPartidas().get(indexOfGame).getCurrentPlayers() + 1);
                         // ArrayList <threadServidorRummikub> playersActiveThread = server.getJugadoresEnLobby(); //Obtenemos todas los jugadores conectados
-
+                            
                         gameRecieved.getPlayers().add(this); // Agrega al jugador a la partida
-
-                        for (int i = 0; i < gameRecieved.getPlayers().size(); i++){
-
-                            // Bucle para la asginacion de enemgios
-
-                            if (!gameRecieved.getPlayers().get(i).getNamePlayer().equals(this.getNamePlayer())) {
-
-                                this.enemies.add(gameRecieved.getPlayers().get(i));
-
-                            }
-
+                         
+                        for (int i = 0; i < gameRecieved.getPlayers().size(); i++){ //Limpia los enemigos cada vez que se une uno
+                              threadServidorRummikub playerPartida = gameRecieved.getPlayers().get (i);
+                              playerPartida.enemies.clear(); //Limpiamos para hacer el refresh
+                              
+                              for (int j = 0; j < gameRecieved.getPlayers().size(); j++){ //Asegura que 
+                                  threadServidorRummikub otroJugadorPartida = gameRecieved.getPlayers().get(j);
+                                  if (!otroJugadorPartida.getNamePlayer().equals(playerPartida.getNamePlayer())){
+                                      playerPartida.enemies.add(otroJugadorPartida);
+                                  }
+                              }
                         }
                             
                         output.writeInt(5);    

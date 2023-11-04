@@ -14,7 +14,8 @@ public class TokensTypes {
         RED,
         YELLOW,
         BLUE,
-        BLACK  
+        BLACK,
+        SPECIAL
     }
     
 }

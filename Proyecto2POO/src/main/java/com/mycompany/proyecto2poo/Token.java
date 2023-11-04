@@ -1,6 +1,8 @@
 package com.mycompany.proyecto2poo;
 
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable{
     // Atributos
     
     private TokensTypes.Token color;

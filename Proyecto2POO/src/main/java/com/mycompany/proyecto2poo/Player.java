@@ -34,6 +34,7 @@ public class Player implements Serializable{
     private String username; // Username del jugador
     private boolean isHost; // True --> Es el host : False --> No es el host
     private threadServidorRummikub threadServidorPlayer;
+    private ArrayList <Token> tokensPlayer;
     
     
     // Atributo de prueba; 
@@ -49,6 +50,7 @@ public class Player implements Serializable{
         this.refMainWindow = new MainWindow(true);
         this.isHost = false;
         this.threadServidorPlayer = null;
+        this.tokensPlayer = new ArrayList <> ();
     }
     
     public Player (MainWindow refMainWindow) throws ClassNotFoundException{
@@ -57,7 +59,9 @@ public class Player implements Serializable{
         this.refMainWindow = refMainWindow;
         this.isHost = false;
         this.threadServidorPlayer = null;
+        this.tokensPlayer = new ArrayList <> ();
     }
+    
     
     public Player(){
         
@@ -74,7 +78,7 @@ public class Player implements Serializable{
             read = new DataInputStream(player.getInputStream());
             write = new DataOutputStream(player.getOutputStream());
 
-            // Solicita el nombre de usuario
+            // Solicita el nombre de usuario           
             setUsername(JOptionPane.showInputDialog("Introduzca su nombre de usuario:"));
 
             // Envia el nombre de usuario al servidor

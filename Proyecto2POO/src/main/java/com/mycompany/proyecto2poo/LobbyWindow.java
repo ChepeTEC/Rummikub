@@ -154,7 +154,7 @@ public class LobbyWindow extends javax.swing.JFrame {
     }
     
     private void btnRefreshGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshGamesActionPerformed
-            
+        Buttons.clear();
         pnlLobbys.removeAll();
         pnlLobbys.revalidate();
         pnlLobbys.repaint();

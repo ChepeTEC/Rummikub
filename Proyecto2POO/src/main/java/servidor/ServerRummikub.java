@@ -65,6 +65,7 @@ public class ServerRummikub implements Serializable{
                 frame.mostrar(".:: Cliente #" + ++counter + " Aceptado ::.");
 
                 threadServidorRummikub playerThread = new threadServidorRummikub(player, this, counter);
+                //jugadoresEnLobby.add(playerThread);
                 
                 playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor                               
                 
