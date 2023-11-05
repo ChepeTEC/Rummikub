@@ -3,6 +3,7 @@ package servidor;
 import com.mycompany.proyecto2poo.LobbyWindow;
 import com.mycompany.proyecto2poo.Partida;
 import com.mycompany.proyecto2poo.PartidaSerializable;
+import com.mycompany.proyecto2poo.Player;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -69,21 +70,13 @@ public class ServerRummikub implements Serializable{
                 
                 playerThread.start(); //Empezamos en thread de comunicacion entre el jugador y el servidor                               
                 
-                // Intento de pasarle el objeto
-                
-                System.out.println("Intentando");
-                
-//                ObjectOutputStream out = new ObjectOutputStream(player.getOutputStream()); // Crea un socket para enviar un objeto
-//                out.writeObject(this.partidas); // Envia el objeto para que el cliente lo reciba
-                
-                System.out.println("Se pudo");
             } 
          
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-    
+   
     
     // GETTERS AND SETTERS 
     

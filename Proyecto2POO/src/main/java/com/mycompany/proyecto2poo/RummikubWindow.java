@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,6 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,25 +40,77 @@ public class RummikubWindow extends javax.swing.JFrame {
         this.cordMazoY = 10;
         
         this.player = player;
+        initComponents();
+        setLocationRelativeTo(null);
+            
+        setSize(820, 380);
+            
+    }
+    
+    public void errorAlEliminarJugador(int indicador){
         
+        if(indicador == 1)
+            JOptionPane.showMessageDialog(this, "NO SE HA PODIDO ELIMINAR EL JUGADOR");
         
-        //try {
+        else if(indicador == 2)
+            JOptionPane.showMessageDialog(this, "SE HA ELIMINADO EL JUGADOR CON EXITO");
+    }
+    
+    public void agregarBotonEliminarJugador(){
         
-            // Parte de la ventana
-            initComponents();
-            setLocationRelativeTo(null);
+        JButton eliminarJugadores = new JButton();
+        eliminarJugadores.setText("Eliminar");
+        eliminarJugadores.setSize(101, 24);
+        
+        JButton iniciarPartida = new JButton();
+        iniciarPartida.setText("Iniciar");
+        iniciarPartida.setSize(101, 24);
+        
+        pnlBackGround.add(eliminarJugadores);
+        pnlBackGround.add(iniciarPartida);
+        
+        eliminarJugadores.setLocation(505, 277);
+        eliminarJugadores.setVisible(true);
+        
+        iniciarPartida.setLocation(505,307);
+        iniciarPartida.setVisible(true);
+        
+        eliminarJugadores.addActionListener(new ActionListener(){
             
-            // Crea una cliente que es su coenxion al server
+            public void actionPerformed(ActionEvent e){
+                
+                String respuesta = JOptionPane.showInputDialog ("Nombre del jugador a eliminar: ");
+                
+                try {
+                    
+                    System.out.println("ENTRA AL BOTON");
+                    player.getWrite().writeInt(5);
+                    player.getWrite().writeUTF(respuesta);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }
             
-            //player = new Player(this);
-            //player.getConnected();
+        });
+        
+        iniciarPartida.addActionListener(new ActionListener(){
             
-            setSize(820, 380);
+            public void actionPerformed(ActionEvent e){
+                
+                // Aqui el codigo para que la partida inicie
+                
+                // PASOS:
+                
+                // Repartir cartas
+                // Cambiar el booleano de la partida a InProgress
+                // Demas....
+            }
             
-            
-        //} catch (IOException ex) {
-           
-        //}
+        });
+        
     }
     
     public void mostrar(String mensaje){
@@ -97,11 +155,11 @@ public class RummikubWindow extends javax.swing.JFrame {
         tokenLabel.setLocation(cordMazoX, cordMazoY);
         setCordMazoX(getCordMazoX()+30);
         pnlPlayerTokens.repaint();
-        
-        
+          
     }
     
     public void comenzarPartida (Partida partida){
+        
         ArrayList <Token> tokensGame = new ArrayList <>();
         for (int i = 0 ; i < 106 ; i++){ //Creacion de las 106 fichas
             if (i == 0 || i == 1){ //Generacion de las 2 fichas comodines
@@ -240,10 +298,10 @@ public class RummikubWindow extends javax.swing.JFrame {
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addComponent(txfPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -252,34 +310,32 @@ public class RummikubWindow extends javax.swing.JFrame {
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                                .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12))
-                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
         getContentPane().add(pnlBackGround);
-        pnlBackGround.setBounds(0, 0, 810, 337);
+        pnlBackGround.setBounds(0, 0, 810, 343);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

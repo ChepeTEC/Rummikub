@@ -26,6 +26,7 @@ import servidor.threadServidorRummikub;
 public class LobbyWindow extends javax.swing.JFrame {
     
     private threadServidorRummikub playerThreadServidor;
+    //private ThreadRefreshGamesToShow refreshInfo;
     private int cordX;
     private int cordY;
     
@@ -42,6 +43,9 @@ public class LobbyWindow extends javax.swing.JFrame {
         this.cordY = 10;
         
         this.player = player;
+        
+        //this.refreshInfo = new ThreadRefreshGamesToShow(this);
+                
     }
     
     @SuppressWarnings("unchecked")
@@ -153,7 +157,8 @@ public class LobbyWindow extends javax.swing.JFrame {
         
     }
     
-    private void btnRefreshGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshGamesActionPerformed
+    public void refreshGamesToShow(){
+        
         Buttons.clear();
         pnlLobbys.removeAll();
         pnlLobbys.revalidate();
@@ -170,6 +175,11 @@ public class LobbyWindow extends javax.swing.JFrame {
             System.out.println("ERROR AL UNIRSE A PARTIDA");
         
         }
+    }
+    
+    private void btnRefreshGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshGamesActionPerformed
+        
+        refreshGamesToShow();
         
     }//GEN-LAST:event_btnRefreshGamesActionPerformed
     
@@ -206,15 +216,18 @@ public class LobbyWindow extends javax.swing.JFrame {
                 
                 final JButton buttonPressed = (JButton) e.getSource();
                 
+                
                 try {
                     
                     int buttonIndex = findJButtonIndex(buttonPressed);
                     
                     player.getWrite().writeInt(3); //Primero mandamos la opcion que queremos
                     
-                    player.getWrite().writeInt(buttonIndex);
+                    player.getWrite().writeInt(buttonIndex); // Se manda el indice del boton presionado para identificar la partida
                     
                     player.getWrite().writeUTF(player.getUsername()); //Mandamos el nombre del player que hace la accion
+                    
+                    //refreshInfo.setIsPaused(true);
                     
                 }catch (IOException a){
                     System.out.println("Ocurrió un error al intentar unirse a la partida deseada.");
@@ -290,6 +303,82 @@ public class LobbyWindow extends javax.swing.JFrame {
     public void setCordY(int cordY) {
         this.cordY = cordY;
     }
+    
+    
+//
+//    public ThreadRefreshGamesToShow getRefreshInfo() {
+//        return refreshInfo;
+//    }
+//
+//    public void setRefreshInfo(ThreadRefreshGamesToShow refreshInfo) {
+//        this.refreshInfo = refreshInfo;
+//    }
+
+    public threadServidorRummikub getPlayerThreadServidor() {
+        return playerThreadServidor;
+    }
+
+    public void setPlayerThreadServidor(threadServidorRummikub playerThreadServidor) {
+        this.playerThreadServidor = playerThreadServidor;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public ArrayList<JButton> getButtons() {
+        return Buttons;
+    }
+
+    public void setButtons(ArrayList<JButton> Buttons) {
+        this.Buttons = Buttons;
+    }
+
+    public JButton getBtnRefreshGames() {
+        return btnRefreshGames;
+    }
+
+    public void setBtnRefreshGames(JButton btnRefreshGames) {
+        this.btnRefreshGames = btnRefreshGames;
+    }
+
+    public JButton getBtnVolver() {
+        return btnVolver;
+    }
+
+    public void setBtnVolver(JButton btnVolver) {
+        this.btnVolver = btnVolver;
+    }
+
+    public JScrollPane getjScrollPane2() {
+        return jScrollPane2;
+    }
+
+    public void setjScrollPane2(JScrollPane jScrollPane2) {
+        this.jScrollPane2 = jScrollPane2;
+    }
+
+    public JPanel getPnlBackGround() {
+        return pnlBackGround;
+    }
+
+    public void setPnlBackGround(JPanel pnlBackGround) {
+        this.pnlBackGround = pnlBackGround;
+    }
+
+    public JPanel getPnlLobbys() {
+        return pnlLobbys;
+    }
+
+    public void setPnlLobbys(JPanel pnlLobbys) {
+        this.pnlLobbys = pnlLobbys;
+    }
+    
+    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

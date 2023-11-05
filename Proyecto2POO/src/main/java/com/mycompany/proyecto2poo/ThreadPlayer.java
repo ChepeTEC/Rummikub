@@ -53,6 +53,10 @@ public class ThreadPlayer extends Thread{
                         player.getRefLobby().setVisible(true);
                         player.getRefMainWindow().setVisible(false);
                         
+                        // Inicio del thread 
+                        
+                        //player.getRefLobby().getRefreshInfo().start();
+                        
                         break;
                         
                     case 2: // Funcionalidad 2: Crear partida
@@ -67,7 +71,7 @@ public class ThreadPlayer extends Thread{
                         playerThreadServidor = ((threadServidorRummikub) in3.readObject());
                         player.setThreadServidorPlayer(playerThreadServidor);            
                         
-                    case 4: // Funcionalidad 3: Interaccion del chat
+                    case 4: // Funcionalidad 4: Interaccion del chat
                         
                         mensaje = read.readUTF();
                         
@@ -75,13 +79,69 @@ public class ThreadPlayer extends Thread{
                         
                         break;
                         
-                    case 5:
+                    case 5: // Funcionalidad 5: Unirse a una partida
                         
                         player.setRefVentana(new RummikubWindow(player));
                         player.getRefVentana().setVisible(true);
-                        player.getRefLobby().dispose();
+                        player.getRefLobby().setVisible(false);
+                        
+                        if(player.isIsHost()){
+                            
+                            player.getRefVentana().agregarBotonEliminarJugador();
+                            
+                        }
                         
                         break;
+                        
+                    case 6: // Funcionalidad 6: Desginar al player como host de la partida
+                        
+                        this.player.setIsHost(true);
+                        
+                        break;
+                        
+                    case 7: // Funcionalidad 7: Manejar la eliminacion de jugadores y sus posibles errores
+                        
+                        int situacion = player.getRead().readInt();
+                        
+                        switch (situacion) {
+                            
+                            case 1:
+                                
+                                // No se encontro el jugador que se deseaba eliminar
+                                System.out.println("NO SE PUDO");
+                                player.getRefVentana().errorAlEliminarJugador(1);
+                                
+                                break;
+                                
+                            case 2:
+                                
+                                // Se elimino el jugador con exito
+                                System.out.println("SE PUDO");
+                                player.getRefVentana().errorAlEliminarJugador(2);
+                                
+                                break;
+                                
+                            default:
+                                throw new AssertionError();
+                                
+                        }
+                        
+                        break;
+                        
+                    case 8: // Funcionalidad: Has sido eliminado de la partida
+                        
+                        player.getRefVentana().setVisible(false);
+                        player.getRefMainWindow().setVisible(true);
+                        
+                        player.getRefLobby().getButtons().clear();
+                        player.getRefLobby().getPnlLobbys().removeAll();
+                        player.getRefLobby().getPnlLobbys().revalidate();
+                        player.getRefLobby().getPnlLobbys().repaint();
+                        player.getRefLobby().setCordX(10);
+                        player.getRefLobby().setCordY(10);
+                        
+                        break;
+                        
                 }
             }
             catch (ClassNotFoundException ex) {

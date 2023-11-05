@@ -127,6 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
             
         } catch (Exception e) {
             
+            // Por que entra a este error?
             System.out.println("ERROR AL UNIRSE A PARTIDA");
         
         }

@@ -2,12 +2,15 @@ com\mycompany\proyecto2poo\MainWindow$ImagePanel.class
 com\mycompany\proyecto2poo\PartidaSerializable.class
 com\mycompany\proyecto2poo\RummikubWindow$3.class
 servidor\ServerRummikub.class
+com\mycompany\proyecto2poo\ThreadRefreshGamesToShow.class
 com\mycompany\proyecto2poo\MainWindow$4.class
 com\mycompany\proyecto2poo\LobbyWindow$3.class
+com\mycompany\proyecto2poo\RummikubWindow$5.class
 com\mycompany\proyecto2poo\TokensTypes$Token.class
 com\mycompany\proyecto2poo\RummikubWindow$1.class
 com\mycompany\proyecto2poo\MainWindow$1.class
 com\mycompany\proyecto2poo\MainWindow$2.class
+com\mycompany\proyecto2poo\RummikubWindow$6.class
 com\mycompany\proyecto2poo\Player.class
 com\mycompany\proyecto2poo\LobbyWindow$2.class
 servidor\threadServidorRummikub.class

@@ -27,41 +27,41 @@ public class Player implements Serializable{
     public static String IP_SERVER = "localhost"; // IP del Servidor
     
     private Socket player = null; // para la comunicacion
+    private boolean isHost; // True ->> es host : False ->> no es host
     
     private DataInputStream read = null; // leer comunicacion
     private DataOutputStream write = null; // escribir comunicacion
     
     private String username; // Username del jugador
-    private boolean isHost; // True --> Es el host : False --> No es el host
     private threadServidorRummikub threadServidorPlayer;
     private ArrayList <Token> tokensPlayer;
-    
-    
+   
     // Atributo de prueba; 
     
     private ArrayList<Partida> partidas;
     
-    // Constructor
+    // Builders
     
     public Player(RummikubWindow refVentana) throws ClassNotFoundException{
         
         this.refVentana = refVentana;
         this.refLobby = new LobbyWindow(this);
         this.refMainWindow = new MainWindow(true);
-        this.isHost = false;
         this.threadServidorPlayer = null;
         this.tokensPlayer = new ArrayList <> ();
+        this.isHost = false;
+        
     }
     
     public Player (MainWindow refMainWindow) throws ClassNotFoundException{
         
         this.refLobby = new LobbyWindow(this);
         this.refMainWindow = refMainWindow;
-        this.isHost = false;
         this.threadServidorPlayer = null;
         this.tokensPlayer = new ArrayList <> ();
+        this.isHost = false;
+        
     }
-    
     
     public Player(){
         
@@ -150,15 +150,7 @@ public class Player implements Serializable{
     public void setRefLobby(LobbyWindow refLobby) {
         this.refLobby = refLobby;
     }
-
-    public boolean isIsHost() {
-        return isHost;
-    }
-
-    public void setIsHost(boolean isHost) {
-        this.isHost = isHost;
-    }
-
+    
     public ArrayList<Partida> getPartidas() {
         return partidas;
     }
@@ -182,9 +174,13 @@ public class Player implements Serializable{
     public void setThreadServidorPlayer(threadServidorRummikub threadServidorPlayer) {
         this.threadServidorPlayer = threadServidorPlayer;
     }
-    
-    
 
-    
+    public boolean isIsHost() {
+        return isHost;
+    }
 
+    public void setIsHost(boolean isHost) {
+        this.isHost = isHost;
+    }
+    
 }
