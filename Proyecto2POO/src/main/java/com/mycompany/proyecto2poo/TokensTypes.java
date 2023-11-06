@@ -4,11 +4,13 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pablo
  */
-public class TokensTypes {
+public class TokensTypes implements Serializable {
  
     public enum Token{
         RED,

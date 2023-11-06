@@ -19,6 +19,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.standard.OutputDeviceAssigned;
 import javax.swing.JOptionPane;
 
 
@@ -240,6 +241,18 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         }
                         
                         break;
+                        
+                    case 6: //Buscar la referencia de la partida para asi obtenerla y comenzar la partida
+//                        String nombrePlayerHost = input.readUTF();
+//                        for (int i = 0 ; i < server.getPartidas().size() ; i++){
+//                            if (server.getPartidas().get(i).getUsernameHost().equals(nombrePlayerHost)){
+//                                Partida partidaPorComenzar = server.getPartidas().get(i);
+//                                for (int j = 0 ; j < partidaPorComenzar.getPlayers().size() ; j++){
+//                                    server. 
+//                                }
+//                            }
+//                        }
+                        
                 }
                 
             }catch (IOException e){ 
@@ -297,9 +310,40 @@ public class threadServidorRummikub extends Thread implements Serializable {
         
         return false;
     }
-    
     //GETTERS & SETTERS
+    public Player getPlayerObject() {
+        return playerObject;
+    }
+
+    public void setPlayerObject(Player playerObject) {
+        this.playerObject = playerObject;
+    }
+
+    public int getNumPlayer() {
+        return numPlayer;
+    }
+
+    public void setNumPlayer(int numPlayer) {
+        this.numPlayer = numPlayer;
+    }
+
+    public ArrayList<threadServidorRummikub> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(ArrayList<threadServidorRummikub> enemies) {
+        this.enemies = enemies;
+    }
+
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
+
     
+    public void setTokens(ArrayList<Token> tokens) {    
+        this.tokens = tokens;
+    }
+
     public Socket getPlayer() {
         return player;
     }

@@ -44,6 +44,15 @@ public class Partida implements Serializable{
     }
 
     // GETTERS AND SETTERS
+
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(ArrayList<Token> tokens) {
+        this.tokens = tokens;
+    }
+    
     
     public ArrayList<threadServidorRummikub> getPlayers() {
         return players;

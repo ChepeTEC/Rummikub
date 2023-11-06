@@ -25,7 +25,6 @@ public class ServerRummikub implements Serializable{
     private ArrayList<PartidaSerializable> copiaPartidas;
     
     private ArrayList<threadServidorRummikub> jugadoresEnLobby;
-    private ArrayList<threadServidorRummikub> jugadoresPrePartida;
     
     private boolean accepting;
     private DataOutputStream output = null;
@@ -42,7 +41,6 @@ public class ServerRummikub implements Serializable{
         this.jugadoresEnLobby = new ArrayList <threadServidorRummikub>();
         this.partidas = new ArrayList <Partida> ();
         this.copiaPartidas = new ArrayList <PartidaSerializable> ();
-        this.jugadoresPrePartida = new ArrayList <threadServidorRummikub> ();
         this.matchID = 0;
         
     }

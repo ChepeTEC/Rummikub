@@ -101,12 +101,15 @@ public class RummikubWindow extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e){
                 
                 // Aqui el codigo para que la partida inicie
-                
-                // PASOS:
-                
-                // Repartir cartas
-                // Cambiar el booleano de la partida a InProgress
-                // Demas....
+                // Se busca la referencia a la partida
+                try{
+                    System.out.println("Entra al boton de Iniciar partida");
+                    player.getWrite().writeInt(6);
+                    player.getWrite().writeUTF(player.getUsername());
+                    
+                } catch (IOException event){
+                    System.out.println("Error al iniciar la partida");
+                }
             }
             
         });
@@ -160,6 +163,7 @@ public class RummikubWindow extends javax.swing.JFrame {
     
     public void comenzarPartida (Partida partida){
         
+        partida.setInProgres(true); //Cambiamos el estado de la partida
         ArrayList <Token> tokensGame = new ArrayList <>();
         for (int i = 0 ; i < 106 ; i++){ //Creacion de las 106 fichas
             if (i == 0 || i == 1){ //Generacion de las 2 fichas comodines
@@ -194,10 +198,22 @@ public class RummikubWindow extends javax.swing.JFrame {
             }
         }
         
+        partida.setTokens(tokensGame); //Los tokens se le referencian a la partida
+        
         Collections.shuffle(tokensGame); //Le hacemos shuffle a los tokens
         
-        for (int i = 0 ; i < partida.getCurrentPlayers() ; i++){
-            
+        for (int i = 0 ; i < partida.getCurrentPlayers() ; i++) { //Hacemos un for con la cantidad de jugadores de la partida
+            for (int j = 0; j < 14; j++) {
+                // Asegurarse de que hay suficientes fichas
+                if (tokensGame.isEmpty()) {
+                    throw new IllegalStateException("No hay suficientes fichas para todos los jugadores");
+                }
+
+                // "Gastar" una ficha y dársela al jugador
+                Token ficha = tokensGame.remove(tokensGame.size() - 1);
+                partida.getPlayers().get(i).getTokens().add(ficha); //Se le da al jugador "actual"
+                //generarFicha(ficha); //Mejor esto se hara cada jugadors
+            }
         }
         
         
@@ -218,6 +234,7 @@ public class RummikubWindow extends javax.swing.JFrame {
         txaChat = new javax.swing.JTextArea();
         txfPrueba = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -283,6 +300,13 @@ public class RummikubWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlBackGroundLayout = new javax.swing.GroupLayout(pnlBackGround);
         pnlBackGround.setLayout(pnlBackGroundLayout);
         pnlBackGroundLayout.setHorizontalGroup(
@@ -298,13 +322,17 @@ public class RummikubWindow extends javax.swing.JFrame {
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(137, 137, 137)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addGap(137, 137, 137)
                         .addComponent(txfPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15))
         );
         pnlBackGroundLayout.setVerticalGroup(
@@ -318,19 +346,25 @@ public class RummikubWindow extends javax.swing.JFrame {
                     .addComponent(txfPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pnlBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(12, 12, 12))
         );
 
@@ -386,6 +420,11 @@ public class RummikubWindow extends javax.swing.JFrame {
     private void txfPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfPruebaActionPerformed
 
     }//GEN-LAST:event_txfPruebaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //comenzarPartida(partida);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -422,6 +461,7 @@ public class RummikubWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvatarPlayer1;
     private javax.swing.JLabel lblAvatarPlayer2;

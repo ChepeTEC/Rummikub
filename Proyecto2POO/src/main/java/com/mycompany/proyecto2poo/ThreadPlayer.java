@@ -65,11 +65,7 @@ public class ThreadPlayer extends Thread{
                     
                     case 3: // Funcionalidad 3
                         
-                        // Para que sirve esta funcionalidad??
-                        
-                        ObjectInputStream in3 = new ObjectInputStream (read);
-                        playerThreadServidor = ((threadServidorRummikub) in3.readObject());
-                        player.setThreadServidorPlayer(playerThreadServidor);            
+           
                         
                     case 4: // Funcionalidad 4: Interaccion del chat
                         
