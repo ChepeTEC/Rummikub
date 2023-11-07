@@ -11,6 +11,9 @@ import java.util.logging.Logger;
  *
  * @author Pablo
  */
+
+// CLASE TOTALMENTE SIN USO POR EL MOMENTO
+
 public class ThreadRefreshGamesToShow extends Thread{
     
     private LobbyWindow refLobby;

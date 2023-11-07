@@ -23,14 +23,13 @@ public class ServerRummikub implements Serializable{
     private ArrayList <Socket> players;
     private ArrayList<Partida> partidas;
     private ArrayList<PartidaSerializable> copiaPartidas;
-    
     private ArrayList<threadServidorRummikub> jugadoresEnLobby;
     
     private boolean accepting;
+    private int matchID;
+    
     private DataOutputStream output = null;
     
-    private int matchID;
-
     //Constructores:
     
     public ServerRummikub (JFrameServer ventanaPadre){
@@ -46,6 +45,7 @@ public class ServerRummikub implements Serializable{
     }
 
     //Metodos
+    
     public void runServer (){
         
         try{
@@ -74,7 +74,6 @@ public class ServerRummikub implements Serializable{
             e.printStackTrace();
         }
     }
-   
     
     // GETTERS AND SETTERS 
     
@@ -125,6 +124,5 @@ public class ServerRummikub implements Serializable{
     public void setCopiaPartidas(ArrayList<PartidaSerializable> copiaPartidas) {
         this.copiaPartidas = copiaPartidas;
     }
-
     
 }

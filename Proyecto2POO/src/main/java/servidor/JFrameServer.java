@@ -5,7 +5,6 @@
 package servidor;
 
 import com.mycompany.proyecto2poo.LobbyWindow;
-import com.mycompany.proyecto2poo.ThreadLeerPartidasActivas;
 import javax.swing.JTextArea;
 
 /**
@@ -15,8 +14,6 @@ import javax.swing.JTextArea;
 public class JFrameServer extends javax.swing.JFrame {
     
     private ServerRummikub servidor;
-    //private ThreadLeerPartidasActivas threadLeerPartidas;
-    //private LobbyWindow lobby;
 
     public JFrameServer() {
         
@@ -24,15 +21,8 @@ public class JFrameServer extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         // CREACION DE LOS ATRIBUTOS 
-        
-        //this.lobby = new LobbyWindow();
+
         this.servidor = new ServerRummikub(this);
-        
-        // Este puede quedar inutilizado
-        //this.threadLeerPartidas = new ThreadLeerPartidasActivas(this, this.lobby);
-        
-        // PONER A CORRER AL THREAD
-        //this.threadLeerPartidas.start();
 
     }
     

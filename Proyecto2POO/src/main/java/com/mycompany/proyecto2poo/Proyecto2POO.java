@@ -17,25 +17,20 @@ import javax.swing.SwingUtilities;
 public class Proyecto2POO {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Ejemplo de Paneles");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            JPanel panel = new JPanel();
-
-            JLabel jugadorLabel = new JLabel("Jugador1:");
-            JLabel anfitrionLabel = new JLabel("Anfitrión");
-            JLabel estadoLabel = new JLabel("Activa");
-
-            panel.add(jugadorLabel);
-            panel.add(Box.createHorizontalStrut(20)); // Agregar espacio horizontal
-            panel.add(anfitrionLabel);
-            panel.add(Box.createHorizontalStrut(20)); // Agregar espacio horizontal
-            panel.add(estadoLabel);
-
-            frame.add(panel);
-            frame.pack();
-            frame.setVisible(true);
-        });
+        Partida nueva = new Partida(true, "usernameHost", 3);
+        
+        int contador = 0;
+        
+        for (int i = 0; i < nueva.getTokens().size(); i++){
+            
+            
+            if(nueva.getTokens().get(i).getColor() == TokensTypes.Token.BLUE)
+                contador++;
+            
+        }
+        
+        System.out.println(contador);
+        
     }
 }

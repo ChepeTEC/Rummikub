@@ -35,6 +35,9 @@ public class Player implements Serializable{
     private String username; // Username del jugador
     private threadServidorRummikub threadServidorPlayer;
     private ArrayList <Token> tokensPlayer;
+    
+    int cantidadDePartidasJugadas;
+    int cantidadDePartidasGanadas;
    
     // Atributo de prueba; 
     

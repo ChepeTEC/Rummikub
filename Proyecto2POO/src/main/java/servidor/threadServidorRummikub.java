@@ -53,8 +53,8 @@ public class threadServidorRummikub extends Thread implements Serializable {
         this.server = server;
         this.numPlayer = num;
         this.indexOfCurrentGame = -1;
-        this.namePlayer = ""; //Se desconoce hasta la primera corrida del thread
-        this.tokens = new ArrayList <>();
+        this.namePlayer = ""; //Se desconoce hasta la primera corrida del run del thread
+        this.tokens = new ArrayList <Token>();
         this.isHost = false;
         
     }
@@ -62,6 +62,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
     public threadServidorRummikub (){
 
         this.indexOfCurrentGame = -1;
+        this.tokens = new ArrayList <Token>();
         
     }
     
@@ -72,24 +73,11 @@ public class threadServidorRummikub extends Thread implements Serializable {
         
         try{
             
-            //Inicializamos para lectura y escritura con el player
             input = new DataInputStream (player.getInputStream());
             output = new DataOutputStream (player.getOutputStream());
             
-            //String posibleNombreDeJugador = input.readUTF(); No se porque no esta funcionando se queda pegado al unirse partida (boton)
-            
-            
-            //for (int i = 0 ; i <= server.getJugadoresEnLobby().size() ; i++){
-                //if (server.getJugadoresEnLobby().get(i).getNamePlayer().equals(posibleNombreDeJugador)){ //Si se repite el nombre de jugador
-                    //server.getJugadoresEnLobby().get(i).getPlayer().close(); //Se cierra el socket
-                    //server.getFrame().mostrar("Se cerró el socket con el jugador con el nombre repetido.");
-                //}else{
-                    this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
-                    
-                //}
-            //}
+            this.setNamePlayer(input.readUTF()); //Conseguimos el nombre del jugador
 
-            
         }catch (IOException e){
             
             e.printStackTrace();
@@ -106,8 +94,6 @@ public class threadServidorRummikub extends Thread implements Serializable {
                 switch (opcion){
 
                     case 1: // Funcionalidad 1: Mostrar las partidas activas en ese momeneto
-                        
-                        System.out.println("ENTRO AL CASE 1 DEL SERVER");
                         
                         // Actualiza los juegos disponibles en ese momento
                         setGamesToShow(server.getCopiaPartidas());
@@ -195,30 +181,18 @@ public class threadServidorRummikub extends Thread implements Serializable {
                     
                     case 5: // Funcionalidad 5: Eliminar jugador de una partida
                         
-                        System.out.println("ENTRA AL 5");
-                        
                         String nombreDeJugadorAEliminar = input.readUTF();
-                        
-                        System.out.println("111111111");
                         
                         if(existeEnemigo(nombreDeJugadorAEliminar)){
                             
-                            System.out.println("ENTRA AL IF");
-                            
                             int indice = getIndexOfEnemigo(nombreDeJugadorAEliminar);
                             
-                            System.out.println("CONSIGUIÓ INDEX");
-                            
                             enemies.get(indice).output.writeInt(8);
-                            
-                            System.out.println("MANDO EL MENSAJE");
                             
                             removePlayerFromEnemyList(nombreDeJugadorAEliminar); // Elimina al jugador de la lista de enemigos de todos los demas
                             
                             enemies.get(indice).enemies.clear(); // Deja al jugador eliminado sin enemigos
                             enemies.remove(indice); // Elimina al jugador de la lista de enemigos del HOST
-                            
-                            System.out.println("ANTES DEL OUTPUT");
                             
                             output.writeInt(7);
                             output.writeInt(2);
@@ -226,15 +200,10 @@ public class threadServidorRummikub extends Thread implements Serializable {
                             server.getPartidas().get(indexOfCurrentGame).setCurrentPlayers(server.getPartidas().get(indexOfCurrentGame).getCurrentPlayers() - 1);
                             server.getCopiaPartidas().get(indexOfCurrentGame).setCurrentPlayers(server.getCopiaPartidas().get(indexOfCurrentGame).getCurrentPlayers() - 1);
                             
-                            System.out.println("DESPUES DEL IF");
-                            
                         }
-                        
-//                        
+                                              
                         else{
                             
-                            
-                            System.out.println("ENTRA AL ELSE");
                             output.writeInt(7);
                             output.writeInt(1);
                             
@@ -242,17 +211,40 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         
                         break;
                         
-                    case 6: //Buscar la referencia de la partida para asi obtenerla y comenzar la partida
-//                        String nombrePlayerHost = input.readUTF();
-//                        for (int i = 0 ; i < server.getPartidas().size() ; i++){
-//                            if (server.getPartidas().get(i).getUsernameHost().equals(nombrePlayerHost)){
-//                                Partida partidaPorComenzar = server.getPartidas().get(i);
-//                                for (int j = 0 ; j < partidaPorComenzar.getPlayers().size() ; j++){
-//                                    server. 
-//                                }
-//                            }
-//                        }
+                    case 6: // Funcionalidad 6: Comenzar la partida
+                    {
                         
+                        System.out.println("ANTES DE RECIBIR PARTIDA");
+                        
+                        Partida currentGame = server.getPartidas().get(indexOfCurrentGame);
+                        currentGame.setInProgres(true);
+                        
+                        System.out.println("DESPUES DE RECIBIR A PARTIDA");
+                        
+                        for (int i = 0; i < currentGame.getPlayers().size(); i++){
+                            
+                            for (int j = 0; j < 14; j++){
+                             
+                                // Agregar el token al jugador 
+                                currentGame.getPlayers().get(i).getTokens().add(currentGame.getTokens().get(i));
+                                
+                                // Eliminar el token del mazo principal
+                                currentGame.getTokens().remove(i);
+                                
+                            }
+                            
+                            // Senal para entrar al case
+                            currentGame.getPlayers().get(i).getOutput().writeInt(9);
+                            
+                            // Enviar senal para que se muestre en pantallas esas fichas
+                            ObjectOutputStream writeO = new ObjectOutputStream( currentGame.getPlayers().get(i).getPlayer().getOutputStream());
+                                
+                            // Se le envia todos la lista de tokens
+                            writeO.writeObject(currentGame.getPlayers().get(i).getTokens());
+                            
+                        }
+                    
+                    }    
                 }
                 
             }catch (IOException e){ 
@@ -310,7 +302,9 @@ public class threadServidorRummikub extends Thread implements Serializable {
         
         return false;
     }
+    
     //GETTERS & SETTERS
+    
     public Player getPlayerObject() {
         return playerObject;
     }

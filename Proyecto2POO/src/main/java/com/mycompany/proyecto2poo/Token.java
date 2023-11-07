@@ -7,6 +7,7 @@ public class Token implements Serializable{
     
     private TokensTypes.Token color;
     private int value;
+    private boolean isWildCard;
 
     // Constructor
     
@@ -37,5 +38,15 @@ public class Token implements Serializable{
     public String toString() {
         return "Token:" + " color -> " + color + " value -> " + value;
     }
-     
+
+    public boolean isIsWildCard() {
+        return isWildCard;
+    }
+
+    public void setIsWildCard(boolean isWildCard) {
+        this.isWildCard = isWildCard;
+    }
+    
+    
+      
 }

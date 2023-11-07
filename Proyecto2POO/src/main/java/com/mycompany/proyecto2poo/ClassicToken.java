@@ -4,13 +4,12 @@
  */
 package com.mycompany.proyecto2poo;
 
-/**
- *
- * @author Pablo
- */
-public class ClassicToken extends Token {
+import java.io.Serializable;
+
+public class ClassicToken extends Token implements Serializable{
     
     public ClassicToken(TokensTypes.Token color, int value) {
         super(color, value);
+        super.setIsWildCard(false);
     }    
 }

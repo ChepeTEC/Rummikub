@@ -18,6 +18,8 @@ public class ThreadPlayer extends Thread{
     private boolean isRunning;
     private Player player;
     
+    // CONSTRUCTOR
+    
     public ThreadPlayer(DataInputStream read, Player player){
         
         this.read = read;
@@ -26,6 +28,8 @@ public class ThreadPlayer extends Thread{
         
     }
 
+    // METODO RUN();
+    
     public void run(){
         
         // Hacer algo antes del while true
@@ -37,15 +41,16 @@ public class ThreadPlayer extends Thread{
             try{
                 
                 String mensaje = "";
-                ArrayList <PartidaSerializable> gamesToShow = new ArrayList <PartidaSerializable> ();
                 
+                ArrayList <PartidaSerializable> gamesToShow = new ArrayList <PartidaSerializable> ();
                 threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
                 
                 opcion = read.readInt();
                 
                 switch(opcion){
+                    
                     case 1: // Funcionalidad 1: Mostrar partidas disponibles
-                        
+                        {
                         ObjectInputStream in = new ObjectInputStream(read);
                         gamesToShow = ((ArrayList<PartidaSerializable>) in.readObject());
                         
@@ -56,16 +61,15 @@ public class ThreadPlayer extends Thread{
                         // Inicio del thread 
                         
                         //player.getRefLobby().getRefreshInfo().start();
-                        
+                        }
                         break;
                         
                     case 2: // Funcionalidad 2: Crear partida
                         
                         break;
                     
-                    case 3: // Funcionalidad 3
+                    case 3: // Funcionalidad 3 : ???
                         
-           
                         
                     case 4: // Funcionalidad 4: Interaccion del chat
                         
@@ -138,6 +142,25 @@ public class ThreadPlayer extends Thread{
                         
                         break;
                         
+                    case 9: 
+                    {
+                        System.out.println("1");
+                        
+                        ObjectInputStream a = new ObjectInputStream(read);
+                        
+                        System.out.println("2");
+                        
+                        ArrayList<Token> playerTokens = ((ArrayList<Token>) a.readObject());
+                        
+                        System.out.println("3");
+                        
+                        for(int i = 0; i < playerTokens.size(); i++){
+                            
+                            player.getRefVentana().generarFicha(playerTokens.get(i));
+                            
+                        }
+                    }    
+                        break;
                 }
             }
             catch (ClassNotFoundException ex) {

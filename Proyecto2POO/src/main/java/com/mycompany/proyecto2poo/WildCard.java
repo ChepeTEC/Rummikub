@@ -4,14 +4,17 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Pablo
  */
-public class WildCard extends Token{
+public class WildCard extends Token implements Serializable{
     
     public WildCard(TokensTypes.Token color, int value) {
         super(color, value);
+        super.setIsWildCard(true);
     }
     
 }
