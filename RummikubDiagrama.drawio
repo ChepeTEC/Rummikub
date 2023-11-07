@@ -1,0 +1,271 @@
+<mxfile host="Electron" modified="2023-11-07T04:26:19.501Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="2sb4Vxz4L6YGnsxZnbJq" version="22.0.3" type="device">
+  <diagram name="Page-1" id="JKhwvigtqWD-MuRiMESI">
+    <mxGraphModel dx="1762" dy="1738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yWPUBpToBPybyT1gnYog-55" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=120;tabHeight=30;tabPosition=left;html=1;whiteSpace=wrap;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="1170" y="200" width="630" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-1" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=120;tabHeight=30;tabPosition=left;html=1;whiteSpace=wrap;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="1140" height="1070" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-2" value="&lt;font face=&quot;Verdana&quot;&gt;Juego&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="10" y="10" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-3" target="yWPUBpToBPybyT1gnYog-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-3" target="yWPUBpToBPybyT1gnYog-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-3" target="yWPUBpToBPybyT1gnYog-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="130" />
+              <mxPoint x="550" y="420" />
+              <mxPoint x="695" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-3" target="yWPUBpToBPybyT1gnYog-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1490" y="130" />
+              <mxPoint x="1490" y="430" />
+              <mxPoint x="1635" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-3" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;abstract&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;Token&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- color: TokensTypes&lt;br&gt;- value: int&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ toString (): String&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="87.5" y="70" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-4" target="yWPUBpToBPybyT1gnYog-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-4" target="yWPUBpToBPybyT1gnYog-6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="183" y="264" />
+              <mxPoint x="175" y="264" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-4" value="" style="triangle;whiteSpace=wrap;html=1;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="160" y="182.5" width="45" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-6" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ClassicToken&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="80" y="292.5" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-10" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;WildCard&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="320" y="292.5" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-12" target="yWPUBpToBPybyT1gnYog-58">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-12" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Partida&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- inProgress : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- amountPlayerWanted : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- currentPlayers : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- usernameHost : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tokens : ArrayList &amp;lt;Token&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- players : ArrayList &amp;lt;threadServidorRummikub&amp;gt;&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="870" y="242.5" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-15" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="212.5" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-16" value="0..106" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="277.5" y="100" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-66" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-17" target="yWPUBpToBPybyT1gnYog-58">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="695" y="400" />
+              <mxPoint x="850" y="400" />
+              <mxPoint x="850" y="530" />
+              <mxPoint x="1335" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-17" target="yWPUBpToBPybyT1gnYog-74">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="695" y="400" />
+              <mxPoint x="850" y="400" />
+              <mxPoint x="850" y="570" />
+              <mxPoint x="1440" y="570" />
+              <mxPoint x="1440" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-17" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;PartidaSerializable&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- inProgress : boolean&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- amountPlayerWanted : int&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px;&quot;&gt;- currentPlayers : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- usernameHost : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tokens : ArrayList &amp;lt;Token&amp;gt;&amp;nbsp;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="580" y="257.5" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-19" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="227.5" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-21" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;TokensTypes&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;RED&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;YELLOW&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;BLUE&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;BLACK&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;SPECIAL&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="80" y="380" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-23" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;MainWindow&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Player&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run () : void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="70" y="580" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-25" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;ImagePanel&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- Image : image&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ paintComponent (g : Graphics) : void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="320" y="380" width="190" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-27" value="" style="endArrow=open;endFill=1;endSize=12;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-21" target="yWPUBpToBPybyT1gnYog-3">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="30" y="430" as="sourcePoint" />
+            <mxPoint x="190" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="40" y="440" />
+              <mxPoint x="40" y="310" />
+              <mxPoint x="40" y="190" />
+              <mxPoint x="40" y="130" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-30" target="yWPUBpToBPybyT1gnYog-74">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-30" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;LobbyWindow&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- cordX : int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- cordY : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Player&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- playerThreadServidor : threadServidorRummikub&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- Buttons : ArrayList &amp;lt;JButton&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ agregarPartidasDisponibles (partidas : ArrayList &amp;lt;PartidasSerializable&amp;gt;) : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ refreshGamesToShow () : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ insertarPartida (cantidadPlayers : int, inProgress : boolean, partida : PartidaSerializable, index : int) : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ findJButtonIndex (button : JButton) : int&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="140" y="770" width="230" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-32" value="" style="endArrow=open;startArrow=circlePlus;endFill=0;startFill=0;endSize=8;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-25" target="yWPUBpToBPybyT1gnYog-23">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="390" y="630" as="sourcePoint" />
+            <mxPoint x="550" y="630" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="415" y="530" />
+              <mxPoint x="185" y="530" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-33" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Player&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- refVentana : RummikubWindow&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- refLobby : LobbyWindow&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- refMainWindow : MainWindow&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ static IP_server : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Socket&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- isHost : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- read : DataInputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- write : DataOutputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- username : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- threadServidorPlayer : threadServidorRummikub&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tokensPlayer : ArrayList &amp;lt;Token&amp;gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ getConnected(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="580" y="450" width="230" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-35" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-23" target="yWPUBpToBPybyT1gnYog-33">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="330" y="640" as="sourcePoint" />
+            <mxPoint x="490" y="640" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="470" y="640" />
+              <mxPoint x="470" y="570" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-38" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-30" target="yWPUBpToBPybyT1gnYog-33">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="190" y="730" as="sourcePoint" />
+            <mxPoint x="350" y="730" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="255" y="730" />
+              <mxPoint x="520" y="730" />
+              <mxPoint x="520" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-39" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;RummikubWindow&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- cordX : int&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- cordY : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Player&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ agregarBotonEliminarJugador () : void&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ mostrar (mensaje : String) : void&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ generarFicha (token : Token) : void&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ comenzarPartida (partida : Partida) : void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="480" y="770" width="230" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-41" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-39" target="yWPUBpToBPybyT1gnYog-33">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="590" y="730" as="sourcePoint" />
+            <mxPoint x="750" y="730" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="595" y="730" />
+              <mxPoint x="695" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-43" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="420" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-44" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="550" y="130" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-45" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="307.5" y="600" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-46" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="540" y="530" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-47" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="220" y="730" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-48" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="540" y="590" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-49" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="560" y="740" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-50" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="660" y="690" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-51" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ThreadPlayer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- read : DataInputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- isRunning : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Player&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run(): void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="770" y="770" width="230" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-52" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-51" target="yWPUBpToBPybyT1gnYog-33">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="780" y="740" as="sourcePoint" />
+            <mxPoint x="940" y="740" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="885" y="630" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-53" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="810" y="640" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-54" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="880" y="740" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-56" value="&lt;font face=&quot;Verdana&quot;&gt;Servidor&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1190" y="200" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-57" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;JFrameServer&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- servidor : ServerRummikub&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ mostrar (texto : String) : void&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="272.5" width="230" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-58" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ServidorRummikub&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- frame : JFrameServer&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- players : ArrayList &amp;lt;Socket&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- partidas : ArrayList &amp;lt;Partida&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- copiaPartidas : ArrayList &amp;lt;PartidaSerializable&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- jugadoresEnLobby : ArrayList &amp;lt;threadServidorRummikub&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- accepting : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;-output : DataOutputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- matchID : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ runServer () : void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="262.5" width="230" height="247.5" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-63" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="510" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-64" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="985" y="392.5" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-67" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="655" y="377.5" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-69" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="215" y="1020" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-74" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;threadServidorRummikub&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- player : Socket&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- playerObject : Player&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- input : DataInputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- output : DataOutputStream&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- numPlayer : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- indexOfCurrentGame : int&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- namePlayer : String&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- isHost : boolean&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- enemies : ArrayList &amp;lt;threadServidorRummikub&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- gamesToShow : ArrayList &amp;lt;PartidaSerializable&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;- tokens : ArrayList &amp;lt;Tokens&amp;gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;&lt;/p&gt;&lt;p style=&quot;margin:0px;margin-left:4px;&quot;&gt;+ run() : void&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1520" y="491.25" width="230" height="247.5" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-76" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1640" y="740" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-78" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="810" y="535" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-79" value="" style="endArrow=block;startArrow=block;endFill=1;startFill=1;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="yWPUBpToBPybyT1gnYog-33" target="yWPUBpToBPybyT1gnYog-74">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="830" y="610" as="sourcePoint" />
+            <mxPoint x="990" y="610" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1180" y="570" />
+              <mxPoint x="1440" y="570" />
+              <mxPoint x="1440" y="615" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-80" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1490" y="580" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-83" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1500" y="130" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="yWPUBpToBPybyT1gnYog-84" value="0..n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="1650" y="461.25" width="40" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
