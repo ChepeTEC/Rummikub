@@ -42,6 +42,8 @@ public class ThreadPlayer extends Thread{
                 
                 String mensaje = "";
                 
+                int cantidadAvatares;
+                
                 ArrayList <PartidaSerializable> gamesToShow = new ArrayList <PartidaSerializable> ();
                 threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
                 
@@ -80,9 +82,32 @@ public class ThreadPlayer extends Thread{
                         break;
                         
                     case 5: // Funcionalidad 5: Unirse a una partida
+                        cantidadAvatares = read.readInt();
                         
                         player.setRefVentana(new RummikubWindow(player));
                         player.getRefVentana().setVisible(true);
+                        
+                        
+                        switch (cantidadAvatares){
+                            case 2:
+                                player.getRefVentana().getlblAvatar1().setVisible(true);
+                                player.getRefVentana().getlblAvatar2().setVisible(true);
+                                break;
+                            
+                            case 3:
+                                player.getRefVentana().getlblAvatar1().setVisible(true);
+                                player.getRefVentana().getlblAvatar2().setVisible(true);
+                                player.getRefVentana().getlblAvatar3().setVisible(true);
+                                break;
+                            
+                            case 4:
+                                player.getRefVentana().getlblAvatar1().setVisible(true);
+                                player.getRefVentana().getlblAvatar2().setVisible(true);
+                                player.getRefVentana().getlblAvatar3().setVisible(true);
+                                player.getRefVentana().getlblAvatar4().setVisible(true);
+                                break;
+                        }
+                        
                         player.getRefLobby().setVisible(false);
                         
                         if(player.isIsHost()){

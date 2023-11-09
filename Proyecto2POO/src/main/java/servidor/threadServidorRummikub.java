@@ -158,7 +158,8 @@ public class threadServidorRummikub extends Thread implements Serializable {
                             
                         }
                         
-                        output.writeInt(5);    
+                        output.writeInt(5);
+                        output.writeInt(server.getCopiaPartidas().get(indexOfGame).getAmountPlayerWanted());
                         
                         break;
 

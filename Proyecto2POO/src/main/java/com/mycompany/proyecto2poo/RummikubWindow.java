@@ -32,6 +32,13 @@ public class RummikubWindow extends javax.swing.JFrame {
     private Player player;
     private int cordMazoX;
     private int cordMazoY;
+    private int turnoJugador; //Puede ser 1,2,3,4
+    private int numeroJugador; //Puede ser 1,2,3,4
+    private final ImageIcon avatarImagen1 = new ImageIcon("IconoAvatar1.gif");
+    private final ImageIcon avatarImagen2 = new ImageIcon("IconoAvatar2.gif");
+    private final ImageIcon avatarImagen3 = new ImageIcon("IconoAvatar3.gif");
+    private final ImageIcon avatarImagen4 = new ImageIcon("IconoAvatar4.gif");
+
     
 
     public RummikubWindow(Player player) {
@@ -41,10 +48,53 @@ public class RummikubWindow extends javax.swing.JFrame {
         
         this.player = player;
         initComponents();
+        
+        lblTurnos.setVisible(false);
+        
+        lblAvatarPlayer1.setVisible(false);
+        lblAvatarPlayer2.setVisible(false);
+        lblAvatarPlayer3.setVisible(false);
+        lblAvatarPlayer4.setVisible(false);
+        
+        lblAvatarPlayer1.setIcon(avatarImagen1);
+        lblAvatarPlayer1.setOpaque(false);
+        lblAvatarPlayer1.setBorder(null);
+        
+        lblAvatarPlayer2.setIcon(avatarImagen2);
+        lblAvatarPlayer2.setOpaque(false);
+        lblAvatarPlayer2.setBorder(null);
+        
+        
+        
+        lblAvatarPlayer3.setIcon(avatarImagen3);
+        lblAvatarPlayer3.setOpaque(false);
+        lblAvatarPlayer3.setBorder(null);
+        
+        
+        lblAvatarPlayer4.setIcon(avatarImagen4);
+        lblAvatarPlayer4.setOpaque(false);
+        lblAvatarPlayer4.setBorder(null);
+        
         setLocationRelativeTo(null);
             
         setSize(850, 518);
             
+    }
+    public JLabel getlblAvatar1 (){
+        return lblAvatarPlayer1;
+    }
+    public JLabel getlblAvatar2 (){
+        return lblAvatarPlayer2;
+    }
+    public JLabel getlblAvatar3 (){
+        return lblAvatarPlayer3;
+    }
+    public JLabel getlblAvatar4 (){
+        return lblAvatarPlayer4;
+    }
+    
+    public JLabel getlblTurnos (){
+        return lblTurnos;
     }
     
     public void errorAlEliminarJugador(int indicador){
@@ -245,6 +295,7 @@ public class RummikubWindow extends javax.swing.JFrame {
         txfChat = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
         jPanel1 = new ImagePanel1();
+        lblTurnos = new javax.swing.JLabel();
 
         pnlBoard.setBackground(new java.awt.Color(204, 204, 204));
         pnlBoard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -321,64 +372,75 @@ public class RummikubWindow extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        lblTurnos.setBackground(new java.awt.Color(255, 0, 51));
+        lblTurnos.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
+        lblTurnos.setForeground(new java.awt.Color(255, 0, 51));
+        lblTurnos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTurnos.setText("Turno del jugador #1");
+
         javax.swing.GroupLayout pnlBackGroundLayout = new javax.swing.GroupLayout(pnlBackGround);
         pnlBackGround.setLayout(pnlBackGroundLayout);
         pnlBackGroundLayout.setHorizontalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))))
+                        .addGap(15, 15, 15)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(50, 50, 50)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(lblTurnos)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap()
+                .addComponent(lblTurnos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                                 .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(23, 23, 23)
                                 .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(14, 14, 14))))
         );
 
         getContentPane().add(pnlBackGround);
-        pnlBackGround.setBounds(0, 0, 830, 480);
+        pnlBackGround.setBounds(0, 0, 840, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -469,6 +531,7 @@ public class RummikubWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblAvatarPlayer2;
     private javax.swing.JLabel lblAvatarPlayer3;
     private javax.swing.JLabel lblAvatarPlayer4;
+    private javax.swing.JLabel lblTurnos;
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlBoard;
     private javax.swing.JPanel pnlPlayerTokens;
