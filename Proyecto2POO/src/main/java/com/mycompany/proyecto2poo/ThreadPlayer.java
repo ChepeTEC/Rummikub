@@ -44,6 +44,8 @@ public class ThreadPlayer extends Thread{
                 
                 int cantidadAvatares;
                 
+                int numeroJugadorRecibido;
+                
                 ArrayList <PartidaSerializable> gamesToShow = new ArrayList <PartidaSerializable> ();
                 threadServidorRummikub playerThreadServidor = new threadServidorRummikub ();
                 
@@ -70,7 +72,11 @@ public class ThreadPlayer extends Thread{
                         
                         break;
                     
-                    case 3: // Funcionalidad 3 : ???
+                    case 3: // Funcionalidad 3 : Enemigos marquen en el tablero y reciban el turno
+                        //Lee las coordenadas
+                        //Llama al metodo marcar (donde tambien se cambia el turno)
+                        player.getRefVentana().marcar();
+                        break;
                         
                         
                     case 4: // Funcionalidad 4: Interaccion del chat
@@ -83,12 +89,17 @@ public class ThreadPlayer extends Thread{
                         
                     case 5: // Funcionalidad 5: Unirse a una partida
                         cantidadAvatares = read.readInt();
+                        numeroJugadorRecibido = read.readInt();
                         
                         player.setRefVentana(new RummikubWindow(player));
                         player.getRefVentana().setVisible(true);
+                        player.getRefVentana().setNumeroJugador(numeroJugadorRecibido);
+                        
+                        player.getRefVentana().getlblTurnos().setVisible(true);
                         
                         
-                        switch (cantidadAvatares){
+                        
+                        switch (cantidadAvatares){ //Mostrar avatares
                             case 2:
                                 player.getRefVentana().getlblAvatar1().setVisible(true);
                                 player.getRefVentana().getlblAvatar2().setVisible(true);

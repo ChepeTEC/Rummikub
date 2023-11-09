@@ -136,8 +136,10 @@ public class threadServidorRummikub extends Thread implements Serializable {
                             
                         gameRecieved.setCurrentPlayers(gameRecieved.getCurrentPlayers() + 1); // Se unio un jugador, se le suma
                         server.getCopiaPartidas().get(indexOfGame).setCurrentPlayers(server.getCopiaPartidas().get(indexOfGame).getCurrentPlayers() + 1);
-                            
+                        this.numPlayer = gameRecieved.getCurrentPlayers() + 1;
+                        
                         gameRecieved.getPlayers().add(this); // Agrega al jugador a la partida
+                        
                          
                         for (int i = 0; i < gameRecieved.getPlayers().size(); i++){ //Limpia los enemigos cada vez que se une uno
                               threadServidorRummikub playerPartida = gameRecieved.getPlayers().get (i);
@@ -160,6 +162,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         
                         output.writeInt(5);
                         output.writeInt(server.getCopiaPartidas().get(indexOfGame).getAmountPlayerWanted());
+                        output.writeInt (gameRecieved.getCurrentPlayers());
                         
                         break;
 
@@ -245,7 +248,15 @@ public class threadServidorRummikub extends Thread implements Serializable {
                             
                         }
                     
-                    }    
+                    }
+                    case 7: //Envio de coordenada y turno
+                        //Lee las coordenadas
+                        
+                        for (int i = 0 ; i < enemies.size() ; i++){
+                            enemies.get(i).output.writeInt(3);
+                            //Envia las coordenadas los enemigos
+                        }
+                        break;
                 }
                 
             }catch (IOException e){ 
