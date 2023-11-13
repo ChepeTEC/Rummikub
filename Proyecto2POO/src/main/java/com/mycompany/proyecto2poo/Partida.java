@@ -20,6 +20,7 @@ public class Partida implements Serializable{
     private int currentPlayers;
     private String usernameHost;
     private ArrayList <Token> tokens;
+    private int turno;
   
     //Constructores
 
@@ -28,7 +29,8 @@ public class Partida implements Serializable{
         this.players = players;
         this.inProgres = inProgres;
         this.currentPlayers = 0;
-        this.tokens = new ArrayList <> ();
+        this.tokens = new ArrayList <Token> ();
+        this.turno = 0;
         inicializarMazo();
 
     }
@@ -40,7 +42,8 @@ public class Partida implements Serializable{
         this.players = new ArrayList <>();
         this.amountPlayerWanted = amountWanted;
         this.currentPlayers = 0;
-        this.tokens = new ArrayList <> ();
+        this.tokens = new ArrayList <Token> ();
+        this.turno = 0;
         inicializarMazo();
         
     }
@@ -126,8 +129,7 @@ public class Partida implements Serializable{
     public void setTokens(ArrayList<Token> tokens) {
         this.tokens = tokens;
     }
-    
-    
+      
     public ArrayList<threadServidorRummikub> getPlayers() {
         return players;
     }
@@ -167,5 +169,15 @@ public class Partida implements Serializable{
     public void setCurrentPlayers(int currentPlayers) {
         this.currentPlayers = currentPlayers;
     }
+
+    public int getTurno() {
+        return turno;
+    }
+
+    public void setTurno(int turno) {
+        this.turno = turno;
+    }
+    
+    
     
 }

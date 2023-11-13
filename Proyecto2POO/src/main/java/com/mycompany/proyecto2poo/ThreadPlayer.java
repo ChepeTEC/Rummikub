@@ -4,12 +4,18 @@
  */
 package com.mycompany.proyecto2poo;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import servidor.threadServidorRummikub;
 
 public class ThreadPlayer extends Thread{
@@ -55,6 +61,7 @@ public class ThreadPlayer extends Thread{
                     
                     case 1: // Funcionalidad 1: Mostrar partidas disponibles
                         {
+                        
                         ObjectInputStream in = new ObjectInputStream(read);
                         gamesToShow = ((ArrayList<PartidaSerializable>) in.readObject());
                         
@@ -62,23 +69,38 @@ public class ThreadPlayer extends Thread{
                         player.getRefLobby().setVisible(true);
                         player.getRefMainWindow().setVisible(false);
                         
-                        // Inicio del thread 
-                        
-                        //player.getRefLobby().getRefreshInfo().start();
                         }
                         break;
                         
-                    case 2: // Funcionalidad 2: Crear partida
+                    case 2: // Funcionalidad 2: Manejar no poder unirse a partida 
+                        
+                        int opcionError = read.readInt();
+                        
+                        switch (opcionError) {
+                            case 1:
+                                JOptionPane.showMessageDialog(player.getRefLobby(), "No se puede unir a la partida, partida llena");
+                                break;
+                                
+                            case 2: 
+                                JOptionPane.showMessageDialog(player.getRefLobby(), "No se puede unir a la partida, ya esta en progreso");
+                                break;
+                                
+                            case 3: 
+                                JOptionPane.showMessageDialog(player.getRefVentana(), "No quedan mas cartas en el mazo");
+                                player.setMyTurn(true);
+                                
+                            default:
+                                throw new AssertionError();
+                        }
                         
                         break;
                     
-                    case 3: // Funcionalidad 3 : Enemigos marquen en el tablero y reciban el turno
-                        //Lee las coordenadas
-                        //Llama al metodo marcar (donde tambien se cambia el turno)
-                        player.getRefVentana().marcar();
+                    case 3: // Funcionalidad 3 : Cambio de turno
+                        
+                        player.setMyTurn(true);
+                        
                         break;
-                        
-                        
+        
                     case 4: // Funcionalidad 4: Interaccion del chat
                         
                         mensaje = read.readUTF();
@@ -88,6 +110,7 @@ public class ThreadPlayer extends Thread{
                         break;
                         
                     case 5: // Funcionalidad 5: Unirse a una partida
+                        
                         cantidadAvatares = read.readInt();
                         numeroJugadorRecibido = read.readInt();
                         
@@ -97,9 +120,8 @@ public class ThreadPlayer extends Thread{
                         
                         player.getRefVentana().getlblTurnos().setVisible(true);
                         
-                        
-                        
                         switch (cantidadAvatares){ //Mostrar avatares
+                            
                             case 2:
                                 player.getRefVentana().getlblAvatar1().setVisible(true);
                                 player.getRefVentana().getlblAvatar2().setVisible(true);
@@ -116,6 +138,7 @@ public class ThreadPlayer extends Thread{
                                 player.getRefVentana().getlblAvatar2().setVisible(true);
                                 player.getRefVentana().getlblAvatar3().setVisible(true);
                                 player.getRefVentana().getlblAvatar4().setVisible(true);
+                                
                                 break;
                         }
                         
@@ -132,6 +155,7 @@ public class ThreadPlayer extends Thread{
                     case 6: // Funcionalidad 6: Desginar al player como host de la partida
                         
                         this.player.setIsHost(true);
+                        this.player.setMyTurn(true);
                         
                         break;
                         
@@ -178,17 +202,12 @@ public class ThreadPlayer extends Thread{
                         
                         break;
                         
-                    case 9: 
+                    case 9: // Funcionalidad 9: Recibir fichas al principio
                     {
-                        System.out.println("1");
                         
                         ObjectInputStream a = new ObjectInputStream(read);
                         
-                        System.out.println("2");
-                        
                         ArrayList<Token> playerTokens = ((ArrayList<Token>) a.readObject());
-                        
-                        System.out.println("3");
                         
                         for(int i = 0; i < playerTokens.size(); i++){
                             
@@ -197,8 +216,104 @@ public class ThreadPlayer extends Thread{
                         }
                     }    
                         break;
+                        
+                    case 10: // Funcionalidad 10: Marcar jugada en tablero
+                        
+                        System.out.println("ENTRA AL CASE 10");
+                        
+                        int x = read.readInt();
+                        int y = read.readInt();
+                        
+                        int valueOfToken = read.readInt();
+                        int colorOfToken = read.readInt();
+                        
+                        System.out.println("THREAD CLIENTE");
+                        
+                        System.out.println("(" + x + "," + y + ")");
+                        System.out.println("->> " + valueOfToken);
+                        System.out.println("->> " + colorOfToken);
+                        
+                        JLabel labelToken = new JLabel();
+
+                        labelToken.setSize(10,15);
+                        BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK);
+                        labelToken.setBorder(bevelBorder);
+                        labelToken.setText(String.valueOf(valueOfToken));
+                        labelToken.setHorizontalAlignment(SwingConstants.CENTER);
+                        labelToken.setBackground(Color.gray); // Establece el fondo en negro
+                        labelToken.setOpaque(true);
+                        Font font = new Font("Lucida Sans", Font.BOLD, 8);
+                        labelToken.setFont(font);
+
+                        switch (colorOfToken) {
+                            case 0:
+                                labelToken.setForeground(Color.BLACK);
+                                break;
+                            case 1:
+                                labelToken.setForeground(Color.BLUE);
+                                break;
+                            case 2:
+                                labelToken.setForeground(Color.RED);
+                                break;
+                            case 3:
+                                labelToken.setForeground(Color.YELLOW);
+                                break;
+                            case 4:
+                                labelToken.setForeground(Color.ORANGE);
+                            default:
+                                throw new AssertionError();
+                        }
+                        
+                        labelToken.setLocation(x, y);
+                        
+                        player.getRefVentana().getPnlGame().add(labelToken);
+                        player.getRefVentana().getPnlGame().repaint();
+                        
+                        break;
+                        
+                    case 11: // Funcionalidad 11: Actulizar mazo del jugador
+                        
+                        player.getRefVentana().getPnlPlayerTokens().removeAll();
+                        player.getRefVentana().getPnlPlayerTokens().validate();
+                        player.getRefVentana().getPnlPlayerTokens().repaint();
+                        
+                        player.getRefVentana().setCordMazoX(10);
+                        player.getRefVentana().setCordMazoY(10);
+                        
+                        ObjectInputStream a = new ObjectInputStream(read);
+                        
+                        ArrayList<Token> playerTokens = ((ArrayList<Token>) a.readObject());
+                        
+                        for(int i = 0; i < playerTokens.size(); i++){
+                            
+                            player.getRefVentana().generarFicha(playerTokens.get(i));
+                            
+                        }
+                        
+                        break;
+                    
+                    case 12: // Funcionalidad 12: Activar los botones de comer ficha
+                        
+                            player.getRefVentana().getBtnComerFicha().setEnabled(true);
+                        
+                        break;
+                    
+                    case 13: // Funcionalidad 13: Setear cantidad de fichas en el mazo
+                        
+                        int cantidadDeFichas = read.readInt();
+                        
+                        player.getRefVentana().getBtnComerFicha().setText(String.valueOf(cantidadDeFichas));
+                        
+                        break;
+                        
+                    case 14: // Funcionalidad 14: Setea el titulo dle turno
+                        
+                        String turnoText = read.readUTF();
+                        
+                        player.getRefVentana().getlblTurnos().setText(turnoText);
                 }
             }
+            
             catch (ClassNotFoundException ex) {
                 Logger.getLogger(ThreadPlayer.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("ERROR 1");

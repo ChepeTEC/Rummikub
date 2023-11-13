@@ -4,7 +4,16 @@
  */
 package com.mycompany.proyecto2poo;
 
+import static com.mycompany.proyecto2poo.TokensTypes.Token.BLACK;
+import static com.mycompany.proyecto2poo.TokensTypes.Token.BLUE;
+import static com.mycompany.proyecto2poo.TokensTypes.Token.RED;
+import static com.mycompany.proyecto2poo.TokensTypes.Token.SPECIAL;
+import static com.mycompany.proyecto2poo.TokensTypes.Token.YELLOW;
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -22,25 +31,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.border.BevelBorder;
 
-/**
- *
- * @author Pablo
- */
 public class RummikubWindow extends javax.swing.JFrame {
     
     private Player player;
     private int cordMazoX;
     private int cordMazoY;
+    
+    private int cordYToken;
+    private int cordXToken;
+    private int numCartaAJugar;
+    private int color1; // 0: negro, 1: azul, 2: Rojo, 3: Amarillo, 4: Especial
+    
     private int turnoJugador; //Puede ser 1,2,3,4
     private int numeroJugador; //Puede ser 1,2,3,4
     private int cantidadJugadores; //2,3,4
+    
     private final ImageIcon avatarImagen1 = new ImageIcon("IconoAvatar1.gif");
     private final ImageIcon avatarImagen2 = new ImageIcon("IconoAvatar2.gif");
     private final ImageIcon avatarImagen3 = new ImageIcon("IconoAvatar3.gif");
-    private final ImageIcon avatarImagen4 = new ImageIcon("IconoAvatar4.gif");
-
-    
+    private final ImageIcon avatarImagen4 = new ImageIcon("IconoAvatar4.gif");    
 
     public RummikubWindow(Player player) {
         
@@ -66,230 +77,26 @@ public class RummikubWindow extends javax.swing.JFrame {
         lblAvatarPlayer2.setIcon(avatarImagen2);
         lblAvatarPlayer2.setOpaque(false);
         lblAvatarPlayer2.setBorder(null);
-        
-        
-        
+
         lblAvatarPlayer3.setIcon(avatarImagen3);
         lblAvatarPlayer3.setOpaque(false);
         lblAvatarPlayer3.setBorder(null);
-        
-        
+
         lblAvatarPlayer4.setIcon(avatarImagen4);
         lblAvatarPlayer4.setOpaque(false);
         lblAvatarPlayer4.setBorder(null);
         
+        this.numCartaAJugar = -1;
+        this.color1 = -1;
+        this.cordXToken = -1;
+        this.cordMazoY = -1;
+        
+        btnComerFicha.setEnabled(false);
+        
         setLocationRelativeTo(null);
             
-        setSize(850, 518);
+        setSize(830, 518);
             
-    }
-    public JLabel getlblAvatar1 (){
-        return lblAvatarPlayer1;
-    }
-    public JLabel getlblAvatar2 (){
-        return lblAvatarPlayer2;
-    }
-    public JLabel getlblAvatar3 (){
-        return lblAvatarPlayer3;
-    }
-    public JLabel getlblAvatar4 (){
-        return lblAvatarPlayer4;
-    }
-    
-    public JLabel getlblTurnos (){
-        return lblTurnos;
-    }
-
-    public int getNumeroJugador() {
-        return numeroJugador;
-    }
-
-    public void setNumeroJugador(int numeroJugador) {
-        this.numeroJugador = numeroJugador;
-    }
-    
-    
-    
-    public void errorAlEliminarJugador(int indicador){
-        
-        if(indicador == 1)
-            JOptionPane.showMessageDialog(this, "NO SE HA PODIDO ELIMINAR EL JUGADOR");
-        
-        else if(indicador == 2)
-            JOptionPane.showMessageDialog(this, "SE HA ELIMINADO EL JUGADOR CON EXITO");
-    }
-    
-    public void agregarBotonEliminarJugador(){
-        
-        JButton eliminarJugadores = new JButton();
-        eliminarJugadores.setText("Eliminar");
-        eliminarJugadores.setSize(101, 24);
-        
-        JButton iniciarPartida = new JButton();
-        iniciarPartida.setText("Iniciar");
-        iniciarPartida.setSize(101, 24);
-        
-        pnlBackGround.add(eliminarJugadores);
-        pnlBackGround.add(iniciarPartida);
-        
-        eliminarJugadores.setLocation(480, 400);
-        eliminarJugadores.setVisible(true);
-        
-        iniciarPartida.setLocation(480,430);
-        iniciarPartida.setVisible(true);
-        
-        eliminarJugadores.addActionListener(new ActionListener(){
-            
-            public void actionPerformed(ActionEvent e){
-                
-                String respuesta = JOptionPane.showInputDialog ("Nombre del jugador a eliminar: ");
-                
-                try {
-                    
-                    System.out.println("ENTRA AL BOTON");
-                    player.getWrite().writeInt(5);
-                    player.getWrite().writeUTF(respuesta);
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
-            }
-            
-        });
-        
-        iniciarPartida.addActionListener(new ActionListener(){
-            
-            public void actionPerformed(ActionEvent e){
-                
-                // Aqui el codigo para que la partida inicie
-                // Se busca la referencia a la partida
-                try{
-                    System.out.println("Entra al boton de Iniciar partida");
-                    
-                    player.getWrite().writeInt(6);
-                    
-                } catch (IOException event){
-                    System.out.println("Error al iniciar la partida");
-                }
-            }
-            
-        });
-        
-    }
-    
-    public void mostrar(String mensaje){
-        txaChat.append(mensaje + "\n");
-        
-    }
-    
-    public void generarFicha(Token token){
-
-        int value = token.getValue();
-        TokensTypes.Token color = token.getColor();
-
-        JLabel tokenLabel = new JLabel();
-        pnlPlayerTokens.add(tokenLabel);
-        
-        tokenLabel.setSize(20,30);
-        tokenLabel.setText(String.valueOf(value));
-        tokenLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        tokenLabel.setBackground(Color.gray); // Establece el fondo en negro
-        tokenLabel.setOpaque(true);
-        Font font = new Font("Lucida Sans", Font.BOLD, 16);
-        tokenLabel.setFont(font);
-
-        switch (color) {
-            case BLACK:
-                tokenLabel.setForeground(Color.BLACK);
-                break;
-            case BLUE:
-                tokenLabel.setForeground(Color.BLUE);
-                break;
-            case RED:
-                tokenLabel.setForeground(Color.RED);
-                break;
-            case YELLOW:
-                tokenLabel.setForeground(Color.YELLOW);
-                break;
-            case SPECIAL:
-                tokenLabel.setForeground(Color.ORANGE);
-            default:
-                throw new AssertionError();
-        }
-
-        
-        tokenLabel.setLocation(cordMazoX, cordMazoY);
-        setCordMazoX(getCordMazoX()+30);
-        pnlPlayerTokens.repaint();
-        
-        if (getCordMazoX() >= 370){
-            
-            setCordMazoX(10);
-            setCordMazoY(getCordMazoY()+ 50);
-        }
-          
-    }
-    
-    public void comenzarPartida (Partida partida){
-        
-        // Me parece que esta funcion queda inutilizada
-        
-        partida.setInProgres(true); //Cambiamos el estado de la partida
-        ArrayList <Token> tokensGame = new ArrayList <>();
-        for (int i = 0 ; i < 106 ; i++){ //Creacion de las 106 fichas
-            if (i == 0 || i == 1){ //Generacion de las 2 fichas comodines
-                WildCard wild = new WildCard (TokensTypes.Token.SPECIAL, 0); //Valores para saber si es especial o no
-                tokensGame.add(wild);
-            }else{
-                int number = ((i-2) % 13) + 1; //Para generar el numero
-                int colorIndex = (i-2) / 13; //Determinar el color
-                TokensTypes.Token color;
-                
-                switch (colorIndex){
-                    case 0:
-                    case 1:
-                        color = TokensTypes.Token.YELLOW;
-                        break;
-                    
-                    case 2:
-                    case 3:
-                        color = TokensTypes.Token.RED;
-                        break;
-                        
-                    case 4:
-                    case 5:
-                        color = TokensTypes.Token.BLUE;
-                        break;
-                    
-                    default:
-                        color = TokensTypes.Token.BLACK;
-                }
-                Token token = new Token (color, number);
-                tokensGame.add (token);
-            }
-        }
-        
-        partida.setTokens(tokensGame); //Los tokens se le referencian a la partida
-        
-        Collections.shuffle(tokensGame); //Le hacemos shuffle a los tokens
-        
-        for (int i = 0 ; i < partida.getCurrentPlayers() ; i++) { //Hacemos un for con la cantidad de jugadores de la partida
-            for (int j = 0; j < 14; j++) {
-                // Asegurarse de que hay suficientes fichas
-                if (tokensGame.isEmpty()) {
-                    throw new IllegalStateException("No hay suficientes fichas para todos los jugadores");
-                }
-
-                // "Gastar" una ficha y dársela al jugador
-                Token ficha = tokensGame.remove(tokensGame.size() - 1);
-                partida.getPlayers().get(i).getTokens().add(ficha); //Se le da al jugador "actual"
-                //generarFicha(ficha); //Mejor esto se hara cada jugadors
-            }
-        }
-        
-        
     }
     
     @SuppressWarnings("unchecked")
@@ -307,9 +114,9 @@ public class RummikubWindow extends javax.swing.JFrame {
         txaChat = new javax.swing.JTextArea();
         txfChat = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        jPanel1 = new ImagePanel1();
+        pnlGame = new ImagePanel1();
         lblTurnos = new javax.swing.JLabel();
-        lblPruebaTurnos = new javax.swing.JLabel();
+        btnComerFicha = new javax.swing.JButton();
 
         pnlBoard.setBackground(new java.awt.Color(204, 204, 204));
         pnlBoard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -375,29 +182,34 @@ public class RummikubWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlGame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlGameMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlGameLayout = new javax.swing.GroupLayout(pnlGame);
+        pnlGame.setLayout(pnlGameLayout);
+        pnlGameLayout.setHorizontalGroup(
+            pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 500, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlGameLayout.setVerticalGroup(
+            pnlGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
         lblTurnos.setBackground(new java.awt.Color(255, 0, 51));
-        lblTurnos.setFont(new java.awt.Font("MS PGothic", 1, 18)); // NOI18N
+        lblTurnos.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         lblTurnos.setForeground(new java.awt.Color(255, 0, 51));
         lblTurnos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTurnos.setText("Turno del Jugador #1");
+        lblTurnos.setText("Turno del Jugador : ");
 
-        lblPruebaTurnos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblPruebaTurnos.setForeground(new java.awt.Color(255, 51, 51));
-        lblPruebaTurnos.setText("Cambiar turno");
-        lblPruebaTurnos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblPruebaTurnosMouseClicked(evt);
+        btnComerFicha.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnComerFicha.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(41, 43, 45)), "FICHAS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        btnComerFicha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComerFichaActionPerformed(evt);
             }
         });
 
@@ -416,12 +228,12 @@ public class RummikubWindow extends javax.swing.JFrame {
                             .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                                 .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(lblPruebaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnComerFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(28, 28, 28)
                         .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                                 .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,7 +243,7 @@ public class RummikubWindow extends javax.swing.JFrame {
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(lblTurnos)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,30 +251,31 @@ public class RummikubWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTurnos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
-                        .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBackGroundLayout.createSequentialGroup()
                         .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBackGroundLayout.createSequentialGroup()
                         .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPruebaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addComponent(pnlGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)))
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnComerFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14))
         );
 
         getContentPane().add(pnlBackGround);
@@ -470,22 +283,168 @@ public class RummikubWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void errorAlEliminarJugador(int indicador){
+        
+        if(indicador == 1)
+            JOptionPane.showMessageDialog(this, "NO SE HA PODIDO ELIMINAR EL JUGADOR");
+        
+        else if(indicador == 2)
+            JOptionPane.showMessageDialog(this, "SE HA ELIMINADO EL JUGADOR CON EXITO");
+    }
     
-    public int getCordMazoX() {
-        return cordMazoX;
-    }
+    public void agregarBotonEliminarJugador(){
+        
+        JButton eliminarJugadores = new JButton();
+        eliminarJugadores.setText("Eliminar");
+        eliminarJugadores.setSize(75, 24);
+        
+        JButton iniciarPartida = new JButton();
+        iniciarPartida.setText("Iniciar");
+        iniciarPartida.setSize(75, 24);
+        
+        pnlBackGround.add(eliminarJugadores);
+        pnlBackGround.add(iniciarPartida);
+        
+        eliminarJugadores.setLocation(535, 410);
+        eliminarJugadores.setVisible(true);
+        
+        iniciarPartida.setLocation(535,440);
+        iniciarPartida.setVisible(true);
+        
+        eliminarJugadores.addActionListener(new ActionListener(){
+            
+            public void actionPerformed(ActionEvent e){
+                
+                String respuesta = JOptionPane.showInputDialog ("Nombre del jugador a eliminar: ");
+                
+                try {
+                   
+                    player.getWrite().writeInt(5);
+                    player.getWrite().writeUTF(respuesta);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }
+            
+        });
+        
+        iniciarPartida.addActionListener(new ActionListener(){
+            
+            public void actionPerformed(ActionEvent e){
+                
+                JButton botonPresionado = (JButton) e.getSource();
 
-    public void setCordMazoX(int cordMazoX) {
-        this.cordMazoX = cordMazoX;
+                try{
+                    
+                    player.getWrite().writeInt(6);
+                    
+                    botonPresionado.setEnabled(false);
+                    
+                } catch (IOException event){
+                    System.out.println("Error al iniciar la partida");
+                }
+            }
+            
+        });
+        
     }
+    
+    public void mostrar(String mensaje){
+        txaChat.append(mensaje + "\n");
+        
+    }
+    
+    public void generarFicha(Token token){
 
-    public int getCordMazoY() {
-        return cordMazoY;
-    }
+        int value = token.getValue();
+        TokensTypes.Token color = token.getColor();
 
-    public void setCordMazoY(int cordMazoY) {
-        this.cordMazoY = cordMazoY;
+        JLabel tokenLabel = new JLabel();
+        
+        tokenLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+                JLabel clickedLabel = (JLabel) e.getSource();
+                
+                setNumCartaAJugar(Integer.parseInt(clickedLabel.getText()));
+                
+                if(clickedLabel.getForeground() == Color.BLACK)
+                    setColor(0);
+                
+                if(clickedLabel.getForeground() == Color.BLUE)
+                    setColor(1);
+                
+                if(clickedLabel.getForeground() == Color.RED)
+                    setColor(2);
+                
+                if(clickedLabel.getForeground() == Color.YELLOW)
+                    setColor(3);
+                
+                if(clickedLabel.getForeground() == Color.ORANGE)
+                    setColor(4);
+                    
+            }
+        });
+        
+        pnlPlayerTokens.add(tokenLabel);
+        
+        tokenLabel.setSize(20,30);
+        tokenLabel.setText(String.valueOf(value));
+        tokenLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        tokenLabel.setBackground(Color.gray); // Establece el fondo en negro
+        tokenLabel.setOpaque(true);
+        Font font = new Font("Lucida Sans", Font.BOLD, 16);
+        tokenLabel.setFont(font);
+
+        switch (color) {
+            case BLACK:
+                tokenLabel.setForeground(Color.BLACK);
+                break;
+            case BLUE:
+                tokenLabel.setForeground(Color.BLUE);
+                break;
+            case RED:
+                tokenLabel.setForeground(Color.RED);
+                break;
+            case YELLOW:
+                tokenLabel.setForeground(Color.YELLOW);
+                break;
+            case SPECIAL:
+                tokenLabel.setForeground(Color.ORANGE);
+            default:
+                throw new AssertionError();
+        }
+
+        
+        tokenLabel.setLocation(cordMazoX, cordMazoY);
+        setCordMazoX(getCordMazoX()+30);
+        pnlPlayerTokens.repaint();
+        
+        if (getCordMazoX() >= 370){
+            
+            setCordMazoX(10);
+            setCordMazoY(getCordMazoY()+ 50);
+        }
+          
     }
+    
+    public void marcar(){ //Recibe las corrdenadas
+        //Se le cambia el turno del jugador
+        turnoJugador = (turnoJugador % numeroJugador) + 1;
+        lblTurnos.setText("Turno del Jugador #" + turnoJugador);
+    }
+    
+    public void cambiarTurno (){
+        turnoJugador = (turnoJugador % numeroJugador) + 1;
+        lblTurnos.setText("Turno del Jugador #" + turnoJugador); //Se cambia el texto del indicador del turno
+    }
+    
+    // ACTIONS 
     
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         
@@ -511,51 +470,207 @@ public class RummikubWindow extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnEnviarActionPerformed
-    public void marcar(){ //Recibe las corrdenadas
-        //Se le cambia el turno del jugador
-        turnoJugador = (turnoJugador % numeroJugador) + 1;
-        lblTurnos.setText("Turno del Jugador #" + turnoJugador);
-    }
-    
-    public void cambiarTurno (){
-        turnoJugador = (turnoJugador % numeroJugador) + 1;
-        lblTurnos.setText("Turno del Jugador #" + turnoJugador); //Se cambia el texto del indicador del turno
-    }
     
     private void txfChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfChatActionPerformed
 
     }//GEN-LAST:event_txfChatActionPerformed
 
-    private void lblPruebaTurnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPruebaTurnosMouseClicked
-        System.out.println("Click en el label");
-        JLabel labelTemp = (JLabel)evt.getComponent(); //Se obtiene el componente label
-        //Aqui iria el identificador del label que se le dio click OJO: Ponerle el command a cada label -->Mirar juego gato (funcionallidad crearTablero)
+    private void pnlGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGameMouseClicked
         
-        //int columna = Integer.parseInt(identificadorBoton.substring(0,identificadorBoton.indexOf(",")));
-        //int fila = Integer.parseInt(identificadorBoton.substring(1+identificadorBoton.indexOf(",")));
+        int x = evt.getX()/10;
+        int y = evt.getY()/15;
+
+        cordXToken = x*10;
+        cordYToken = y*15;
         
-        
-        
-        
-        System.out.println("Numero de jugador es tal " + numeroJugador);
-        System.out.println("Turno del jugador " + turnoJugador);
-        if (numeroJugador != turnoJugador){ //Si es el turno del jugador sigue corriend, sino termina
-            System.out.println("Jugada no permitida");
-            return;
+        if (cordXToken != -1 && cordYToken != -1 && numCartaAJugar != -1 && color1 != -1){
+
+            if(player.isMyTurn()){
+                
+                System.out.println("Entra al if");
+
+                JLabel labelToken = new JLabel();
+
+                labelToken.setSize(10,15);
+                BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK);
+                labelToken.setBorder(bevelBorder);
+                labelToken.setText(String.valueOf(numCartaAJugar));
+                labelToken.setHorizontalAlignment(SwingConstants.CENTER);
+                labelToken.setBackground(Color.gray); // Establece el fondo en negro
+                labelToken.setOpaque(true);
+                Font font = new Font("Lucida Sans", Font.BOLD, 8);
+                labelToken.setFont(font);
+
+                switch (color1) {
+                    case 0:
+                        labelToken.setForeground(Color.BLACK);
+                        break;
+                    case 1:
+                        labelToken.setForeground(Color.BLUE);
+                        break;
+                    case 2:
+                        labelToken.setForeground(Color.RED);
+                        break;
+                    case 3:
+                        labelToken.setForeground(Color.YELLOW);
+                        break;
+                    case 4:
+                        labelToken.setForeground(Color.ORANGE);
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
+
+                labelToken.setLocation(cordXToken, cordYToken);
+
+                pnlGame.add(labelToken);
+                pnlGame.repaint();
+
+                try {
+
+                        player.setMyTurn(false);
+                        
+                        player.getWrite().writeInt(7);
+                        
+                        // Mandar las coordenadas
+
+                        player.getWrite().writeInt(cordXToken);
+                        player.getWrite().writeInt(cordYToken);
+
+                        // Mandar informacion de del token
+                        
+                        player.getWrite().writeInt(numCartaAJugar);
+                        player.getWrite().writeInt(color1);
+
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+            
+            else JOptionPane.showMessageDialog(this, "ESPERA A TU TURNO","ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        //Aqui el profe implementa un "tablero logico"
+    }//GEN-LAST:event_pnlGameMouseClicked
+
+    private void btnComerFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComerFichaActionPerformed
         
-        //Implementa el tablero [][].setIcon (...);
-        System.out.println("Jugador " + turnoJugador + "hizo su jugada");
-        cambiarTurno();
+        if(player.isMyTurn()){
         
-        try{
-            player.getWrite().writeInt(7);
-        }catch (IOException ex){
-            System.out.println("Ocurrio un error con el enviar turno");
+            player.setMyTurn(false);
+
+            try {
+                player.getWrite().writeInt(8);
+            } catch (IOException ex) {
+                Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }//GEN-LAST:event_lblPruebaTurnosMouseClicked
+        
+        else JOptionPane.showMessageDialog(this, "ESPERA A TU TURNO","ERROR", JOptionPane.ERROR_MESSAGE);
+    }//GEN-LAST:event_btnComerFichaActionPerformed
+
+    // GETTERS AND SETTERS
     
+    public int getNumCartaAJugar() {
+        return numCartaAJugar;
+    }
+
+    public void setNumCartaAJugar(int numCartaAJugar) {
+        this.numCartaAJugar = numCartaAJugar;
+    }
+
+    public int getColor() {
+        return color1;
+    }
+
+    public void setColor(int color) {
+        this.color1 = color;
+    }  
+
+    public JPanel getPnlBoard() {
+        return pnlBoard;
+    }
+
+    public void setPnlBoard(JPanel pnlBoard) {
+        this.pnlBoard = pnlBoard;
+    }
+    
+    public int getCordMazoX() {
+        return cordMazoX;
+    }
+
+    public void setCordMazoX(int cordMazoX) {
+        this.cordMazoX = cordMazoX;
+    }
+
+    public int getCordMazoY() {
+        return cordMazoY;
+    }
+
+    public void setCordMazoY(int cordMazoY) {
+        this.cordMazoY = cordMazoY;
+    }
+    
+    public JLabel getlblAvatar1 (){
+        return lblAvatarPlayer1;
+    }
+    
+    public JLabel getlblAvatar2 (){
+        return lblAvatarPlayer2;
+    }
+    
+    public JLabel getlblAvatar3 (){
+        return lblAvatarPlayer3;
+    }
+    
+    public JLabel getlblAvatar4 (){
+        return lblAvatarPlayer4;
+    }
+    
+    public JLabel getlblTurnos (){
+        return lblTurnos;
+    }
+
+    public int getNumeroJugador() {
+        return numeroJugador;
+    }
+
+    public void setNumeroJugador(int numeroJugador) {
+        this.numeroJugador = numeroJugador;
+    }
+
+    public JPanel getPnlGame() {
+        return pnlGame;
+    }
+
+    public void setPnlGame(JPanel pnlGame) {
+        this.pnlGame = pnlGame;
+    }
+
+    public JPanel getPnlPlayerTokens() {
+        return pnlPlayerTokens;
+    }
+
+    public void setPnlPlayerTokens(JPanel pnlPlayerTokens) {
+        this.pnlPlayerTokens = pnlPlayerTokens;
+    }
+
+    public JButton getBtnComerFicha() {
+        return btnComerFicha;
+    }
+
+    public void setBtnComerFicha(JButton btnComerFicha) {
+        this.btnComerFicha = btnComerFicha;
+    }
+
+    public JLabel getLblTurnos() {
+        return lblTurnos;
+    }
+
+    public void setLblTurnos(JLabel lblTurnos) {
+        this.lblTurnos = lblTurnos;
+    }
+    
+    // MAIN
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -591,17 +706,17 @@ public class RummikubWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComerFicha;
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAvatarPlayer1;
     private javax.swing.JLabel lblAvatarPlayer2;
     private javax.swing.JLabel lblAvatarPlayer3;
     private javax.swing.JLabel lblAvatarPlayer4;
-    private javax.swing.JLabel lblPruebaTurnos;
     private javax.swing.JLabel lblTurnos;
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlBoard;
+    private javax.swing.JPanel pnlGame;
     private javax.swing.JPanel pnlPlayerTokens;
     private javax.swing.JTextArea txaChat;
     private javax.swing.JTextField txfChat;

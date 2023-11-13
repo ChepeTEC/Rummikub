@@ -26,7 +26,7 @@ import servidor.threadServidorRummikub;
 public class LobbyWindow extends javax.swing.JFrame {
     
     private threadServidorRummikub playerThreadServidor;
-    //private ThreadRefreshGamesToShow refreshInfo;
+    
     private int cordX;
     private int cordY;
     
@@ -303,16 +303,6 @@ public class LobbyWindow extends javax.swing.JFrame {
     public void setCordY(int cordY) {
         this.cordY = cordY;
     }
-    
-    
-//
-//    public ThreadRefreshGamesToShow getRefreshInfo() {
-//        return refreshInfo;
-//    }
-//
-//    public void setRefreshInfo(ThreadRefreshGamesToShow refreshInfo) {
-//        this.refreshInfo = refreshInfo;
-//    }
 
     public threadServidorRummikub getPlayerThreadServidor() {
         return playerThreadServidor;

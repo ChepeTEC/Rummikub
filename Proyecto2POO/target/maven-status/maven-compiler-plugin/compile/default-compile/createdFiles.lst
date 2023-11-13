@@ -2,7 +2,6 @@ com\mycompany\proyecto2poo\MainWindow$ImagePanel.class
 com\mycompany\proyecto2poo\PartidaSerializable.class
 com\mycompany\proyecto2poo\RummikubWindow$3.class
 servidor\ServerRummikub.class
-com\mycompany\proyecto2poo\ThreadRefreshGamesToShow.class
 com\mycompany\proyecto2poo\MainWindow$4.class
 com\mycompany\proyecto2poo\LobbyWindow$3.class
 com\mycompany\proyecto2poo\RummikubWindow$5.class
@@ -16,10 +15,12 @@ com\mycompany\proyecto2poo\Player.class
 com\mycompany\proyecto2poo\LobbyWindow$2.class
 servidor\threadServidorRummikub.class
 com\mycompany\proyecto2poo\ClassicToken.class
+com\mycompany\proyecto2poo\RummikubWindow$8.class
 com\mycompany\proyecto2poo\MainWindow$5.class
 servidor\JFrameServer$1.class
 com\mycompany\proyecto2poo\Proyecto2POO.class
 com\mycompany\proyecto2poo\Token.class
+com\mycompany\proyecto2poo\RummikubWindow$9.class
 com\mycompany\proyecto2poo\LobbyWindow$4.class
 com\mycompany\proyecto2poo\Partida.class
 com\mycompany\proyecto2poo\RummikubWindow$2.class

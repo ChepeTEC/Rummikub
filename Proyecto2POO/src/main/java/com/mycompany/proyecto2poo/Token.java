@@ -1,5 +1,6 @@
 package com.mycompany.proyecto2poo;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 public class Token implements Serializable{

@@ -28,6 +28,7 @@ public class Player implements Serializable{
     
     private Socket player = null; // para la comunicacion
     private boolean isHost; // True ->> es host : False ->> no es host
+    private boolean myTurn;
     
     private DataInputStream read = null; // leer comunicacion
     private DataOutputStream write = null; // escribir comunicacion
@@ -53,6 +54,7 @@ public class Player implements Serializable{
         this.threadServidorPlayer = null;
         this.tokensPlayer = new ArrayList <> ();
         this.isHost = false;
+        this.myTurn = false;
         
     }
     
@@ -63,7 +65,7 @@ public class Player implements Serializable{
         this.threadServidorPlayer = null;
         this.tokensPlayer = new ArrayList <> ();
         this.isHost = false;
-        
+        this.myTurn = false;
     }
     
     public Player(){
@@ -184,6 +186,14 @@ public class Player implements Serializable{
 
     public void setIsHost(boolean isHost) {
         this.isHost = isHost;
+    }
+
+    public boolean isMyTurn() {
+        return myTurn;
+    }
+
+    public void setMyTurn(boolean myTurn) {
+        this.myTurn = myTurn;
     }
     
 }
