@@ -4,6 +4,7 @@ import com.mycompany.proyecto2poo.LobbyWindow;
 import com.mycompany.proyecto2poo.Partida;
 import com.mycompany.proyecto2poo.PartidaSerializable;
 import com.mycompany.proyecto2poo.Player;
+import com.mycompany.proyecto2poo.Token;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

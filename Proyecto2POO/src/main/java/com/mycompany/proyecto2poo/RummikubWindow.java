@@ -43,15 +43,16 @@ public class RummikubWindow extends javax.swing.JFrame {
     private int cordXToken;
     private int numCartaAJugar;
     private int color1; // 0: negro, 1: azul, 2: Rojo, 3: Amarillo, 4: Especial
-    
-    private int turnoJugador; //Puede ser 1,2,3,4
-    private int numeroJugador; //Puede ser 1,2,3,4
+  
     private int cantidadJugadores; //2,3,4
     
     private final ImageIcon avatarImagen1 = new ImageIcon("IconoAvatar1.gif");
     private final ImageIcon avatarImagen2 = new ImageIcon("IconoAvatar2.gif");
     private final ImageIcon avatarImagen3 = new ImageIcon("IconoAvatar3.gif");
     private final ImageIcon avatarImagen4 = new ImageIcon("IconoAvatar4.gif");    
+    
+    private ArrayList<JLabel> avatarIcons = new ArrayList<JLabel> ();
+    private ArrayList<JLabel> playerNames = new ArrayList<JLabel> ();
 
     public RummikubWindow(Player player) {
         
@@ -60,8 +61,6 @@ public class RummikubWindow extends javax.swing.JFrame {
         
         this.player = player;
         initComponents();
-        
-        turnoJugador = 1;
         
         lblTurnos.setVisible(false);
         
@@ -86,10 +85,46 @@ public class RummikubWindow extends javax.swing.JFrame {
         lblAvatarPlayer4.setOpaque(false);
         lblAvatarPlayer4.setBorder(null);
         
+        avatarIcons.add(lblAvatarPlayer2);
+        avatarIcons.add(lblAvatarPlayer3);
+        avatarIcons.add(lblAvatarPlayer1);
+        avatarIcons.add(lblAvatarPlayer4);
+        
+        Font font = new Font("Century Gothic", Font.BOLD, 10);
+        
+        lblPlayer1.setOpaque(false);
+        lblPlayer1.setBorder(null);
+        lblPlayer1.setText("");
+        lblPlayer1.setFont(font);
+        lblPlayer1.setHorizontalAlignment(JLabel.CENTER);
+        
+        lblPlayer2.setOpaque(false);
+        lblPlayer2.setBorder(null);
+        lblPlayer2.setText("");
+        lblPlayer2.setFont(font);
+        lblPlayer2.setHorizontalAlignment(JLabel.CENTER);
+        
+        lblPlayer3.setOpaque(false);
+        lblPlayer3.setBorder(null);
+        lblPlayer3.setText("");
+        lblPlayer3.setFont(font);
+        lblPlayer3.setHorizontalAlignment(JLabel.CENTER);
+        
+        lblPlayer4.setOpaque(false);
+        lblPlayer4.setBorder(null);
+        lblPlayer4.setText("");
+        lblPlayer4.setFont(font);
+        lblPlayer4.setHorizontalAlignment(JLabel.CENTER);
+        
+        playerNames.add(lblPlayer1);
+        playerNames.add(lblPlayer2);
+        playerNames.add(lblPlayer3);
+        playerNames.add(lblPlayer4);
+        
         this.numCartaAJugar = -1;
         this.color1 = -1;
         this.cordXToken = -1;
-        this.cordMazoY = -1;
+        this.cordXToken = -1;
         
         btnComerFicha.setEnabled(false);
         
@@ -114,9 +149,13 @@ public class RummikubWindow extends javax.swing.JFrame {
         txaChat = new javax.swing.JTextArea();
         txfChat = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        pnlGame = new ImagePanel1();
+        pnlGame = new javax.swing.JPanel();
         lblTurnos = new javax.swing.JLabel();
         btnComerFicha = new javax.swing.JButton();
+        lblPlayer1 = new javax.swing.JLabel();
+        lblPlayer2 = new javax.swing.JLabel();
+        lblPlayer3 = new javax.swing.JLabel();
+        lblPlayer4 = new javax.swing.JLabel();
 
         pnlBoard.setBackground(new java.awt.Color(204, 204, 204));
         pnlBoard.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -157,7 +196,7 @@ public class RummikubWindow extends javax.swing.JFrame {
         );
         pnlPlayerTokensLayout.setVerticalGroup(
             pnlPlayerTokensLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGap(0, 116, Short.MAX_VALUE)
         );
 
         txaChat.setEditable(false);
@@ -213,37 +252,48 @@ public class RummikubWindow extends javax.swing.JFrame {
             }
         });
 
+        lblPlayer1.setText("player1");
+
+        lblPlayer2.setText("player1");
+
+        lblPlayer3.setText("player1");
+
+        lblPlayer4.setText("player1");
+
         javax.swing.GroupLayout pnlBackGroundLayout = new javax.swing.GroupLayout(pnlBackGround);
         pnlBackGround.setLayout(pnlBackGroundLayout);
         pnlBackGroundLayout.setHorizontalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                .addGap(268, 268, 268)
+                .addComponent(lblTurnos)
+                .addContainerGap(399, Short.MAX_VALUE))
+            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lblPlayer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPlayer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPlayer3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblPlayer4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                                .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnComerFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28)
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                                .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlBackGroundLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(lblTurnos)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnComerFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnlGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackGroundLayout.createSequentialGroup()
+                        .addComponent(txfChat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
         );
         pnlBackGroundLayout.setVerticalGroup(
             pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,21 +310,31 @@ public class RummikubWindow extends javax.swing.JFrame {
                             .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlBackGroundLayout.createSequentialGroup()
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                                 .addComponent(pnlGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                                .addGap(0, 9, Short.MAX_VALUE))
                             .addGroup(pnlBackGroundLayout.createSequentialGroup()
                                 .addComponent(lblAvatarPlayer2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPlayer1)
+                                .addGap(26, 26, 26)
                                 .addComponent(lblAvatarPlayer3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPlayer2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblAvatarPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)))
-                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnComerFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblPlayer3)
+                                .addGap(10, 10, 10)))
+                        .addGroup(pnlBackGroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnComerFicha, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
                             .addComponent(pnlPlayerTokens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlBackGroundLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                                .addComponent(lblAvatarPlayer4, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(7, 7, 7)
+                                .addComponent(lblPlayer4)))))
                 .addGap(14, 14, 14))
         );
 
@@ -344,6 +404,7 @@ public class RummikubWindow extends javax.swing.JFrame {
                     
                     botonPresionado.setEnabled(false);
                     
+                    
                 } catch (IOException event){
                     System.out.println("Error al iniciar la partida");
                 }
@@ -387,18 +448,20 @@ public class RummikubWindow extends javax.swing.JFrame {
                 
                 if(clickedLabel.getForeground() == Color.ORANGE)
                     setColor(4);
-                    
+                
             }
         });
         
         pnlPlayerTokens.add(tokenLabel);
         
         tokenLabel.setSize(20,30);
+        BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK);
+        tokenLabel.setBorder(bevelBorder);
         tokenLabel.setText(String.valueOf(value));
         tokenLabel.setHorizontalAlignment(SwingConstants.CENTER);
         tokenLabel.setBackground(Color.gray); // Establece el fondo en negro
         tokenLabel.setOpaque(true);
-        Font font = new Font("Lucida Sans", Font.BOLD, 16);
+        Font font = new Font("Lucida Sans", Font.BOLD, 12);
         tokenLabel.setFont(font);
 
         switch (color) {
@@ -417,9 +480,8 @@ public class RummikubWindow extends javax.swing.JFrame {
             case SPECIAL:
                 tokenLabel.setForeground(Color.ORANGE);
             default:
-                throw new AssertionError();
+                tokenLabel.setForeground(Color.ORANGE);
         }
-
         
         tokenLabel.setLocation(cordMazoX, cordMazoY);
         setCordMazoX(getCordMazoX()+30);
@@ -431,17 +493,6 @@ public class RummikubWindow extends javax.swing.JFrame {
             setCordMazoY(getCordMazoY()+ 50);
         }
           
-    }
-    
-    public void marcar(){ //Recibe las corrdenadas
-        //Se le cambia el turno del jugador
-        turnoJugador = (turnoJugador % numeroJugador) + 1;
-        lblTurnos.setText("Turno del Jugador #" + turnoJugador);
-    }
-    
-    public void cambiarTurno (){
-        turnoJugador = (turnoJugador % numeroJugador) + 1;
-        lblTurnos.setText("Turno del Jugador #" + turnoJugador); //Se cambia el texto del indicador del turno
     }
     
     // ACTIONS 
@@ -477,21 +528,19 @@ public class RummikubWindow extends javax.swing.JFrame {
 
     private void pnlGameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlGameMouseClicked
         
-        int x = evt.getX()/10;
-        int y = evt.getY()/15;
+        int x = evt.getX()/20;
+        int y = evt.getY()/30;
 
-        cordXToken = x*10;
-        cordYToken = y*15;
+        cordXToken = x*20;
+        cordYToken = y*30;
         
         if (cordXToken != -1 && cordYToken != -1 && numCartaAJugar != -1 && color1 != -1){
-
+            
             if(player.isMyTurn()){
-                
-                System.out.println("Entra al if");
 
                 JLabel labelToken = new JLabel();
 
-                labelToken.setSize(10,15);
+                labelToken.setSize(20,30);
                 BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK);
                 labelToken.setBorder(bevelBorder);
                 labelToken.setText(String.valueOf(numCartaAJugar));
@@ -523,11 +572,7 @@ public class RummikubWindow extends javax.swing.JFrame {
 
                 labelToken.setLocation(cordXToken, cordYToken);
 
-                pnlGame.add(labelToken);
-                pnlGame.repaint();
-
                 try {
-
                         player.setMyTurn(false);
                         
                         player.getWrite().writeInt(7);
@@ -541,7 +586,12 @@ public class RummikubWindow extends javax.swing.JFrame {
                         
                         player.getWrite().writeInt(numCartaAJugar);
                         player.getWrite().writeInt(color1);
-
+                        
+                        cordXToken = -1;
+                        cordYToken = -1;
+                        
+                        numCartaAJugar = -1;
+                        color1 = -1;
 
                     } catch (IOException ex) {
                         Logger.getLogger(RummikubWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -630,14 +680,6 @@ public class RummikubWindow extends javax.swing.JFrame {
         return lblTurnos;
     }
 
-    public int getNumeroJugador() {
-        return numeroJugador;
-    }
-
-    public void setNumeroJugador(int numeroJugador) {
-        this.numeroJugador = numeroJugador;
-    }
-
     public JPanel getPnlGame() {
         return pnlGame;
     }
@@ -668,6 +710,22 @@ public class RummikubWindow extends javax.swing.JFrame {
 
     public void setLblTurnos(JLabel lblTurnos) {
         this.lblTurnos = lblTurnos;
+    }
+
+    public ArrayList<JLabel> getAvatarIcons() {
+        return avatarIcons;
+    }
+
+    public void setAvatarIcons(ArrayList<JLabel> avatarIcons) {
+        this.avatarIcons = avatarIcons;
+    }
+
+    public ArrayList<JLabel> getPlayerNames() {
+        return playerNames;
+    }
+
+    public void setPlayerNames(ArrayList<JLabel> playerNames) {
+        this.playerNames = playerNames;
     }
     
     // MAIN
@@ -713,6 +771,10 @@ public class RummikubWindow extends javax.swing.JFrame {
     private javax.swing.JLabel lblAvatarPlayer2;
     private javax.swing.JLabel lblAvatarPlayer3;
     private javax.swing.JLabel lblAvatarPlayer4;
+    private javax.swing.JLabel lblPlayer1;
+    private javax.swing.JLabel lblPlayer2;
+    private javax.swing.JLabel lblPlayer3;
+    private javax.swing.JLabel lblPlayer4;
     private javax.swing.JLabel lblTurnos;
     private javax.swing.JPanel pnlBackGround;
     private javax.swing.JPanel pnlBoard;

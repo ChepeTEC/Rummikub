@@ -45,7 +45,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-32,0,0,3,43"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-34,0,0,3,33"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -71,40 +71,41 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                  <Component id="lblTurnos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="399" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lblAvatarPlayer3" pref="60" max="32767" attributes="0"/>
+                      <Component id="lblAvatarPlayer2" pref="60" max="32767" attributes="0"/>
+                      <Component id="lblAvatarPlayer1" alignment="0" pref="60" max="32767" attributes="0"/>
+                      <Component id="lblAvatarPlayer4" pref="60" max="32767" attributes="0"/>
+                      <Component id="lblPlayer1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblPlayer2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblPlayer3" alignment="1" max="32767" attributes="0"/>
+                      <Component id="lblPlayer4" alignment="1" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblAvatarPlayer3" min="-2" pref="60" max="-2" attributes="0"/>
-                              <Component id="lblAvatarPlayer2" min="-2" pref="60" max="-2" attributes="0"/>
-                              <Component id="lblAvatarPlayer1" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                              <Component id="lblAvatarPlayer4" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pnlGame" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="pnlPlayerTokens" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnComerFicha" min="-2" pref="59" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="txfChat" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnEnviar" min="-2" pref="48" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane1" min="-2" pref="170" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="pnlPlayerTokens" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnComerFicha" min="-2" pref="59" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
-                          <Component id="lblTurnos" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="pnlGame" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="txfChat" min="-2" pref="116" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnEnviar" min="-2" pref="48" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="1" min="-2" pref="170" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -125,24 +126,35 @@
                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="pnlGame" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblAvatarPlayer2" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblPlayer1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Component id="lblAvatarPlayer3" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblPlayer2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="lblAvatarPlayer1" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblPlayer3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="btnComerFicha" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnComerFicha" pref="116" max="32767" attributes="0"/>
                               <Component id="pnlPlayerTokens" max="32767" attributes="0"/>
-                              <Component id="lblAvatarPlayer4" alignment="1" min="-2" pref="61" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace pref="32" max="32767" attributes="0"/>
+                                  <Component id="lblAvatarPlayer4" min="-2" pref="61" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Component id="lblPlayer4" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -194,7 +206,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="110" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="116" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -242,9 +254,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnlGameMouseClicked"/>
           </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new ImagePanel1()"/>
-          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -288,6 +297,26 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComerFichaActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayer1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="player1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayer2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="player1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayer3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="player1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblPlayer4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="player1"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

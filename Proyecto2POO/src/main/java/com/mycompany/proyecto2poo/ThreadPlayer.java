@@ -34,7 +34,7 @@ public class ThreadPlayer extends Thread{
         
     }
 
-    // METODO RUN();
+    // METODO RUN()
     
     public void run(){
         
@@ -89,6 +89,29 @@ public class ThreadPlayer extends Thread{
                                 JOptionPane.showMessageDialog(player.getRefVentana(), "No quedan mas cartas en el mazo");
                                 player.setMyTurn(true);
                                 
+                                break;
+                                
+                            case 4: 
+                                JOptionPane.showMessageDialog(player.getRefVentana(), "No puede colocar dos fichas en el mismo lugar");
+                                player.setMyTurn(true);
+                                break;
+                                
+                            case 5:
+                                JOptionPane.showMessageDialog(player.getRefVentana(), "JUGADA INVALIDA");
+                                player.setMyTurn(true);
+                                break;
+                                
+                            case 6:
+                                JOptionPane.showMessageDialog(player.getRefVentana(), "ERES EL GANADOR DE LA PARTIDA");
+                                player.getRefVentana().setVisible(false);
+                                player.getRefMainWindow().setVisible(true);
+                                break;
+                                
+                            case 7: 
+                                JOptionPane.showMessageDialog(player.getRefVentana(), "HAS PERDIDO");
+                                player.getRefVentana().setVisible(false);
+                                player.getRefMainWindow().setVisible(true);
+                                break;
                             default:
                                 throw new AssertionError();
                         }
@@ -111,36 +134,11 @@ public class ThreadPlayer extends Thread{
                         
                     case 5: // Funcionalidad 5: Unirse a una partida
                         
-                        cantidadAvatares = read.readInt();
-                        numeroJugadorRecibido = read.readInt();
                         
                         player.setRefVentana(new RummikubWindow(player));
                         player.getRefVentana().setVisible(true);
-                        player.getRefVentana().setNumeroJugador(numeroJugadorRecibido);
                         
                         player.getRefVentana().getlblTurnos().setVisible(true);
-                        
-                        switch (cantidadAvatares){ //Mostrar avatares
-                            
-                            case 2:
-                                player.getRefVentana().getlblAvatar1().setVisible(true);
-                                player.getRefVentana().getlblAvatar2().setVisible(true);
-                                break;
-                            
-                            case 3:
-                                player.getRefVentana().getlblAvatar1().setVisible(true);
-                                player.getRefVentana().getlblAvatar2().setVisible(true);
-                                player.getRefVentana().getlblAvatar3().setVisible(true);
-                                break;
-                            
-                            case 4:
-                                player.getRefVentana().getlblAvatar1().setVisible(true);
-                                player.getRefVentana().getlblAvatar2().setVisible(true);
-                                player.getRefVentana().getlblAvatar3().setVisible(true);
-                                player.getRefVentana().getlblAvatar4().setVisible(true);
-                                
-                                break;
-                        }
                         
                         player.getRefLobby().setVisible(false);
                         
@@ -219,30 +217,22 @@ public class ThreadPlayer extends Thread{
                         
                     case 10: // Funcionalidad 10: Marcar jugada en tablero
                         
-                        System.out.println("ENTRA AL CASE 10");
-                        
                         int x = read.readInt();
                         int y = read.readInt();
                         
                         int valueOfToken = read.readInt();
                         int colorOfToken = read.readInt();
                         
-                        System.out.println("THREAD CLIENTE");
-                        
-                        System.out.println("(" + x + "," + y + ")");
-                        System.out.println("->> " + valueOfToken);
-                        System.out.println("->> " + colorOfToken);
-                        
                         JLabel labelToken = new JLabel();
 
-                        labelToken.setSize(10,15);
+                        labelToken.setSize(20,30);
                         BevelBorder bevelBorder = new BevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK);
                         labelToken.setBorder(bevelBorder);
                         labelToken.setText(String.valueOf(valueOfToken));
                         labelToken.setHorizontalAlignment(SwingConstants.CENTER);
                         labelToken.setBackground(Color.gray); // Establece el fondo en negro
                         labelToken.setOpaque(true);
-                        Font font = new Font("Lucida Sans", Font.BOLD, 8);
+                        Font font = new Font("Lucida Sans", Font.BOLD, 10);
                         labelToken.setFont(font);
 
                         switch (colorOfToken) {
@@ -260,6 +250,7 @@ public class ThreadPlayer extends Thread{
                                 break;
                             case 4:
                                 labelToken.setForeground(Color.ORANGE);
+                                break;
                             default:
                                 throw new AssertionError();
                         }
@@ -311,6 +302,31 @@ public class ThreadPlayer extends Thread{
                         String turnoText = read.readUTF();
                         
                         player.getRefVentana().getlblTurnos().setText(turnoText);
+                        
+                        break;
+                        
+                    case 15:
+                        
+                        int indiceDeAvatar = read.readInt();
+                        
+                        ObjectInputStream ObjectIn = new ObjectInputStream(read);
+                        ArrayList <String> names = (ArrayList <String>)ObjectIn.readObject();
+                        
+                        for (int i = 0; i < indiceDeAvatar; i++){
+                            
+                            // Setear avatar
+                            
+                            player.getRefVentana().getAvatarIcons().get(i).setVisible(true);
+                            
+                            // Setear nombre
+                            
+                            player.getRefVentana().getPlayerNames().get(i).setVisible(true);
+                            player.getRefVentana().getPlayerNames().get(i).setOpaque(true);
+                            player.getRefVentana().getPlayerNames().get(i).setText(names.get(i));
+                            
+                        }
+                        
+                        break;
                 }
             }
             
@@ -327,6 +343,5 @@ public class ThreadPlayer extends Thread{
     }
     
     // GETTER & SETTERS
-    
     
 }

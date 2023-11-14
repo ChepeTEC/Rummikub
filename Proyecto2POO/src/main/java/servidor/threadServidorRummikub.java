@@ -11,6 +11,7 @@ import com.mycompany.proyecto2poo.RummikubWindow;
 import com.mycompany.proyecto2poo.Token;
 import com.mycompany.proyecto2poo.TokensTypes;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,8 +23,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.print.attribute.standard.OutputDeviceAssigned;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 public class threadServidorRummikub extends Thread implements Serializable {
     
@@ -122,7 +125,7 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         break;
                         
                     case 3: // Funcionalidad 3: Unirse a partida
-                        
+                    {    
                         int indexOfGame = input.readInt();
                         
                         setIndexOfCurrentGame(indexOfGame);
@@ -130,6 +133,8 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         String namePlayer = input.readUTF(); //Leemos el nombre del jugador para asignarle el threadServidorRummikub
                             
                         Partida gameRecieved = server.getPartidas().get(indexOfGame); // Se reconoce cual es el game al que se quiere unir   
+                        
+                        gameRecieved.getPlayerNames().add(this.namePlayer);
                         
                         if (gameRecieved.getCurrentPlayers() + 1 > gameRecieved.getAmountPlayer()){ //Si se pasa del limite de jugadores
                             output.writeInt(2);
@@ -170,9 +175,17 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         }
                         
                         output.writeInt(5);
-                        output.writeInt(server.getCopiaPartidas().get(indexOfGame).getAmountPlayerWanted());
-                        output.writeInt (gameRecieved.getCurrentPlayers());
                         
+                        for (int i = 0; i < gameRecieved.getPlayers().size(); i++){
+                        
+                            gameRecieved.getPlayers().get(i).output.writeInt(15);
+                            gameRecieved.getPlayers().get(i).output.writeInt (gameRecieved.getPlayers().size());
+                            
+                            ObjectOutputStream ObjectOut = new ObjectOutputStream(gameRecieved.getPlayers().get(i).output);
+                            
+                            ObjectOut.writeObject(gameRecieved.getPlayerNames());
+                        }
+                    }    
                         break;
 
                     case 4: // Funcionalidad 4: Enviar un mensaje por el chat
@@ -281,61 +294,152 @@ public class threadServidorRummikub extends Thread implements Serializable {
                         
                         int valueOfToken = input.readInt();
                         int colorOfToken = input.readInt();
+                        Color color = new Color(1,1,1);
                         
                         Partida currentGame = server.getPartidas().get(indexOfCurrentGame);
                         
-                        currentGame.setTurno((currentGame.getTurno() + 1) % currentGame.getPlayers().size());
+                        if(currentGame.ganador() == -1){
                         
-                        int posicionPlayerAJugar = currentGame.getTurno();
-                        
-                        threadServidorRummikub JugadorConTurno = currentGame.getPlayers().get(posicionPlayerAJugar);
-                        
-                        JugadorConTurno.output.writeInt(3);
-                        
-                        for (int i = 0; i < enemies.size(); i++){
-                            
-                            enemies.get(i).output.writeInt(10);
-                            
-                            enemies.get(i).output.writeInt(x);
-                            enemies.get(i).output.writeInt(y);
+                            if (colorOfToken == 0)
+                                color = new Color(Color.BLACK.getRGB());
 
-                            enemies.get(i).output.writeInt(valueOfToken);
-                            enemies.get(i).output.writeInt(colorOfToken);
-                            
-                        }
+                            if(colorOfToken == 1)
+                                color = new Color(Color.BLUE.getRGB());
+
+                            if(colorOfToken == 2)
+                                color = new Color(Color.RED.getRGB());
+
+                            if(colorOfToken == 3)
+                                color = new Color(Color.YELLOW.getRGB());
+
+                            if(colorOfToken == 4)
+                                color = new Color(Color.ORANGE.getRGB());
+
+                            if(currentGame.existeToken(x, y) == false){
+
+                                if(currentGame.verificarJugadaMismoNumero(x, y, valueOfToken) || currentGame.verificarJugadaMismoColor(x, y, valueOfToken, color) || colorOfToken == 4){
+
+                                    // CREAR LABEL PARA AGREGARLO
+
+                                    JLabel labelToken = new JLabel();
+
+                                    labelToken.setSize(20,30);
+                                    labelToken.setText(String.valueOf(valueOfToken));
+                                    labelToken.setBackground(Color.gray); // Establece el fondo en negro
+                                    Font font = new Font("Lucida Sans", Font.BOLD, 8);
+                                    labelToken.setFont(font);
+
+                                    switch (colorOfToken) {
+                                        case 0:
+                                            labelToken.setForeground(Color.BLACK);
+                                            break;
+                                        case 1:
+                                            labelToken.setForeground(Color.BLUE);
+                                            break;
+                                        case 2:
+                                            labelToken.setForeground(Color.RED);
+                                            break;
+                                        case 3:
+                                            labelToken.setForeground(Color.YELLOW);
+                                            break;
+                                        case 4:
+                                            labelToken.setForeground(Color.ORANGE);
+                                        default:
+                                            labelToken.setForeground(Color.ORANGE);
+                                    }
+
+                                    labelToken.setLocation(x, y);
+
+                                    currentGame.getTablero().add(labelToken);
+
+                                    currentGame.setTurno((currentGame.getTurno() + 1) % currentGame.getPlayers().size());
+
+                                    int posicionPlayerAJugar = currentGame.getTurno();
+
+                                    threadServidorRummikub JugadorConTurno = currentGame.getPlayers().get(posicionPlayerAJugar);
+
+                                    JugadorConTurno.output.writeInt(3);
+
+                                    for (int i = 0; i < currentGame.getPlayers().size(); i++){
+
+                                        currentGame.getPlayers().get(i).output.writeInt(10);
+
+                                        currentGame.getPlayers().get(i).output.writeInt(x);
+                                        currentGame.getPlayers().get(i).output.writeInt(y);
+
+                                        currentGame.getPlayers().get(i).output.writeInt(valueOfToken);
+                                        currentGame.getPlayers().get(i).output.writeInt(colorOfToken);
+
+                                    }
+
+                                    for (int i = 0; i < currentGame.getPlayers().size(); i++){
+
+                                        currentGame.getPlayers().get(i).getOutput().writeInt(14);
+                                        String texto = "Turno del jugador: " + currentGame.getPlayers().get(posicionPlayerAJugar).namePlayer;
+                                        currentGame.getPlayers().get(i).getOutput().writeUTF(texto);
+
+                                    }
+
+                                    // Se borra la carta del mazo del jugador
+
+                                    if(colorOfToken == 0)
+                                        removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.BLACK);
+
+                                    if(colorOfToken == 1)
+                                        removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.BLUE);
+
+                                    if(colorOfToken == 2)
+                                        removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.RED);
+
+                                    if(colorOfToken == 3)
+                                        removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.YELLOW);
+
+                                    if(colorOfToken == 4)    
+                                        removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.SPECIAL);
+
+                                    output.writeInt(11);
+
+                                    ObjectOutputStream writeT = new ObjectOutputStream(player.getOutputStream());
+
+                                    writeT.writeObject(tokens);
+                                }
+
+                                else {
+
+                                    output.writeInt(2);
+                                    output.writeInt(5);
+                                }
+                            }
+
+                            else {
+                                output.writeInt(2);
+                                output.writeInt(4);
+                            }
+                        }   
                         
-                        for (int i = 0; i < currentGame.getPlayers().size(); i++){
+                        else {
                             
-                            currentGame.getPlayers().get(i).getOutput().writeInt(14);
-                            String texto = "Turno del jugador: " + currentGame.getPlayers().get(posicionPlayerAJugar).namePlayer;
-                            currentGame.getPlayers().get(i).getOutput().writeUTF(texto);
+                            int ganador = currentGame.ganador();
+                            
+                            for (int i = 0; i < currentGame.getPlayers().size(); i++){
                                 
+                                if(i == ganador){
+                                    
+                                    currentGame.getPlayers().get(i).output.writeInt(2);
+                                    currentGame.getPlayers().get(i).output.writeInt(6);
+                                    
+                                }
+                                
+                                else {
+                                    
+                                    currentGame.getPlayers().get(i).output.writeInt(2);
+                                    currentGame.getPlayers().get(i).output.writeInt(7);
+                                    
+                                }
+                                
+                            }
+                            
                         }
-                        
-                        
-                        // Se borra la carta del mazo del jugador
-                        
-                        if(colorOfToken == 0)
-                            removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.BLACK);
-                            
-                        if(colorOfToken == 1)
-                            removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.BLUE);
-                            
-                        if(colorOfToken == 2)
-                            removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.RED);
-                            
-                        if(colorOfToken == 3)
-                            removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.YELLOW);
-                            
-                        if(colorOfToken == 4)    
-                            removeTokenFromPlayerHand(valueOfToken, TokensTypes.Token.SPECIAL);
-                            
-                        output.writeInt(11);
-                        
-                        ObjectOutputStream writeT = new ObjectOutputStream(player.getOutputStream());
-                        
-                        writeT.writeObject(tokens);
-                        
                     }    
                         break;
                     
@@ -344,41 +448,69 @@ public class threadServidorRummikub extends Thread implements Serializable {
                     {
                         Partida currentGame = server.getPartidas().get(indexOfCurrentGame);
                         
-                        if (currentGame.getTokens().size() != 0){
-                            
-                            currentGame.setTurno((currentGame.getTurno() + 1) % currentGame.getPlayers().size());
+                        if(currentGame.ganador() == -1){
                         
-                            int posicionPlayerAJugar = currentGame.getTurno();
+                            if (currentGame.getTokens().size() != 0){
 
-                            threadServidorRummikub JugadorConTurno = currentGame.getPlayers().get(posicionPlayerAJugar);
+                                currentGame.setTurno((currentGame.getTurno() + 1) % currentGame.getPlayers().size());
 
-                            JugadorConTurno.output.writeInt(3);
-                            
-                            tokens.add(currentGame.getTokens().get(0));
-                            currentGame.getTokens().remove(0);
+                                int posicionPlayerAJugar = currentGame.getTurno();
 
-                            output.writeInt(11);
+                                threadServidorRummikub JugadorConTurno = currentGame.getPlayers().get(posicionPlayerAJugar);
 
-                            ObjectOutputStream writeT = new ObjectOutputStream(player.getOutputStream());
+                                JugadorConTurno.output.writeInt(3);
 
-                            writeT.writeObject(tokens);
-                            
-                            for (int i = 0; i < currentGame.getPlayers().size(); i++){
-                            
-                                currentGame.getPlayers().get(i).getOutput().writeInt(13);
-                                currentGame.getPlayers().get(i).getOutput().writeInt(currentGame.getTokens().size());
+                                tokens.add(currentGame.getTokens().get(0));
+                                currentGame.getTokens().remove(0);
 
-                                currentGame.getPlayers().get(i).getOutput().writeInt(14);
-                                String texto = "Turno del jugador: " + currentGame.getPlayers().get(posicionPlayerAJugar).namePlayer;
-                                currentGame.getPlayers().get(i).getOutput().writeUTF(texto);
-                                
+                                output.writeInt(11);
+
+                                ObjectOutputStream writeT = new ObjectOutputStream(player.getOutputStream());
+
+                                writeT.writeObject(tokens);
+
+                                for (int i = 0; i < currentGame.getPlayers().size(); i++){
+
+                                    currentGame.getPlayers().get(i).getOutput().writeInt(13);
+                                    currentGame.getPlayers().get(i).getOutput().writeInt(currentGame.getTokens().size());
+
+                                    currentGame.getPlayers().get(i).getOutput().writeInt(14);
+                                    String texto = "Turno del jugador: " + currentGame.getPlayers().get(posicionPlayerAJugar).namePlayer;
+                                    currentGame.getPlayers().get(i).getOutput().writeUTF(texto);
+
+                                }
+
                             }
-                            
+
+                            else {
+                                output.writeInt(2);
+                                output.writeInt(3);
+                            }
                         }
                         
                         else {
-                            output.writeInt(2);
-                            output.writeInt(3);
+                            
+                           int ganador = currentGame.ganador();
+                            
+                            for (int i = 0; i < currentGame.getPlayers().size(); i++){
+                                
+                                if(i == ganador){
+                                    
+                                    currentGame.getPlayers().get(i).output.writeInt(2);
+                                    currentGame.getPlayers().get(i).output.writeInt(6);
+                                    
+                                }
+                                
+                                else {
+                                    
+                                    currentGame.getPlayers().get(i).output.writeInt(2);
+                                    currentGame.getPlayers().get(i).output.writeInt(7);
+                                    
+                                }
+                                
+                            } 
+                            
+                            
                         }
                     }    
                         break;
@@ -396,18 +528,9 @@ public class threadServidorRummikub extends Thread implements Serializable {
     
     private boolean removeTokenFromPlayerHand(int value, TokensTypes.Token color){
         
-        System.out.println("LO QUE LLEGA: ");
-        System.out.println("->> " + value);
-        System.out.println("->> " + color);
-        
         for(int i = 0; i < tokens.size(); i++)
          
             if(tokens.get(i).getValue() == value && tokens.get(i).getColor() == color){
-                
-                System.out.println("===================");
-                System.out.println("->> " + tokens.get(i).getValue());
-                System.out.println("->> " + tokens.get(i).getColor());
-                System.out.println("===================");
                 
                 tokens.remove(i);
                 return true;
@@ -452,8 +575,6 @@ public class threadServidorRummikub extends Thread implements Serializable {
     private boolean existeEnemigo(String nameOfPlayer){
         
         for(threadServidorRummikub player : enemies){
-            
-            System.out.println("->>" + player.getNamePlayer());
             
             if(player.getNamePlayer().equals(nameOfPlayer)){
                 return true;

@@ -227,8 +227,6 @@ public class LobbyWindow extends javax.swing.JFrame {
                     
                     player.getWrite().writeUTF(player.getUsername()); //Mandamos el nombre del player que hace la accion
                     
-                    //refreshInfo.setIsPaused(true);
-                    
                 }catch (IOException a){
                     System.out.println("Ocurrió un error al intentar unirse a la partida deseada.");
                 }
